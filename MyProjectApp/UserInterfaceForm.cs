@@ -16,5 +16,12 @@ namespace MyProjectApp
         {
             InitializeComponent();
         }
+
+        private void createReminderButton_Click(object sender, EventArgs e)
+        {
+            //Hide();
+            Form form = new CreateReminderForm();
+            form.Show();
+        }
     }
 }

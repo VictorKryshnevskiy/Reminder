@@ -10,11 +10,21 @@ using System.Windows.Forms;
 
 namespace MyProjectApp
 {
-    public partial class CreateReminderFor : Form
+    public partial class CreateReminderForm : Form
     {
-        public CreateReminderFor()
+        public CreateReminderForm()
         {
             InitializeComponent();
+        }
+
+        private void CreateReminderForm_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void saveRemindButton_Click(object sender, EventArgs e)
+        {
+            Close();
         }
     }
 }
