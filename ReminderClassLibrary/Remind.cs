@@ -12,16 +12,21 @@ namespace ReminderClassLibrary
         private string RemindName;
         private string RemindDescription;
         private DateTime EndRemindDate;
-        private List<string> TasksList;
+        private string TasksList;
 
-        public Remind(DateTime startRemindDate, string remindName, string remindDescription,
-            DateTime endRemindDate, List<string> tasksList)
+        public Remind(DateTime startRemindDate, string remindName, DateTime endRemindDate, string remindDescription,
+            string tasksList )
         {
             StartRemindDate = startRemindDate;
             RemindName = remindName;
             RemindDescription = remindDescription;
             EndRemindDate = endRemindDate;
             TasksList = tasksList;
+        }
+        public string GetRemindString()
+        {
+            return StartRemindDate.ToString() + " " + RemindName + " " + EndRemindDate.ToString() + " " + RemindDescription + " "
+                + TasksList;
         }
     }
 }

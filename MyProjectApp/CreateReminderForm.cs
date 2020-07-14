@@ -1,4 +1,6 @@
 ﻿using System;
+using ReminderClassLibrary;
+using System.Text.Json;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -24,7 +26,21 @@ namespace MyProjectApp
 
         private void saveRemindButton_Click(object sender, EventArgs e)
         {
-            Close();
+            if (reminderNameTextBox.Text != "")
+            {
+                var startDate = startDateTimePicker.Value;
+                var name = reminderNameTextBox.Text;
+                var endDate = endDateTimePicker.Value;
+                var description = reminderDescriptionTextBox.Text;
+                var tasks = reminderTasksRichTextBox.Text;
+                var remind = new Remind(startDate, name, endDate, description, tasks);
+                FileSystem.SaveRemind(remind.GetRemindString());
+                Close();
+            }
+            else
+            {
+                MessageBox.Show("Пожалуйста, укажите имя события");
+            }
         }
     }
 }
