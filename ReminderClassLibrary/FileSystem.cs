@@ -31,7 +31,16 @@ namespace ReminderClassLibrary
                 var jsonString = JsonSerializer.Serialize(list, options);
                 File.WriteAllText("Reminder.json", jsonString);
             }
-        
+        }
+        public static void SaveRemind(List<Remind> value)
+        {
+            JsonSerializerOptions options = new JsonSerializerOptions
+            {
+                Encoder = JavaScriptEncoder.Create(UnicodeRanges.All),
+                WriteIndented = true
+            };
+            var jsonString = JsonSerializer.Serialize(value, options);
+            File.WriteAllText("Reminder.json", jsonString);
         }
         public static List<Remind> GetRemind()
         {

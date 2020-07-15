@@ -29,14 +29,14 @@
         private void InitializeComponent()
         {
             this.reminderDataGridView = new System.Windows.Forms.DataGridView();
-            this.createReminderButton = new System.Windows.Forms.Button();
-            this.editReminderButton = new System.Windows.Forms.Button();
-            this.deleteReminderButton = new System.Windows.Forms.Button();
             this.startDateColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.nameColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.endDateColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.descriptionColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tasksColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.createReminderButton = new System.Windows.Forms.Button();
+            this.editReminderButton = new System.Windows.Forms.Button();
+            this.deleteReminderButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.reminderDataGridView)).BeginInit();
             this.SuspendLayout();
             // 
@@ -53,6 +53,31 @@
             this.reminderDataGridView.Name = "reminderDataGridView";
             this.reminderDataGridView.Size = new System.Drawing.Size(631, 426);
             this.reminderDataGridView.TabIndex = 0;
+            // 
+            // startDateColumn
+            // 
+            this.startDateColumn.HeaderText = "Дата начала события";
+            this.startDateColumn.Name = "startDateColumn";
+            // 
+            // nameColumn
+            // 
+            this.nameColumn.HeaderText = "Имя события";
+            this.nameColumn.Name = "nameColumn";
+            // 
+            // endDateColumn
+            // 
+            this.endDateColumn.HeaderText = "Дата окончания события";
+            this.endDateColumn.Name = "endDateColumn";
+            // 
+            // descriptionColumn
+            // 
+            this.descriptionColumn.HeaderText = "Описание события";
+            this.descriptionColumn.Name = "descriptionColumn";
+            // 
+            // tasksColumn
+            // 
+            this.tasksColumn.HeaderText = "Задачи";
+            this.tasksColumn.Name = "tasksColumn";
             // 
             // createReminderButton
             // 
@@ -81,31 +106,7 @@
             this.deleteReminderButton.TabIndex = 3;
             this.deleteReminderButton.Text = "Удалить событие";
             this.deleteReminderButton.UseVisualStyleBackColor = true;
-            // 
-            // startDateColumn
-            // 
-            this.startDateColumn.HeaderText = "Дата начала события";
-            this.startDateColumn.Name = "startDateColumn";
-            // 
-            // nameColumn
-            // 
-            this.nameColumn.HeaderText = "Имя события";
-            this.nameColumn.Name = "nameColumn";
-            // 
-            // endDateColumn
-            // 
-            this.endDateColumn.HeaderText = "Дата окончания события";
-            this.endDateColumn.Name = "endDateColumn";
-            // 
-            // descriptionColumn
-            // 
-            this.descriptionColumn.HeaderText = "Описание события";
-            this.descriptionColumn.Name = "descriptionColumn";
-            // 
-            // tasksColumn
-            // 
-            this.tasksColumn.HeaderText = "Задачи";
-            this.tasksColumn.Name = "tasksColumn";
+            this.deleteReminderButton.Click += new System.EventHandler(this.deleteReminderButton_Click);
             // 
             // UserInterfaceForm
             // 

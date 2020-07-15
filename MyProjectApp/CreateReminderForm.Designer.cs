@@ -143,17 +143,23 @@
             // 
             // startDateTimePicker
             // 
+            this.startDateTimePicker.CustomFormat = "MMMMdd, yyyy  |  HH:mm";
+            this.startDateTimePicker.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.startDateTimePicker.Location = new System.Drawing.Point(15, 159);
             this.startDateTimePicker.Name = "startDateTimePicker";
             this.startDateTimePicker.Size = new System.Drawing.Size(200, 20);
             this.startDateTimePicker.TabIndex = 14;
+            this.startDateTimePicker.Value = new System.DateTime(2020, 7, 15, 19, 49, 11, 0);
             // 
             // endDateTimePicker
             // 
+            this.endDateTimePicker.CustomFormat = "MMMMdd, yyyy  |  HH:mm";
+            this.endDateTimePicker.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.endDateTimePicker.Location = new System.Drawing.Point(258, 159);
             this.endDateTimePicker.Name = "endDateTimePicker";
             this.endDateTimePicker.Size = new System.Drawing.Size(200, 20);
             this.endDateTimePicker.TabIndex = 15;
+            this.endDateTimePicker.Value = new System.DateTime(2020, 7, 15, 19, 49, 50, 0);
             // 
             // reminderTasksRichTextBox
             // 
