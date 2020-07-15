@@ -28,7 +28,12 @@ namespace MyProjectApp
         {
             if (FileSystem.IsExist("Reminder.json"))
             {
-               reminderDataGridView.Rows.Add(FileSystem.GetRemind());
+                var remindersList = FileSystem.GetRemind();
+                foreach (var remind in remindersList)
+                {
+                    reminderDataGridView.Rows.Add(remind.StartRemindDate, remind.RemindName, remind.EndRemindDate,
+                        remind.RemindDescription, remind.TasksList);
+                }
             }
         }
     }

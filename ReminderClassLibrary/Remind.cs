@@ -8,14 +8,14 @@ namespace ReminderClassLibrary
 {
     public class Remind
     {
-        public DateTime StartRemindDate{get;}
-        public string RemindName { get; }
-        public string RemindDescription { get; }
-        public DateTime EndRemindDate { get; }
-        public string TasksList { get; }
+        public DateTime StartRemindDate { get; set; }
+        public string RemindName { get; set; }
+        public string RemindDescription { get; set; }
+        public DateTime EndRemindDate { get; set; }
+        public string TasksList { get; set; }
 
         public Remind(DateTime startRemindDate, string remindName, DateTime endRemindDate, string remindDescription,
-            string tasksList )
+            string tasksList)
         {
             StartRemindDate = startRemindDate;
             RemindName = remindName;
