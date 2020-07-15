@@ -1,4 +1,5 @@
 ﻿using System;
+using ReminderClassLibrary;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -22,6 +23,13 @@ namespace MyProjectApp
             //Hide();
             Form form = new CreateReminderForm();
             form.Show();
+        }
+        private void UserInterfaceForm_Load(object sender, EventArgs e)
+        {
+            if (FileSystem.IsExist("Reminder.json"))
+            {
+               reminderDataGridView.Rows.Add(FileSystem.GetRemind());
+            }
         }
     }
 }

@@ -8,11 +8,11 @@ namespace ReminderClassLibrary
 {
     public class Remind
     {
-        private DateTime StartRemindDate;
-        private string RemindName;
-        private string RemindDescription;
-        private DateTime EndRemindDate;
-        private string TasksList;
+        public DateTime StartRemindDate{get;}
+        public string RemindName { get; }
+        public string RemindDescription { get; }
+        public DateTime EndRemindDate { get; }
+        public string TasksList { get; }
 
         public Remind(DateTime startRemindDate, string remindName, DateTime endRemindDate, string remindDescription,
             string tasksList )
@@ -23,10 +23,7 @@ namespace ReminderClassLibrary
             EndRemindDate = endRemindDate;
             TasksList = tasksList;
         }
-        public string GetRemindString()
-        {
-            return StartRemindDate.ToString() + " " + RemindName + " " + EndRemindDate.ToString() + " " + RemindDescription + " "
-                + TasksList;
-        }
+        public Remind()
+        { }
     }
 }

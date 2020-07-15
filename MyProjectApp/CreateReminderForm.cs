@@ -34,7 +34,7 @@ namespace MyProjectApp
                 var description = reminderDescriptionTextBox.Text;
                 var tasks = reminderTasksRichTextBox.Text;
                 var remind = new Remind(startDate, name, endDate, description, tasks);
-                FileSystem.SaveRemind(remind.GetRemindString());
+                FileSystem.SaveRemind(remind);
                 Close();
             }
             else
