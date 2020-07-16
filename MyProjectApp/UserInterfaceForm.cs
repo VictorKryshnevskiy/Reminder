@@ -32,12 +32,7 @@ namespace MyProjectApp
             form = new UserInterfaceForm();
             if (FileSystem.IsExist("Reminder.json"))
             {
-                remindersList = FileSystem.GetRemind();
-                foreach (var remind in remindersList)
-                {
-                    reminderDataGridView.Rows.Add(remind.StartRemindDate, remind.RemindName, remind.EndRemindDate,
-                        remind.RemindDescription, remind.TasksList);
-                }
+                WriteRemindsToGrid();
             }
         }
         private void deleteReminderButton_Click(object sender, EventArgs e)
@@ -59,6 +54,29 @@ namespace MyProjectApp
             form.Show(this);
             Visible = false;
             RemindEdition.Invoke(this, new RemindEventArgs(remindToEdit));
+            form.Visible = false;
+            form.ShowDialog();
+            if (CreateReminderForm.SaveButtonClicked)
+            {
+                remindersList.RemoveAt(indexToEdit);
+                reminderDataGridView.Rows.RemoveAt(indexToEdit);
+                FileSystem.SaveRemind(remindersList);
+            }
+        }
+        private void WriteRemindsToGrid()
+        {
+            remindersList = FileSystem.GetRemind();
+            foreach (var remind in remindersList)
+            {
+                reminderDataGridView.Rows.Add(remind.StartRemindDate, remind.RemindName, remind.EndRemindDate,
+                    remind.RemindDescription, remind.TasksList);
+            }
+        }
+
+        private void UserInterfaceForm_VisibleChanged(object sender, EventArgs e)
+        {
+            reminderDataGridView.Rows.Clear();
+            WriteRemindsToGrid();
         }
     }
 }

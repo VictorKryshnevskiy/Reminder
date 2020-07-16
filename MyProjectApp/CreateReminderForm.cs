@@ -15,6 +15,8 @@ namespace MyProjectApp
     public partial class CreateReminderForm : Form
     {
         public UserInterfaceForm Form { get; }
+        public static bool SaveButtonClicked { get; private set; }
+
         public CreateReminderForm(UserInterfaceForm form)
         {
             InitializeComponent();
@@ -24,7 +26,7 @@ namespace MyProjectApp
 
         private void CreateReminderForm_Load(object sender, EventArgs e)
         {
-           
+            SaveButtonClicked = false;
         }
 
         private void Form_RemindEdition(object sender, RemindEventArgs e)
@@ -47,6 +49,7 @@ namespace MyProjectApp
                 var tasks = reminderTasksRichTextBox.Text;
                 var remind = new Remind(startDate, name, endDate, description, tasks);
                 FileSystem.SaveRemind(remind);
+                SaveButtonClicked = true;
                 Close();
             }
             else
