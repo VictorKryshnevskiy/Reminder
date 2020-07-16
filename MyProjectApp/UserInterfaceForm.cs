@@ -14,6 +14,8 @@ namespace MyProjectApp
     public partial class UserInterfaceForm : Form
     {
         List<Remind> remindersList;
+        public event EventHandler<RemindEventArgs> RemindEdition;
+        UserInterfaceForm form;
         public UserInterfaceForm()
         {
             InitializeComponent();
@@ -21,11 +23,13 @@ namespace MyProjectApp
         private void createReminderButton_Click(object sender, EventArgs e)
         {
             //Hide();
-            Form form = new CreateReminderForm();
+            Form form = new CreateReminderForm(this);
             form.Show();
+            Visible = false;
         }
         private void UserInterfaceForm_Load(object sender, EventArgs e)
         {
+            form = new UserInterfaceForm();
             if (FileSystem.IsExist("Reminder.json"))
             {
                 remindersList = FileSystem.GetRemind();
@@ -44,6 +48,17 @@ namespace MyProjectApp
             remindersList.RemoveAt(listElementToDelet);
             reminderDataGridView.Rows.RemoveAt(indexToDelete);
             FileSystem.SaveRemind(remindersList);
+        }
+        private void editReminderButton_Click(object sender, EventArgs e)
+        {
+            var indexToEdit = reminderDataGridView.CurrentRow.Index;
+            var listElementToEdit = remindersList.FindIndex(x => x.RemindName == reminderDataGridView[nameColumn.Index, indexToEdit]
+            .Value.ToString());
+            var remindToEdit = remindersList.ElementAt(listElementToEdit);
+            Form form = new CreateReminderForm(this);
+            form.Show(this);
+            Visible = false;
+            RemindEdition.Invoke(this, new RemindEventArgs(remindToEdit));
         }
     }
 }

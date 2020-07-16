@@ -14,14 +14,26 @@ namespace MyProjectApp
 {
     public partial class CreateReminderForm : Form
     {
-        public CreateReminderForm()
+        public UserInterfaceForm Form { get; }
+        public CreateReminderForm(UserInterfaceForm form)
         {
             InitializeComponent();
+            Form = form;
+            Form.RemindEdition += Form_RemindEdition;
         }
 
         private void CreateReminderForm_Load(object sender, EventArgs e)
         {
+           
+        }
 
+        private void Form_RemindEdition(object sender, RemindEventArgs e)
+        {
+            startDateTimePicker.Value = e.Remind.StartRemindDate;
+            reminderNameTextBox.Text = e.Remind.RemindName;
+            endDateTimePicker.Value = e.Remind.EndRemindDate;
+            reminderDescriptionTextBox.Text = e.Remind.RemindDescription;
+            reminderTasksRichTextBox.Text = e.Remind.TasksList;
         }
 
         private void saveRemindButton_Click(object sender, EventArgs e)
@@ -41,6 +53,11 @@ namespace MyProjectApp
             {
                 MessageBox.Show("Пожалуйста, укажите имя события");
             }
+        }
+
+        private void CreateReminderForm_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            Form.Visible = true;
         }
     }
 }

@@ -72,6 +72,7 @@
     <Compile Include="FileSystem.cs" />
     <Compile Include="Remind.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RemindEventArgs.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />

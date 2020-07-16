@@ -56,8 +56,11 @@
             // 
             // startDateColumn
             // 
+            this.startDateColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
             this.startDateColumn.HeaderText = "Дата начала события";
             this.startDateColumn.Name = "startDateColumn";
+            this.startDateColumn.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.startDateColumn.Width = 130;
             // 
             // nameColumn
             // 
@@ -78,6 +81,7 @@
             // 
             this.tasksColumn.HeaderText = "Задачи";
             this.tasksColumn.Name = "tasksColumn";
+            this.tasksColumn.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             // 
             // createReminderButton
             // 
@@ -97,6 +101,7 @@
             this.editReminderButton.TabIndex = 2;
             this.editReminderButton.Text = "Редактировать событие";
             this.editReminderButton.UseVisualStyleBackColor = true;
+            this.editReminderButton.Click += new System.EventHandler(this.editReminderButton_Click);
             // 
             // deleteReminderButton
             // 
