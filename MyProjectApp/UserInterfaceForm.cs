@@ -22,7 +22,6 @@ namespace MyProjectApp
         }
         private void createReminderButton_Click(object sender, EventArgs e)
         {
-            //Hide();
             Form form = new CreateReminderForm(this);
             form.Show();
             Visible = false;
@@ -38,17 +37,15 @@ namespace MyProjectApp
         private void deleteReminderButton_Click(object sender, EventArgs e)
         {
             var indexToDelete = reminderDataGridView.CurrentRow.Index;
-            var listElementToDelet = remindersList.FindIndex(x => x.RemindName == reminderDataGridView[nameColumn.Index, indexToDelete]
-            .Value.ToString());
-            remindersList.RemoveAt(listElementToDelet);
+            var listElementToDelete = FindIndexInArray(indexToDelete);
+            remindersList.RemoveAt(listElementToDelete);
             reminderDataGridView.Rows.RemoveAt(indexToDelete);
             FileSystem.SaveRemind(remindersList);
         }
         private void editReminderButton_Click(object sender, EventArgs e)
         {
             var indexToEdit = reminderDataGridView.CurrentRow.Index;
-            var listElementToEdit = remindersList.FindIndex(x => x.RemindName == reminderDataGridView[nameColumn.Index, indexToEdit]
-            .Value.ToString());
+            var listElementToEdit = FindIndexInArray(indexToEdit);
             var remindToEdit = remindersList.ElementAt(listElementToEdit);
             Form form = new CreateReminderForm(this);
             form.Show(this);
@@ -65,6 +62,16 @@ namespace MyProjectApp
                 WriteRemindsToGrid();
             }
         }
+        private void UserInterfaceForm_VisibleChanged(object sender, EventArgs e)
+        {
+            reminderDataGridView.Rows.Clear();
+            WriteRemindsToGrid();
+        }
+        private int FindIndexInArray(int indexInTable)
+        {
+            return remindersList.FindIndex(x => x.RemindName == reminderDataGridView[nameColumn.Index, indexInTable]
+            .Value.ToString());
+        }
         private void WriteRemindsToGrid()
         {
             remindersList = FileSystem.GetRemind();
@@ -73,12 +80,6 @@ namespace MyProjectApp
                 reminderDataGridView.Rows.Add(remind.StartRemindDate, remind.RemindName, remind.EndRemindDate,
                     remind.RemindDescription, remind.TasksList);
             }
-        }
-
-        private void UserInterfaceForm_VisibleChanged(object sender, EventArgs e)
-        {
-            reminderDataGridView.Rows.Clear();
-            WriteRemindsToGrid();
         }
     }
 }
