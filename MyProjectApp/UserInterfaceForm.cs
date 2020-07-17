@@ -58,9 +58,11 @@ namespace MyProjectApp
             form.ShowDialog();
             if (CreateReminderForm.SaveButtonClicked)
             {
-                remindersList.RemoveAt(indexToEdit);
+                remindersList.RemoveAt(listElementToEdit);
                 reminderDataGridView.Rows.RemoveAt(indexToEdit);
                 FileSystem.SaveRemind(remindersList);
+                reminderDataGridView.Rows.Clear();
+                WriteRemindsToGrid();
             }
         }
         private void WriteRemindsToGrid()

@@ -51,6 +51,7 @@
             this.tasksColumn});
             this.reminderDataGridView.Location = new System.Drawing.Point(12, 12);
             this.reminderDataGridView.Name = "reminderDataGridView";
+            this.reminderDataGridView.ReadOnly = true;
             this.reminderDataGridView.Size = new System.Drawing.Size(631, 426);
             this.reminderDataGridView.TabIndex = 0;
             // 
@@ -59,6 +60,7 @@
             this.startDateColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
             this.startDateColumn.HeaderText = "Дата начала события";
             this.startDateColumn.Name = "startDateColumn";
+            this.startDateColumn.ReadOnly = true;
             this.startDateColumn.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             this.startDateColumn.Width = 130;
             // 
@@ -66,21 +68,25 @@
             // 
             this.nameColumn.HeaderText = "Имя события";
             this.nameColumn.Name = "nameColumn";
+            this.nameColumn.ReadOnly = true;
             // 
             // endDateColumn
             // 
             this.endDateColumn.HeaderText = "Дата окончания события";
             this.endDateColumn.Name = "endDateColumn";
+            this.endDateColumn.ReadOnly = true;
             // 
             // descriptionColumn
             // 
             this.descriptionColumn.HeaderText = "Описание события";
             this.descriptionColumn.Name = "descriptionColumn";
+            this.descriptionColumn.ReadOnly = true;
             // 
             // tasksColumn
             // 
             this.tasksColumn.HeaderText = "Задачи";
             this.tasksColumn.Name = "tasksColumn";
+            this.tasksColumn.ReadOnly = true;
             this.tasksColumn.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             // 
             // createReminderButton
