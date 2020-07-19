@@ -25,8 +25,7 @@ namespace ReminderClassLibrary
             }
             else
             {
-                FileStream fs = File.Create("Reminder.json");
-                fs.Close();
+                using (FileStream fs = File.Create("Reminder.json")) { }
                 var list = new List<Remind> { value };
                 var jsonString = JsonSerializer.Serialize(list, options);
                 File.WriteAllText("Reminder.json", jsonString);

@@ -52,6 +52,7 @@
             this.reminderDataGridView.Location = new System.Drawing.Point(12, 12);
             this.reminderDataGridView.Name = "reminderDataGridView";
             this.reminderDataGridView.ReadOnly = true;
+            this.reminderDataGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.reminderDataGridView.Size = new System.Drawing.Size(631, 426);
             this.reminderDataGridView.TabIndex = 0;
             // 
