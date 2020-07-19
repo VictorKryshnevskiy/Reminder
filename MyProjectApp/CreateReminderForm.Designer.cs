@@ -190,7 +190,6 @@
             this.Controls.Add(this.label1);
             this.Name = "CreateReminderForm";
             this.Text = "CreateReminderFor";
-            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.CreateReminderForm_FormClosed);
             this.Load += new System.EventHandler(this.CreateReminderForm_Load);
             this.ResumeLayout(false);
             this.PerformLayout();

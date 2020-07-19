@@ -14,21 +14,18 @@ namespace MyProjectApp
     public partial class UserInterfaceForm : Form
     {
         List<Remind> remindersList;
-        public event EventHandler<RemindEventArgs> RemindEdition;
-        UserInterfaceForm form;
         public UserInterfaceForm()
         {
             InitializeComponent();
         }
         private void createReminderButton_Click(object sender, EventArgs e)
         {
-            Form form = new CreateReminderForm(this);
-            form.Show();
-            Visible = false;
+            Form form = new CreateReminderForm(new Remind());
+            form.ShowDialog();
+            UpdateGrid();
         }
         private void UserInterfaceForm_Load(object sender, EventArgs e)
         {
-            form = new UserInterfaceForm();
             if (FileSystem.IsExist("Reminder.json"))
             {
                 WriteRemindsToGrid();
@@ -45,27 +42,22 @@ namespace MyProjectApp
         private void editReminderButton_Click(object sender, EventArgs e)
         {
             var indexToEdit = reminderDataGridView.CurrentRow.Index;
-            var listElementToEdit = FindIndexInArray(indexToEdit);
-            var remindToEdit = remindersList.ElementAt(listElementToEdit);
-            Form form = new CreateReminderForm(this);
-            form.Show(this);
-            Visible = false;
-            RemindEdition.Invoke(this, new RemindEventArgs(remindToEdit));
-            form.Visible = false;
-            form.ShowDialog();
-            if (CreateReminderForm.SaveButtonClicked)
+            if (indexToEdit < remindersList.Count)
             {
-                remindersList.RemoveAt(listElementToEdit);
-                reminderDataGridView.Rows.RemoveAt(indexToEdit);
-                FileSystem.SaveRemind(remindersList);
-                reminderDataGridView.Rows.Clear();
-                WriteRemindsToGrid();
+                var listElementToEdit = FindIndexInArray(indexToEdit);
+                var remindToEdit = remindersList.ElementAt(listElementToEdit);
+                Form form = new CreateReminderForm(remindToEdit);
+                form.ShowDialog();
+                if (CreateReminderForm.SaveButtonClicked)
+                {
+                    remindersList.RemoveAt(listElementToEdit);
+                    reminderDataGridView.Rows.RemoveAt(indexToEdit);
+                    remindersList.Add(CreateReminderForm.Remind);
+                    FileSystem.SaveRemind(remindersList);
+                    UpdateGrid();
+                }
             }
-        }
-        private void UserInterfaceForm_VisibleChanged(object sender, EventArgs e)
-        {
-            reminderDataGridView.Rows.Clear();
-            WriteRemindsToGrid();
+            else { MessageBox.Show("Пожалуйста, выберите строку корректно"); }
         }
         private int FindIndexInArray(int indexInTable)
         {
@@ -80,6 +72,11 @@ namespace MyProjectApp
                 reminderDataGridView.Rows.Add(remind.StartRemindDate, remind.RemindName, remind.EndRemindDate,
                     remind.RemindDescription, remind.TasksList);
             }
+        }
+        private void UpdateGrid()
+        {
+            reminderDataGridView.Rows.Clear();
+            WriteRemindsToGrid();
         }
     }
 }

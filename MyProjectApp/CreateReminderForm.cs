@@ -14,53 +14,48 @@ namespace MyProjectApp
 {
     public partial class CreateReminderForm : Form
     {
-        public UserInterfaceForm Form { get; }
         public static bool SaveButtonClicked { get; private set; }
+        public static Remind Remind { get; private set; }
 
-        public CreateReminderForm(UserInterfaceForm form)
+        public CreateReminderForm(Remind rem)
         {
             InitializeComponent();
-            Form = form;
-            Form.RemindEdition += Form_RemindEdition;
+            Remind = rem;
         }
-
         private void CreateReminderForm_Load(object sender, EventArgs e)
         {
             SaveButtonClicked = false;
+            if (Remind.RemindName != default)
+            {
+                RemindsPropertiesLoad();
+            }
         }
-
-        private void Form_RemindEdition(object sender, RemindEventArgs e)
+        private void RemindsPropertiesLoad()
         {
-            startDateTimePicker.Value = e.Remind.StartRemindDate;
-            reminderNameTextBox.Text = e.Remind.RemindName;
-            endDateTimePicker.Value = e.Remind.EndRemindDate;
-            reminderDescriptionTextBox.Text = e.Remind.RemindDescription;
-            reminderTasksRichTextBox.Text = e.Remind.TasksList;
+            startDateTimePicker.Value = Remind.StartRemindDate;
+            reminderNameTextBox.Text = Remind.RemindName;
+            endDateTimePicker.Value = Remind.EndRemindDate;
+            reminderDescriptionTextBox.Text = Remind.RemindDescription;
+            reminderTasksRichTextBox.Text = Remind.TasksList;
         }
-
         private void saveRemindButton_Click(object sender, EventArgs e)
         {
             if (reminderNameTextBox.Text != "")
             {
-                var startDate = startDateTimePicker.Value;
-                var name = reminderNameTextBox.Text;
-                var endDate = endDateTimePicker.Value;
-                var description = reminderDescriptionTextBox.Text;
-                var tasks = reminderTasksRichTextBox.Text;
-                var remind = new Remind(startDate, name, endDate, description, tasks);
-                FileSystem.SaveRemind(remind);
+                Remind.StartRemindDate = startDateTimePicker.Value;
+                Remind.RemindName = reminderNameTextBox.Text;
+                Remind.EndRemindDate = endDateTimePicker.Value;
+                Remind.RemindDescription = reminderDescriptionTextBox.Text;
+                Remind.TasksList = reminderTasksRichTextBox.Text;
+                FileSystem.SaveRemind(Remind);
                 SaveButtonClicked = true;
+                
                 Close();
             }
             else
             {
                 MessageBox.Show("Пожалуйста, укажите имя события");
             }
-        }
-
-        private void CreateReminderForm_FormClosed(object sender, FormClosedEventArgs e)
-        {
-            Form.Visible = true;
         }
     }
 }

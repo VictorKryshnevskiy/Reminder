@@ -132,7 +132,6 @@
             this.Name = "UserInterfaceForm";
             this.Text = "Form1";
             this.Load += new System.EventHandler(this.UserInterfaceForm_Load);
-            this.VisibleChanged += new System.EventHandler(this.UserInterfaceForm_VisibleChanged);
             ((System.ComponentModel.ISupportInitialize)(this.reminderDataGridView)).EndInit();
             this.ResumeLayout(false);
 
