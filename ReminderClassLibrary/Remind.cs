@@ -13,6 +13,7 @@ namespace ReminderClassLibrary
         public string RemindDescription { get; set; }
         public DateTime EndRemindDate { get; set; }
         public string TasksList { get; set; }
+        public const string fileName = "Reminder.json";
 
         public Remind(DateTime startRemindDate, string remindName, DateTime endRemindDate, string remindDescription,
             string tasksList)

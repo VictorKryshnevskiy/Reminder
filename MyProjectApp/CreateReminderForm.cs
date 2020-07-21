@@ -49,7 +49,6 @@ namespace MyProjectApp
                 Remind.TasksList = reminderTasksRichTextBox.Text;
                 FileSystem.SaveRemind(Remind);
                 SaveButtonClicked = true;
-                
                 Close();
             }
             else

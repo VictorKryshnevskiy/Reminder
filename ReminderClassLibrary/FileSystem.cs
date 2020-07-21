@@ -6,7 +6,7 @@ using System.Collections.Generic;
 
 namespace ReminderClassLibrary
 {
-    public class FileSystem
+    public static class FileSystem
     {
         public static void SaveRemind(Remind value)
         {
@@ -15,20 +15,20 @@ namespace ReminderClassLibrary
                 Encoder = JavaScriptEncoder.Create(UnicodeRanges.All),
                 WriteIndented = true
             };
-            if (IsExist("Reminder.json"))
+            if (IsExist(Remind.fileName))
             {
-                var json = File.ReadAllText("Reminder.json");
+                var json = File.ReadAllText(Remind.fileName);
                 var history = JsonSerializer.Deserialize<List<Remind>>(json);
                 history.Add(value);
                 var jsonString = JsonSerializer.Serialize(history, options);
-                File.WriteAllText("Reminder.json", jsonString);
+                File.WriteAllText(Remind.fileName, jsonString);
             }
             else
             {
-                using (FileStream fs = File.Create("Reminder.json")) { }
+                using (FileStream fs = File.Create(Remind.fileName)) { }
                 var list = new List<Remind> { value };
                 var jsonString = JsonSerializer.Serialize(list, options);
-                File.WriteAllText("Reminder.json", jsonString);
+                File.WriteAllText(Remind.fileName, jsonString);
             }
         }
         public static void SaveRemind(List<Remind> value)
@@ -39,11 +39,11 @@ namespace ReminderClassLibrary
                 WriteIndented = true
             };
             var jsonString = JsonSerializer.Serialize(value, options);
-            File.WriteAllText("Reminder.json", jsonString);
+            File.WriteAllText(Remind.fileName, jsonString);
         }
         public static List<Remind> GetRemind()
         {
-            var jsonString = File.ReadAllText("Reminder.json");
+            var jsonString = File.ReadAllText(Remind.fileName);
             var array = JsonSerializer.Deserialize<List<Remind>>(jsonString);
             return array;
         }
