@@ -34,10 +34,14 @@ namespace MyProjectApp
         private void deleteReminderButton_Click(object sender, EventArgs e)
         {
             var indexToDelete = reminderDataGridView.CurrentRow.Index;
-            var listElementToDelete = FindIndexInArray(indexToDelete);
-            remindersList.RemoveAt(listElementToDelete);
-            reminderDataGridView.Rows.RemoveAt(indexToDelete);
-            FileSystem.SaveRemind(remindersList);
+            if (indexToDelete < remindersList.Count)
+            {
+                var listElementToDelete = FindIndexInArray(indexToDelete);
+                remindersList.RemoveAt(listElementToDelete);
+                reminderDataGridView.Rows.RemoveAt(indexToDelete);
+                FileSystem.SaveRemind(remindersList);
+            }
+            else { MessageBox.Show("Пожалуйста, выберите строку корректно"); }
         }
         private void editReminderButton_Click(object sender, EventArgs e)
         {
@@ -61,7 +65,7 @@ namespace MyProjectApp
         }
         private int FindIndexInArray(int indexInTable)
         {
-            return remindersList.FindIndex(x => x.RemindName == reminderDataGridView[nameColumn.Index, indexInTable]
+            return remindersList.FindIndex(x => x.GetGuid.ToString() == reminderDataGridView[guidColumn.Index, indexInTable]
             .Value.ToString());
         }
         private void WriteRemindsToGrid()
@@ -70,7 +74,7 @@ namespace MyProjectApp
             foreach (var remind in remindersList)
             {
                 reminderDataGridView.Rows.Add(remind.StartRemindDate, remind.RemindName, remind.EndRemindDate,
-                    remind.RemindDescription, remind.TasksList);
+                    remind.RemindDescription, remind.TasksList, remind.GetGuid);
             }
         }
         private void UpdateGrid()

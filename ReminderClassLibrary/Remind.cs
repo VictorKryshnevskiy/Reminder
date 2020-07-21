@@ -14,9 +14,11 @@ namespace ReminderClassLibrary
         public DateTime EndRemindDate { get; set; }
         public string TasksList { get; set; }
         public const string fileName = "Reminder.json";
-
-        public Remind(DateTime startRemindDate, string remindName, DateTime endRemindDate, string remindDescription,
-            string tasksList)
+        private Guid guid = Guid.NewGuid(); 
+        public Guid GetGuid { get { return guid; }}
+        public Remind(DateTime startRemindDate = default, string remindName = default,
+            DateTime endRemindDate = default, string remindDescription = default,
+            string tasksList = default)
         {
             StartRemindDate = startRemindDate;
             RemindName = remindName;

@@ -29,14 +29,15 @@
         private void InitializeComponent()
         {
             this.reminderDataGridView = new System.Windows.Forms.DataGridView();
+            this.createReminderButton = new System.Windows.Forms.Button();
+            this.editReminderButton = new System.Windows.Forms.Button();
+            this.deleteReminderButton = new System.Windows.Forms.Button();
             this.startDateColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.nameColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.endDateColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.descriptionColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tasksColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.createReminderButton = new System.Windows.Forms.Button();
-            this.editReminderButton = new System.Windows.Forms.Button();
-            this.deleteReminderButton = new System.Windows.Forms.Button();
+            this.guidColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.reminderDataGridView)).BeginInit();
             this.SuspendLayout();
             // 
@@ -48,13 +49,44 @@
             this.nameColumn,
             this.endDateColumn,
             this.descriptionColumn,
-            this.tasksColumn});
+            this.tasksColumn,
+            this.guidColumn});
             this.reminderDataGridView.Location = new System.Drawing.Point(12, 12);
             this.reminderDataGridView.Name = "reminderDataGridView";
             this.reminderDataGridView.ReadOnly = true;
             this.reminderDataGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.reminderDataGridView.Size = new System.Drawing.Size(631, 426);
             this.reminderDataGridView.TabIndex = 0;
+            // 
+            // createReminderButton
+            // 
+            this.createReminderButton.Location = new System.Drawing.Point(649, 12);
+            this.createReminderButton.Name = "createReminderButton";
+            this.createReminderButton.Size = new System.Drawing.Size(139, 23);
+            this.createReminderButton.TabIndex = 1;
+            this.createReminderButton.Text = "Создать событие";
+            this.createReminderButton.UseVisualStyleBackColor = true;
+            this.createReminderButton.Click += new System.EventHandler(this.createReminderButton_Click);
+            // 
+            // editReminderButton
+            // 
+            this.editReminderButton.Location = new System.Drawing.Point(649, 54);
+            this.editReminderButton.Name = "editReminderButton";
+            this.editReminderButton.Size = new System.Drawing.Size(139, 23);
+            this.editReminderButton.TabIndex = 2;
+            this.editReminderButton.Text = "Редактировать событие";
+            this.editReminderButton.UseVisualStyleBackColor = true;
+            this.editReminderButton.Click += new System.EventHandler(this.editReminderButton_Click);
+            // 
+            // deleteReminderButton
+            // 
+            this.deleteReminderButton.Location = new System.Drawing.Point(649, 94);
+            this.deleteReminderButton.Name = "deleteReminderButton";
+            this.deleteReminderButton.Size = new System.Drawing.Size(139, 23);
+            this.deleteReminderButton.TabIndex = 3;
+            this.deleteReminderButton.Text = "Удалить событие";
+            this.deleteReminderButton.UseVisualStyleBackColor = true;
+            this.deleteReminderButton.Click += new System.EventHandler(this.deleteReminderButton_Click);
             // 
             // startDateColumn
             // 
@@ -90,35 +122,12 @@
             this.tasksColumn.ReadOnly = true;
             this.tasksColumn.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             // 
-            // createReminderButton
+            // guidColumn
             // 
-            this.createReminderButton.Location = new System.Drawing.Point(649, 12);
-            this.createReminderButton.Name = "createReminderButton";
-            this.createReminderButton.Size = new System.Drawing.Size(139, 23);
-            this.createReminderButton.TabIndex = 1;
-            this.createReminderButton.Text = "Создать событие";
-            this.createReminderButton.UseVisualStyleBackColor = true;
-            this.createReminderButton.Click += new System.EventHandler(this.createReminderButton_Click);
-            // 
-            // editReminderButton
-            // 
-            this.editReminderButton.Location = new System.Drawing.Point(649, 54);
-            this.editReminderButton.Name = "editReminderButton";
-            this.editReminderButton.Size = new System.Drawing.Size(139, 23);
-            this.editReminderButton.TabIndex = 2;
-            this.editReminderButton.Text = "Редактировать событие";
-            this.editReminderButton.UseVisualStyleBackColor = true;
-            this.editReminderButton.Click += new System.EventHandler(this.editReminderButton_Click);
-            // 
-            // deleteReminderButton
-            // 
-            this.deleteReminderButton.Location = new System.Drawing.Point(649, 94);
-            this.deleteReminderButton.Name = "deleteReminderButton";
-            this.deleteReminderButton.Size = new System.Drawing.Size(139, 23);
-            this.deleteReminderButton.TabIndex = 3;
-            this.deleteReminderButton.Text = "Удалить событие";
-            this.deleteReminderButton.UseVisualStyleBackColor = true;
-            this.deleteReminderButton.Click += new System.EventHandler(this.deleteReminderButton_Click);
+            this.guidColumn.HeaderText = "Guid";
+            this.guidColumn.Name = "guidColumn";
+            this.guidColumn.ReadOnly = true;
+            this.guidColumn.Visible = false;
             // 
             // UserInterfaceForm
             // 
@@ -148,6 +157,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn endDateColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn descriptionColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn tasksColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn guidColumn;
     }
 }
 
