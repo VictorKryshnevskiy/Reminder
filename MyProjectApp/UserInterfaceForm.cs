@@ -56,7 +56,7 @@ namespace MyProjectApp
                 {
                     remindersList.RemoveAt(listElementToEdit);
                     reminderDataGridView.Rows.RemoveAt(indexToEdit);
-                    remindersList.Add(CreateReminderForm.Remind);
+                    remindersList.Insert(listElementToEdit, CreateReminderForm.Remind);
                     FileSystem.SaveRemind(remindersList);
                     UpdateGrid();
                 }
