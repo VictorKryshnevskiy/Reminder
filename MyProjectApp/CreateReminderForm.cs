@@ -16,6 +16,8 @@ namespace MyProjectApp
     {
         public static bool SaveButtonClicked { get; private set; }
         public static Remind Remind { get; private set; }
+        private CheckState checkState = 0;
+        int checkStateIndex = 0;
 
         public CreateReminderForm(Remind rem)
         {
@@ -36,7 +38,13 @@ namespace MyProjectApp
             reminderNameTextBox.Text = Remind.RemindName;
             endDateTimePicker.Value = Remind.EndRemindDate;
             reminderDescriptionTextBox.Text = Remind.RemindDescription;
-            reminderTasksRichTextBox.Text = Remind.TasksList;
+            timeBeforeRemindtextBox.Text = (Remind.EndRemindDate - Remind.DateToRemind).ToString();
+            //timeBeforeRemindComboBox = ;
+            foreach (var task in Remind.TasksList)
+            {
+                reminderTasksRichTextBox.Text += task.TaskText + '\n';
+                checkedListBox1.Items.Add(task.TaskText, task.CheckStatus);
+            }
         }
         private void saveRemindButton_Click(object sender, EventArgs e)
         {
@@ -46,7 +54,8 @@ namespace MyProjectApp
                 Remind.RemindName = reminderNameTextBox.Text;
                 Remind.EndRemindDate = endDateTimePicker.Value;
                 Remind.RemindDescription = reminderDescriptionTextBox.Text;
-                Remind.TasksList = reminderTasksRichTextBox.Text;
+                Remind.DateToRemind = CountDate(Convert.ToInt32(timeBeforeRemindtextBox.Text),timeBeforeRemindComboBox.Text);
+                Remind.TasksList = reminderTasksRichTextBox.Text.Split(new string[] { "\n" }, StringSplitOptions.RemoveEmptyEntries).Select(x => new RemindsTask(x)).ToList();
                 FileSystem.SaveRemind(Remind);
                 SaveButtonClicked = true;
                 Close();
@@ -55,6 +64,34 @@ namespace MyProjectApp
             {
                 MessageBox.Show("Пожалуйста, укажите имя события");
             }
+        }
+
+        private void checkedListBox1_ItemCheck(object sender, ItemCheckEventArgs e)
+        {
+            checkStateIndex = e.Index;
+            if (e.CurrentValue == 0)
+            { checkState = (CheckState)2; }
+            if (e.CurrentValue == (CheckState)2)
+            { checkState = (CheckState)1; }
+            if (e.CurrentValue == (CheckState)1)
+            { checkState = 0; }
+        }
+        private DateTime CountDate(int timeBeforeRemind, string period)
+        {
+            if (period == "Дни")
+            {
+                return Remind.EndRemindDate.AddDays(-1 * timeBeforeRemind);
+            }
+            if (period == "Часы")
+            {
+                return Remind.EndRemindDate.AddHours(-1 * timeBeforeRemind);
+            }
+            if (period == "Минуты")
+            {
+                return Remind.EndRemindDate.AddMinutes(-1 * timeBeforeRemind);
+            }
+            else
+            { return Remind.DateToRemind; }
         }
     }
 }

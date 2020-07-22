@@ -36,18 +36,20 @@
             this.reminderNameTextBox = new System.Windows.Forms.TextBox();
             this.reminderDescriptionTextBox = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
-            this.textBox3 = new System.Windows.Forms.TextBox();
+            this.timeBeforeRemindComboBox = new System.Windows.Forms.ComboBox();
+            this.timeBeforeRemindtextBox = new System.Windows.Forms.TextBox();
             this.saveRemindButton = new System.Windows.Forms.Button();
             this.startDateTimePicker = new System.Windows.Forms.DateTimePicker();
             this.endDateTimePicker = new System.Windows.Forms.DateTimePicker();
             this.reminderTasksRichTextBox = new System.Windows.Forms.RichTextBox();
+            this.checkedListBox1 = new System.Windows.Forms.CheckedListBox();
+            this.label7 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(12, 133);
+            this.label1.Location = new System.Drawing.Point(12, 12);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(117, 13);
             this.label1.TabIndex = 2;
@@ -56,7 +58,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(447, 133);
+            this.label2.Location = new System.Drawing.Point(12, 133);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(103, 13);
             this.label2.TabIndex = 3;
@@ -65,7 +67,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(279, 133);
+            this.label3.Location = new System.Drawing.Point(12, 93);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(135, 13);
             this.label3.TabIndex = 4;
@@ -74,7 +76,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(171, 133);
+            this.label4.Location = new System.Drawing.Point(12, 53);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(75, 13);
             this.label4.TabIndex = 5;
@@ -83,22 +85,22 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(650, 133);
+            this.label5.Location = new System.Drawing.Point(267, 266);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(43, 13);
+            this.label5.Size = new System.Drawing.Size(41, 13);
             this.label5.TabIndex = 6;
-            this.label5.Text = "Задачи";
+            this.label5.Text = "Статус";
             // 
             // reminderNameTextBox
             // 
-            this.reminderNameTextBox.Location = new System.Drawing.Point(143, 185);
+            this.reminderNameTextBox.Location = new System.Drawing.Point(164, 53);
             this.reminderNameTextBox.Name = "reminderNameTextBox";
             this.reminderNameTextBox.Size = new System.Drawing.Size(130, 20);
             this.reminderNameTextBox.TabIndex = 7;
             // 
             // reminderDescriptionTextBox
             // 
-            this.reminderDescriptionTextBox.Location = new System.Drawing.Point(401, 184);
+            this.reminderDescriptionTextBox.Location = new System.Drawing.Point(164, 133);
             this.reminderDescriptionTextBox.Name = "reminderDescriptionTextBox";
             this.reminderDescriptionTextBox.Size = new System.Drawing.Size(196, 20);
             this.reminderDescriptionTextBox.TabIndex = 8;
@@ -106,34 +108,34 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(38, 301);
+            this.label6.Location = new System.Drawing.Point(10, 187);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(119, 13);
+            this.label6.Size = new System.Drawing.Size(95, 13);
             this.label6.TabIndex = 10;
-            this.label6.Text = "Частота уведомлений";
+            this.label6.Text = "Когда напомнить";
             // 
-            // comboBox1
+            // timeBeforeRemindComboBox
             // 
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Items.AddRange(new object[] {
+            this.timeBeforeRemindComboBox.FormattingEnabled = true;
+            this.timeBeforeRemindComboBox.Items.AddRange(new object[] {
             "Минуты",
             "Часы",
             "Дни"});
-            this.comboBox1.Location = new System.Drawing.Point(326, 293);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(121, 21);
-            this.comboBox1.TabIndex = 11;
+            this.timeBeforeRemindComboBox.Location = new System.Drawing.Point(332, 186);
+            this.timeBeforeRemindComboBox.Name = "timeBeforeRemindComboBox";
+            this.timeBeforeRemindComboBox.Size = new System.Drawing.Size(121, 21);
+            this.timeBeforeRemindComboBox.TabIndex = 11;
             // 
-            // textBox3
+            // timeBeforeRemindtextBox
             // 
-            this.textBox3.Location = new System.Drawing.Point(174, 294);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(130, 20);
-            this.textBox3.TabIndex = 12;
+            this.timeBeforeRemindtextBox.Location = new System.Drawing.Point(174, 187);
+            this.timeBeforeRemindtextBox.Name = "timeBeforeRemindtextBox";
+            this.timeBeforeRemindtextBox.Size = new System.Drawing.Size(130, 20);
+            this.timeBeforeRemindtextBox.TabIndex = 12;
             // 
             // saveRemindButton
             // 
-            this.saveRemindButton.Location = new System.Drawing.Point(616, 347);
+            this.saveRemindButton.Location = new System.Drawing.Point(654, 378);
             this.saveRemindButton.Name = "saveRemindButton";
             this.saveRemindButton.Size = new System.Drawing.Size(120, 23);
             this.saveRemindButton.TabIndex = 13;
@@ -145,7 +147,7 @@
             // 
             this.startDateTimePicker.CustomFormat = "MMMMdd, yyyy  |  HH:mm";
             this.startDateTimePicker.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.startDateTimePicker.Location = new System.Drawing.Point(15, 159);
+            this.startDateTimePicker.Location = new System.Drawing.Point(164, 12);
             this.startDateTimePicker.Name = "startDateTimePicker";
             this.startDateTimePicker.Size = new System.Drawing.Size(200, 20);
             this.startDateTimePicker.TabIndex = 14;
@@ -155,7 +157,7 @@
             // 
             this.endDateTimePicker.CustomFormat = "MMMMdd, yyyy  |  HH:mm";
             this.endDateTimePicker.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.endDateTimePicker.Location = new System.Drawing.Point(258, 159);
+            this.endDateTimePicker.Location = new System.Drawing.Point(164, 93);
             this.endDateTimePicker.Name = "endDateTimePicker";
             this.endDateTimePicker.Size = new System.Drawing.Size(200, 20);
             this.endDateTimePicker.TabIndex = 15;
@@ -163,23 +165,43 @@
             // 
             // reminderTasksRichTextBox
             // 
-            this.reminderTasksRichTextBox.Location = new System.Drawing.Point(639, 184);
+            this.reminderTasksRichTextBox.Location = new System.Drawing.Point(15, 305);
             this.reminderTasksRichTextBox.Name = "reminderTasksRichTextBox";
             this.reminderTasksRichTextBox.Size = new System.Drawing.Size(100, 96);
             this.reminderTasksRichTextBox.TabIndex = 16;
             this.reminderTasksRichTextBox.Text = "";
+            // 
+            // checkedListBox1
+            // 
+            this.checkedListBox1.FormattingEnabled = true;
+            this.checkedListBox1.Location = new System.Drawing.Point(270, 307);
+            this.checkedListBox1.Name = "checkedListBox1";
+            this.checkedListBox1.Size = new System.Drawing.Size(120, 94);
+            this.checkedListBox1.TabIndex = 17;
+            this.checkedListBox1.ItemCheck += new System.Windows.Forms.ItemCheckEventHandler(this.checkedListBox1_ItemCheck);
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(22, 266);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(75, 13);
+            this.label7.TabIndex = 18;
+            this.label7.Text = "Текст задачи";
             // 
             // CreateReminderForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.label7);
+            this.Controls.Add(this.checkedListBox1);
             this.Controls.Add(this.reminderTasksRichTextBox);
             this.Controls.Add(this.endDateTimePicker);
             this.Controls.Add(this.startDateTimePicker);
             this.Controls.Add(this.saveRemindButton);
-            this.Controls.Add(this.textBox3);
-            this.Controls.Add(this.comboBox1);
+            this.Controls.Add(this.timeBeforeRemindtextBox);
+            this.Controls.Add(this.timeBeforeRemindComboBox);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.reminderDescriptionTextBox);
             this.Controls.Add(this.reminderNameTextBox);
@@ -205,11 +227,13 @@
         private System.Windows.Forms.TextBox reminderNameTextBox;
         private System.Windows.Forms.TextBox reminderDescriptionTextBox;
         private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.ComboBox comboBox1;
-        private System.Windows.Forms.TextBox textBox3;
+        private System.Windows.Forms.ComboBox timeBeforeRemindComboBox;
+        private System.Windows.Forms.TextBox timeBeforeRemindtextBox;
         private System.Windows.Forms.Button saveRemindButton;
         private System.Windows.Forms.DateTimePicker startDateTimePicker;
         private System.Windows.Forms.DateTimePicker endDateTimePicker;
         private System.Windows.Forms.RichTextBox reminderTasksRichTextBox;
+        private System.Windows.Forms.CheckedListBox checkedListBox1;
+        private System.Windows.Forms.Label label7;
     }
 }
