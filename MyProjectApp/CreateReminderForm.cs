@@ -16,9 +16,7 @@ namespace MyProjectApp
     {
         public static bool SaveButtonClicked { get; private set; }
         public static Remind Remind { get; private set; }
-        private CheckState checkState = 0;
-        int checkStateIndex = 0;
-
+        int buttonClickCount = 0;
         public CreateReminderForm(Remind rem)
         {
             InitializeComponent();
@@ -38,8 +36,11 @@ namespace MyProjectApp
             reminderNameTextBox.Text = Remind.RemindName;
             endDateTimePicker.Value = Remind.EndRemindDate;
             reminderDescriptionTextBox.Text = Remind.RemindDescription;
-            timeBeforeRemindnumericUpDown.Value = Remind.DateToRimind.TimeBeforeRemind;
-            timeBeforeRemindComboBox.Text = Remind.DateToRimind.Period;
+            foreach (var dateToRimind in Remind.DateToRimind)
+            {
+                timeBeforeRemindnumericUpDown.Value = dateToRimind.TimeBeforeRemind;
+                timeBeforeRemindComboBox.Text = dateToRimind.Period;
+            }
             foreach (var task in Remind.TasksList)
             {
                 if (task.CheckStatus == CheckStatus.ToDo)
@@ -64,14 +65,14 @@ namespace MyProjectApp
                 Remind.RemindName = reminderNameTextBox.Text;
                 Remind.EndRemindDate = endDateTimePicker.Value;
                 Remind.RemindDescription = reminderDescriptionTextBox.Text;
-                Remind.DateToRimind = new DateToRimind(Convert.ToInt32(timeBeforeRemindnumericUpDown.Value), timeBeforeRemindComboBox.Text);
-                Remind.DateTimeToRemind =  CountDate(Convert.ToInt32(timeBeforeRemindnumericUpDown.Value), timeBeforeRemindComboBox.Text);
+                Remind.DateToRimind = new List<DateToRimind> { new DateToRimind(Convert.ToInt32(timeBeforeRemindnumericUpDown.Value), timeBeforeRemindComboBox.Text) };
+                Remind.DateTimeToRemind = new List<DateTime> { CountDate(Convert.ToInt32(timeBeforeRemindnumericUpDown.Value), timeBeforeRemindComboBox.Text) };
                 Remind.TasksList = toDoReminderTasksRichTextBox.Text.Split(new string[] { "\n" }, StringSplitOptions.RemoveEmptyEntries)
                     .Select(x => new RemindsTask(x)).ToList();
                 Remind.TasksList.AddRange(inProgressReminderTasksRichTextBox.Text.Split(new string[] { "\n" }, StringSplitOptions.RemoveEmptyEntries)
-                    .Select(x => new RemindsTask(x,CheckStatus.InProgress)).ToList());
+                    .Select(x => new RemindsTask(x, CheckStatus.InProgress)).ToList());
                 Remind.TasksList.AddRange(doneReminderTasksRichTextBox.Text.Split(new string[] { "\n" }, StringSplitOptions.RemoveEmptyEntries)
-                   .Select(x => new RemindsTask(x,CheckStatus.Done)).ToList());
+                   .Select(x => new RemindsTask(x, CheckStatus.Done)).ToList());
 
                 FileSystem.SaveRemind(Remind);
                 SaveButtonClicked = true;
@@ -82,20 +83,9 @@ namespace MyProjectApp
                 MessageBox.Show("Пожалуйста, укажите имя события");
             }
         }
-
-        private void checkedListBox1_ItemCheck(object sender, ItemCheckEventArgs e)
-        {
-            checkStateIndex = e.Index;
-            if (e.CurrentValue == 0)
-            { checkState = (CheckState)2; }
-            if (e.CurrentValue == (CheckState)2)
-            { checkState = (CheckState)1; }
-            if (e.CurrentValue == (CheckState)1)
-            { checkState = 0; }
-        }
         private DateTime CountDate(int timeBeforeRemind, string period)
         {
-            
+
             if (period == "Дни")
             {
                 return Remind.EndRemindDate.AddDays(-1 * timeBeforeRemind);
@@ -109,7 +99,29 @@ namespace MyProjectApp
                 return Remind.EndRemindDate.AddMinutes(-1 * timeBeforeRemind);
             }
             else
-            { return Remind.DateTimeToRemind; }
+            { return Remind.EndRemindDate; }
+        }
+        private void button1_Click(object sender, EventArgs e)
+        {
+            Button button = (Button)sender;
+            button.Visible = false;
+            var num = new NumericUpDown();
+            var com = new ComboBox();
+            com.Items.AddRange(new string[] { "Минуты", "Часы", "Дни" });
+            Button buttonShow = new Button
+            {
+                Text = "Добавить напоминание",
+                Width = num.Width
+            };
+            buttonShow.Location = new Point(button.Location.X + button.Width + 10, button.Location.Y);
+            num.Location = new Point(buttonShow.Location.X + timeBeforeRemindnumericUpDown.Width + 10,
+                timeBeforeRemindnumericUpDown.Location.Y);
+            com.Location = new Point(buttonShow.Location.X + timeBeforeRemindComboBox.Width + 10,
+                timeBeforeRemindComboBox.Location.Y);
+            buttonShow.Click += new EventHandler(button1_Click);
+            Controls.Add(num);
+            Controls.Add(com);
+            Controls.Add(buttonShow);
         }
     }
 }
