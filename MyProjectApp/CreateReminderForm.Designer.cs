@@ -37,13 +37,14 @@
             this.reminderDescriptionTextBox = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
             this.timeBeforeRemindComboBox = new System.Windows.Forms.ComboBox();
-            this.timeBeforeRemindtextBox = new System.Windows.Forms.TextBox();
             this.saveRemindButton = new System.Windows.Forms.Button();
             this.startDateTimePicker = new System.Windows.Forms.DateTimePicker();
             this.endDateTimePicker = new System.Windows.Forms.DateTimePicker();
             this.reminderTasksRichTextBox = new System.Windows.Forms.RichTextBox();
             this.checkedListBox1 = new System.Windows.Forms.CheckedListBox();
             this.label7 = new System.Windows.Forms.Label();
+            this.timeBeforeRemindnumericUpDown = new System.Windows.Forms.NumericUpDown();
+            ((System.ComponentModel.ISupportInitialize)(this.timeBeforeRemindnumericUpDown)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
@@ -126,13 +127,6 @@
             this.timeBeforeRemindComboBox.Size = new System.Drawing.Size(121, 21);
             this.timeBeforeRemindComboBox.TabIndex = 11;
             // 
-            // timeBeforeRemindtextBox
-            // 
-            this.timeBeforeRemindtextBox.Location = new System.Drawing.Point(174, 187);
-            this.timeBeforeRemindtextBox.Name = "timeBeforeRemindtextBox";
-            this.timeBeforeRemindtextBox.Size = new System.Drawing.Size(130, 20);
-            this.timeBeforeRemindtextBox.TabIndex = 12;
-            // 
             // saveRemindButton
             // 
             this.saveRemindButton.Location = new System.Drawing.Point(654, 378);
@@ -189,18 +183,25 @@
             this.label7.TabIndex = 18;
             this.label7.Text = "Текст задачи";
             // 
+            // timeBeforeRemindnumericUpDown
+            // 
+            this.timeBeforeRemindnumericUpDown.Location = new System.Drawing.Point(164, 187);
+            this.timeBeforeRemindnumericUpDown.Name = "timeBeforeRemindnumericUpDown";
+            this.timeBeforeRemindnumericUpDown.Size = new System.Drawing.Size(120, 20);
+            this.timeBeforeRemindnumericUpDown.TabIndex = 19;
+            // 
             // CreateReminderForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.timeBeforeRemindnumericUpDown);
             this.Controls.Add(this.label7);
             this.Controls.Add(this.checkedListBox1);
             this.Controls.Add(this.reminderTasksRichTextBox);
             this.Controls.Add(this.endDateTimePicker);
             this.Controls.Add(this.startDateTimePicker);
             this.Controls.Add(this.saveRemindButton);
-            this.Controls.Add(this.timeBeforeRemindtextBox);
             this.Controls.Add(this.timeBeforeRemindComboBox);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.reminderDescriptionTextBox);
@@ -213,6 +214,7 @@
             this.Name = "CreateReminderForm";
             this.Text = "CreateReminderFor";
             this.Load += new System.EventHandler(this.CreateReminderForm_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.timeBeforeRemindnumericUpDown)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -228,12 +230,12 @@
         private System.Windows.Forms.TextBox reminderDescriptionTextBox;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.ComboBox timeBeforeRemindComboBox;
-        private System.Windows.Forms.TextBox timeBeforeRemindtextBox;
         private System.Windows.Forms.Button saveRemindButton;
         private System.Windows.Forms.DateTimePicker startDateTimePicker;
         private System.Windows.Forms.DateTimePicker endDateTimePicker;
         private System.Windows.Forms.RichTextBox reminderTasksRichTextBox;
         private System.Windows.Forms.CheckedListBox checkedListBox1;
         private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.NumericUpDown timeBeforeRemindnumericUpDown;
     }
 }
