@@ -33,12 +33,11 @@
             this.editReminderButton = new System.Windows.Forms.Button();
             this.deleteReminderButton = new System.Windows.Forms.Button();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
-            this.startDateColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.nameColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.endDateColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.descriptionColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.guidColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.tasksColumn = new System.Windows.Forms.DataGridViewComboBoxColumn();
+            this.descriptionColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.endDateColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.nameColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.startDateColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.reminderDataGridView)).BeginInit();
             this.SuspendLayout();
             // 
@@ -50,12 +49,11 @@
             this.nameColumn,
             this.endDateColumn,
             this.descriptionColumn,
-            this.guidColumn,
-            this.tasksColumn});
+            this.guidColumn});
             this.reminderDataGridView.Location = new System.Drawing.Point(12, 12);
             this.reminderDataGridView.Name = "reminderDataGridView";
             this.reminderDataGridView.ReadOnly = true;
-            this.reminderDataGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.reminderDataGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
             this.reminderDataGridView.Size = new System.Drawing.Size(631, 426);
             this.reminderDataGridView.TabIndex = 0;
             // 
@@ -92,10 +90,41 @@
             // comboBox1
             // 
             this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(649, 227);
+            this.comboBox1.Location = new System.Drawing.Point(649, 242);
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(121, 21);
             this.comboBox1.TabIndex = 4;
+            // 
+            // guidColumn
+            // 
+            this.guidColumn.HeaderText = "Guid";
+            this.guidColumn.Name = "guidColumn";
+            this.guidColumn.ReadOnly = true;
+            this.guidColumn.Visible = false;
+            // 
+            // descriptionColumn
+            // 
+            this.descriptionColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
+            this.descriptionColumn.HeaderText = "Описание события";
+            this.descriptionColumn.Name = "descriptionColumn";
+            this.descriptionColumn.ReadOnly = true;
+            this.descriptionColumn.Width = 117;
+            // 
+            // endDateColumn
+            // 
+            this.endDateColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
+            this.endDateColumn.HeaderText = "Дата окончания события";
+            this.endDateColumn.Name = "endDateColumn";
+            this.endDateColumn.ReadOnly = true;
+            this.endDateColumn.Width = 146;
+            // 
+            // nameColumn
+            // 
+            this.nameColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
+            this.nameColumn.HeaderText = "Имя события";
+            this.nameColumn.Name = "nameColumn";
+            this.nameColumn.ReadOnly = true;
+            this.nameColumn.Width = 92;
             // 
             // startDateColumn
             // 
@@ -105,39 +134,6 @@
             this.startDateColumn.ReadOnly = true;
             this.startDateColumn.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             this.startDateColumn.Width = 130;
-            // 
-            // nameColumn
-            // 
-            this.nameColumn.HeaderText = "Имя события";
-            this.nameColumn.Name = "nameColumn";
-            this.nameColumn.ReadOnly = true;
-            // 
-            // endDateColumn
-            // 
-            this.endDateColumn.HeaderText = "Дата окончания события";
-            this.endDateColumn.Name = "endDateColumn";
-            this.endDateColumn.ReadOnly = true;
-            // 
-            // descriptionColumn
-            // 
-            this.descriptionColumn.HeaderText = "Описание события";
-            this.descriptionColumn.Name = "descriptionColumn";
-            this.descriptionColumn.ReadOnly = true;
-            // 
-            // guidColumn
-            // 
-            this.guidColumn.HeaderText = "Guid";
-            this.guidColumn.Name = "guidColumn";
-            this.guidColumn.ReadOnly = true;
-            this.guidColumn.Visible = false;
-            // 
-            // tasksColumn
-            // 
-            this.tasksColumn.HeaderText = "Задачи";
-            this.tasksColumn.Name = "tasksColumn";
-            this.tasksColumn.ReadOnly = true;
-            this.tasksColumn.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.tasksColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
             // 
             // UserInterfaceForm
             // 
@@ -169,7 +165,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn endDateColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn descriptionColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn guidColumn;
-        private System.Windows.Forms.DataGridViewComboBoxColumn tasksColumn;
     }
 }
 

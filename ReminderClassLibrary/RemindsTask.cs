@@ -10,12 +10,12 @@ namespace ReminderClassLibrary
     public class RemindsTask
     {
         public string TaskText { get;  set; }
-        public CheckState CheckStatus { get;  set; }
+        public CheckStatus CheckStatus { get;  set; }
 
-    public RemindsTask(string text, CheckState taskStatus = default)
+    public RemindsTask(string text, CheckStatus checkStatus = default)
         {
             TaskText = text;
-            CheckStatus = taskStatus;
+            CheckStatus = checkStatus;
         }
         public RemindsTask() { }
     }

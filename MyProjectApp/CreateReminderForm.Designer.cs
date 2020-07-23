@@ -40,10 +40,13 @@
             this.saveRemindButton = new System.Windows.Forms.Button();
             this.startDateTimePicker = new System.Windows.Forms.DateTimePicker();
             this.endDateTimePicker = new System.Windows.Forms.DateTimePicker();
-            this.reminderTasksRichTextBox = new System.Windows.Forms.RichTextBox();
-            this.checkedListBox1 = new System.Windows.Forms.CheckedListBox();
+            this.toDoReminderTasksRichTextBox = new System.Windows.Forms.RichTextBox();
             this.label7 = new System.Windows.Forms.Label();
             this.timeBeforeRemindnumericUpDown = new System.Windows.Forms.NumericUpDown();
+            this.inProgressReminderTasksRichTextBox = new System.Windows.Forms.RichTextBox();
+            this.doneReminderTasksRichTextBox = new System.Windows.Forms.RichTextBox();
+            this.label8 = new System.Windows.Forms.Label();
+            this.label9 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.timeBeforeRemindnumericUpDown)).BeginInit();
             this.SuspendLayout();
             // 
@@ -86,11 +89,11 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(267, 266);
+            this.label5.Location = new System.Drawing.Point(37, 279);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(41, 13);
+            this.label5.Size = new System.Drawing.Size(49, 13);
             this.label5.TabIndex = 6;
-            this.label5.Text = "Статус";
+            this.label5.Text = "Сделать";
             // 
             // reminderNameTextBox
             // 
@@ -157,31 +160,22 @@
             this.endDateTimePicker.TabIndex = 15;
             this.endDateTimePicker.Value = new System.DateTime(2020, 7, 15, 19, 49, 50, 0);
             // 
-            // reminderTasksRichTextBox
+            // toDoReminderTasksRichTextBox
             // 
-            this.reminderTasksRichTextBox.Location = new System.Drawing.Point(15, 305);
-            this.reminderTasksRichTextBox.Name = "reminderTasksRichTextBox";
-            this.reminderTasksRichTextBox.Size = new System.Drawing.Size(100, 96);
-            this.reminderTasksRichTextBox.TabIndex = 16;
-            this.reminderTasksRichTextBox.Text = "";
-            // 
-            // checkedListBox1
-            // 
-            this.checkedListBox1.FormattingEnabled = true;
-            this.checkedListBox1.Location = new System.Drawing.Point(270, 307);
-            this.checkedListBox1.Name = "checkedListBox1";
-            this.checkedListBox1.Size = new System.Drawing.Size(120, 94);
-            this.checkedListBox1.TabIndex = 17;
-            this.checkedListBox1.ItemCheck += new System.Windows.Forms.ItemCheckEventHandler(this.checkedListBox1_ItemCheck);
+            this.toDoReminderTasksRichTextBox.Location = new System.Drawing.Point(15, 305);
+            this.toDoReminderTasksRichTextBox.Name = "toDoReminderTasksRichTextBox";
+            this.toDoReminderTasksRichTextBox.Size = new System.Drawing.Size(100, 96);
+            this.toDoReminderTasksRichTextBox.TabIndex = 16;
+            this.toDoReminderTasksRichTextBox.Text = "";
             // 
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(22, 266);
+            this.label7.Location = new System.Drawing.Point(209, 242);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(75, 13);
+            this.label7.Size = new System.Drawing.Size(43, 13);
             this.label7.TabIndex = 18;
-            this.label7.Text = "Текст задачи";
+            this.label7.Text = "Задачи";
             // 
             // timeBeforeRemindnumericUpDown
             // 
@@ -190,15 +184,52 @@
             this.timeBeforeRemindnumericUpDown.Size = new System.Drawing.Size(120, 20);
             this.timeBeforeRemindnumericUpDown.TabIndex = 19;
             // 
+            // inProgressReminderTasksRichTextBox
+            // 
+            this.inProgressReminderTasksRichTextBox.Location = new System.Drawing.Point(184, 305);
+            this.inProgressReminderTasksRichTextBox.Name = "inProgressReminderTasksRichTextBox";
+            this.inProgressReminderTasksRichTextBox.Size = new System.Drawing.Size(100, 96);
+            this.inProgressReminderTasksRichTextBox.TabIndex = 20;
+            this.inProgressReminderTasksRichTextBox.Text = "";
+            // 
+            // doneReminderTasksRichTextBox
+            // 
+            this.doneReminderTasksRichTextBox.Location = new System.Drawing.Point(353, 305);
+            this.doneReminderTasksRichTextBox.Name = "doneReminderTasksRichTextBox";
+            this.doneReminderTasksRichTextBox.Size = new System.Drawing.Size(100, 96);
+            this.doneReminderTasksRichTextBox.TabIndex = 21;
+            this.doneReminderTasksRichTextBox.Text = "";
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(199, 279);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(65, 13);
+            this.label8.TabIndex = 22;
+            this.label8.Text = "В процессе";
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(375, 279);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(50, 13);
+            this.label9.TabIndex = 23;
+            this.label9.Text = "Сделано";
+            // 
             // CreateReminderForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.label9);
+            this.Controls.Add(this.label8);
+            this.Controls.Add(this.doneReminderTasksRichTextBox);
+            this.Controls.Add(this.inProgressReminderTasksRichTextBox);
             this.Controls.Add(this.timeBeforeRemindnumericUpDown);
             this.Controls.Add(this.label7);
-            this.Controls.Add(this.checkedListBox1);
-            this.Controls.Add(this.reminderTasksRichTextBox);
+            this.Controls.Add(this.toDoReminderTasksRichTextBox);
             this.Controls.Add(this.endDateTimePicker);
             this.Controls.Add(this.startDateTimePicker);
             this.Controls.Add(this.saveRemindButton);
@@ -233,9 +264,12 @@
         private System.Windows.Forms.Button saveRemindButton;
         private System.Windows.Forms.DateTimePicker startDateTimePicker;
         private System.Windows.Forms.DateTimePicker endDateTimePicker;
-        private System.Windows.Forms.RichTextBox reminderTasksRichTextBox;
-        private System.Windows.Forms.CheckedListBox checkedListBox1;
+        private System.Windows.Forms.RichTextBox toDoReminderTasksRichTextBox;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.NumericUpDown timeBeforeRemindnumericUpDown;
+        private System.Windows.Forms.RichTextBox inProgressReminderTasksRichTextBox;
+        private System.Windows.Forms.RichTextBox doneReminderTasksRichTextBox;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.Label label9;
     }
 }

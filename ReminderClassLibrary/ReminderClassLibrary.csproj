@@ -89,6 +89,7 @@
     <Compile Include="RemindEventArgs.cs" />
     <Compile Include="RemindsTask.cs" />
     <Compile Include="RepositoryClass.cs" />
+    <Compile Include="CheckStatus.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />

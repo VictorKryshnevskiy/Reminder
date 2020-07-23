@@ -75,13 +75,6 @@ namespace MyProjectApp
             {
                 reminderDataGridView.Rows.Add(remind.StartRemindDate, remind.RemindName, remind.EndRemindDate,
                     remind.RemindDescription, remind.GetGuid);
-                foreach (var task in remind.TasksList)
-                {
-                    comboBox1.Items.Add(task.TaskText);
-                    tasksColumn.Items.Add(task);
-                    tasksColumn.DisplayMember = "TaskText";
-                    tasksColumn.ValueMember = "TaskText";
-                }
             }
         }
         private void UpdateGrid()
