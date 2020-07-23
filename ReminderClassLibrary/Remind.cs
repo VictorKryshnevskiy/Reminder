@@ -16,7 +16,8 @@ namespace ReminderClassLibrary
         public List<RemindsTask> TasksList { get; set; }
         private Guid guid = Guid.NewGuid(); 
         public Guid GetGuid { get { return guid; }}
-        public DateTime DateToRemind { get; set; }
+        public DateTime DateTimeToRemind { get; set; }
+        public DateToRimind DateToRimind { get; set; }
         public Remind(DateTime startRemindDate = default, string remindName = default,
             DateTime endRemindDate = default, string remindDescription = default,
             List<RemindsTask> tasksList = default, DateTime dateToRemind = default)
@@ -26,7 +27,7 @@ namespace ReminderClassLibrary
             RemindDescription = remindDescription;
             EndRemindDate = endRemindDate;
             TasksList = tasksList;
-            DateToRemind = dateToRemind;
+            DateTimeToRemind = dateToRemind;
         }
         public Remind()
         { }

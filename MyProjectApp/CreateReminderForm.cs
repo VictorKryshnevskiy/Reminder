@@ -38,7 +38,8 @@ namespace MyProjectApp
             reminderNameTextBox.Text = Remind.RemindName;
             endDateTimePicker.Value = Remind.EndRemindDate;
             reminderDescriptionTextBox.Text = Remind.RemindDescription;
-            timeBeforeRemindnumericUpDown.Value = Convert.ToDecimal((Remind.EndRemindDate - Remind.DateToRemind).TotalHours);
+            timeBeforeRemindnumericUpDown.Value = Remind.DateToRimind.TimeBeforeRemind;
+            timeBeforeRemindComboBox.Text = Remind.DateToRimind.Period;
             foreach (var task in Remind.TasksList)
             {
                 if (task.CheckStatus == CheckStatus.ToDo)
@@ -63,7 +64,8 @@ namespace MyProjectApp
                 Remind.RemindName = reminderNameTextBox.Text;
                 Remind.EndRemindDate = endDateTimePicker.Value;
                 Remind.RemindDescription = reminderDescriptionTextBox.Text;
-                Remind.DateToRemind = CountDate(Convert.ToInt32(timeBeforeRemindnumericUpDown.Value), timeBeforeRemindComboBox.Text);
+                Remind.DateToRimind = new DateToRimind(Convert.ToInt32(timeBeforeRemindnumericUpDown.Value), timeBeforeRemindComboBox.Text);
+                Remind.DateTimeToRemind =  CountDate(Convert.ToInt32(timeBeforeRemindnumericUpDown.Value), timeBeforeRemindComboBox.Text);
                 Remind.TasksList = toDoReminderTasksRichTextBox.Text.Split(new string[] { "\n" }, StringSplitOptions.RemoveEmptyEntries)
                     .Select(x => new RemindsTask(x)).ToList();
                 Remind.TasksList.AddRange(inProgressReminderTasksRichTextBox.Text.Split(new string[] { "\n" }, StringSplitOptions.RemoveEmptyEntries)
@@ -93,6 +95,7 @@ namespace MyProjectApp
         }
         private DateTime CountDate(int timeBeforeRemind, string period)
         {
+            
             if (period == "Дни")
             {
                 return Remind.EndRemindDate.AddDays(-1 * timeBeforeRemind);
@@ -106,7 +109,7 @@ namespace MyProjectApp
                 return Remind.EndRemindDate.AddMinutes(-1 * timeBeforeRemind);
             }
             else
-            { return Remind.DateToRemind; }
+            { return Remind.DateTimeToRemind; }
         }
     }
 }
