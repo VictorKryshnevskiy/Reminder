@@ -9,27 +9,29 @@ namespace ReminderClassLibrary
     public class Remind
     {
         public const string fileName = "Reminder.json";
-        public DateTime StartRemindDate { get; set; }
-        public string RemindName { get; set; }
-        public string RemindDescription { get; set; }
-        public DateTime EndRemindDate { get; set; }
-        public List<RemindsTask> TasksList { get; set; }
+        public DateTime StartDate { get; set; }
+        public string Name { get; set; }
+        public string Description { get; set; }
+        public DateTime EndDate { get; set; }
+        public List<RemindTask> TasksList { get; set; }
         private Guid guid = Guid.NewGuid(); 
         public Guid GetGuid { get { return guid; }}
-        public List<DateTime> DateTimeToRemind { get; set; }
-        public List<DateToRimind> DateToRimind { get; set; }
+        public List<Notification> DateToRimind { get; set; }
+
         public Remind(DateTime startRemindDate = default, string remindName = default,
             DateTime endRemindDate = default, string remindDescription = default,
-            List<RemindsTask> tasksList = default, List<DateTime> dateToRemind = default)
+            List<RemindTask> tasksList = default, List<DateTime> dateToRemind = default)
         {
-            StartRemindDate = startRemindDate;
-            RemindName = remindName;
-            RemindDescription = remindDescription;
-            EndRemindDate = endRemindDate;
+            StartDate = startRemindDate;
+            Name = remindName;
+            Description = remindDescription;
+            EndDate = endRemindDate;
             TasksList = tasksList;
-            DateTimeToRemind = dateToRemind;
+           // DateTimeToRemind = dateToRemind;
         }
-        public Remind()
+
+        //для десериализации
+        public Remind() 
         { }
     }
 }

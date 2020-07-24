@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ReminderClassLibrary
 {
-    public enum CheckStatus
+    public enum TaskStatus
     {
         ToDo = 0,
         InProgress = 1,

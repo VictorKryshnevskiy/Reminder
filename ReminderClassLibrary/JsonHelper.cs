@@ -6,7 +6,7 @@ using System.Collections.Generic;
 
 namespace ReminderClassLibrary
 {
-    public static class JSON
+    public static class JsonHelper
     {
         static JsonSerializerOptions options = new JsonSerializerOptions
         {

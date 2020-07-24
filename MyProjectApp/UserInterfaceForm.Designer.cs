@@ -32,12 +32,11 @@
             this.createReminderButton = new System.Windows.Forms.Button();
             this.editReminderButton = new System.Windows.Forms.Button();
             this.deleteReminderButton = new System.Windows.Forms.Button();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
-            this.guidColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.descriptionColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.endDateColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.nameColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.startDateColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.nameColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.endDateColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.descriptionColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.guidColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.reminderDataGridView)).BeginInit();
             this.SuspendLayout();
             // 
@@ -87,45 +86,6 @@
             this.deleteReminderButton.UseVisualStyleBackColor = true;
             this.deleteReminderButton.Click += new System.EventHandler(this.deleteReminderButton_Click);
             // 
-            // comboBox1
-            // 
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(649, 242);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(121, 21);
-            this.comboBox1.TabIndex = 4;
-            // 
-            // guidColumn
-            // 
-            this.guidColumn.HeaderText = "Guid";
-            this.guidColumn.Name = "guidColumn";
-            this.guidColumn.ReadOnly = true;
-            this.guidColumn.Visible = false;
-            // 
-            // descriptionColumn
-            // 
-            this.descriptionColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
-            this.descriptionColumn.HeaderText = "Описание события";
-            this.descriptionColumn.Name = "descriptionColumn";
-            this.descriptionColumn.ReadOnly = true;
-            this.descriptionColumn.Width = 117;
-            // 
-            // endDateColumn
-            // 
-            this.endDateColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
-            this.endDateColumn.HeaderText = "Дата окончания события";
-            this.endDateColumn.Name = "endDateColumn";
-            this.endDateColumn.ReadOnly = true;
-            this.endDateColumn.Width = 146;
-            // 
-            // nameColumn
-            // 
-            this.nameColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
-            this.nameColumn.HeaderText = "Имя события";
-            this.nameColumn.Name = "nameColumn";
-            this.nameColumn.ReadOnly = true;
-            this.nameColumn.Width = 92;
-            // 
             // startDateColumn
             // 
             this.startDateColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
@@ -135,12 +95,41 @@
             this.startDateColumn.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             this.startDateColumn.Width = 130;
             // 
+            // nameColumn
+            // 
+            this.nameColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
+            this.nameColumn.HeaderText = "Имя события";
+            this.nameColumn.Name = "nameColumn";
+            this.nameColumn.ReadOnly = true;
+            this.nameColumn.Width = 92;
+            // 
+            // endDateColumn
+            // 
+            this.endDateColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
+            this.endDateColumn.HeaderText = "Дата окончания события";
+            this.endDateColumn.Name = "endDateColumn";
+            this.endDateColumn.ReadOnly = true;
+            this.endDateColumn.Width = 146;
+            // 
+            // descriptionColumn
+            // 
+            this.descriptionColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.descriptionColumn.HeaderText = "Описание события";
+            this.descriptionColumn.Name = "descriptionColumn";
+            this.descriptionColumn.ReadOnly = true;
+            // 
+            // guidColumn
+            // 
+            this.guidColumn.HeaderText = "Guid";
+            this.guidColumn.Name = "guidColumn";
+            this.guidColumn.ReadOnly = true;
+            this.guidColumn.Visible = false;
+            // 
             // UserInterfaceForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Controls.Add(this.comboBox1);
             this.Controls.Add(this.deleteReminderButton);
             this.Controls.Add(this.editReminderButton);
             this.Controls.Add(this.createReminderButton);
@@ -159,7 +148,6 @@
         private System.Windows.Forms.Button createReminderButton;
         private System.Windows.Forms.Button editReminderButton;
         private System.Windows.Forms.Button deleteReminderButton;
-        private System.Windows.Forms.ComboBox comboBox1;
         private System.Windows.Forms.DataGridViewTextBoxColumn startDateColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn nameColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn endDateColumn;

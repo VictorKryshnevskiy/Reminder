@@ -6,16 +6,17 @@ using System.Threading.Tasks;
 
 namespace ReminderClassLibrary
 {
-    public class DateToRimind
+    public class Notification
     {
-        public int TimeBeforeRemind{get;  set;}
+        public int PeriodAmount{get;  set;}
         public string Period { get;  set; }
-        public DateToRimind(int timeBeforeRemind, string period)
+        public Notification(int timeBeforeRemind, string period)
         {
-            TimeBeforeRemind = timeBeforeRemind;
+            PeriodAmount = timeBeforeRemind;
             Period = period;
         }
-        public DateToRimind()
+        //для десериализации
+        public Notification()
         { }
     }
 }

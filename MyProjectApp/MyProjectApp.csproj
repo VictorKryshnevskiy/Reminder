@@ -80,6 +80,12 @@
     <Compile Include="CreateReminderForm.Designer.cs">
       <DependentUpon>CreateReminderForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Kanban.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Kanban.Designer.cs">
+      <DependentUpon>Kanban.cs</DependentUpon>
+    </Compile>
     <Compile Include="UserInterfaceForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -90,6 +96,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="CreateReminderForm.resx">
       <DependentUpon>CreateReminderForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Kanban.resx">
+      <DependentUpon>Kanban.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UserInterfaceForm.resx">
       <DependentUpon>UserInterfaceForm.cs</DependentUpon>

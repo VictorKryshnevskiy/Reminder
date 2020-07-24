@@ -73,8 +73,8 @@ namespace MyProjectApp
             remindersList = FileSystem.GetRemind();
             foreach (var remind in remindersList)
             {
-                reminderDataGridView.Rows.Add(remind.StartRemindDate, remind.RemindName, remind.EndRemindDate,
-                    remind.RemindDescription, remind.GetGuid);
+                reminderDataGridView.Rows.Add(remind.StartDate, remind.Name, remind.EndDate,
+                    remind.Description, remind.GetGuid);
             }
         }
         private void UpdateGrid()

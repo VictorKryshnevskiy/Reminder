@@ -1,13 +1,9 @@
 ﻿using System;
 using ReminderClassLibrary;
-using System.Text.Json;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace MyProjectApp
@@ -16,7 +12,9 @@ namespace MyProjectApp
     {
         public static bool SaveButtonClicked { get; private set; }
         public static Remind Remind { get; private set; }
-        int buttonClickCount = 0;
+        List<NumericUpDown> numericUpDownList;
+        List<ComboBox> comboBoxList;
+        int countButtons = 1;
         public CreateReminderForm(Remind rem)
         {
             InitializeComponent();
@@ -25,35 +23,37 @@ namespace MyProjectApp
         private void CreateReminderForm_Load(object sender, EventArgs e)
         {
             SaveButtonClicked = false;
-            if (Remind.RemindName != default)
+            if (Remind.Name != default)
             {
                 RemindsPropertiesLoad();
             }
+            numericUpDownList = new List<NumericUpDown> { timeBeforeRemindnumericUpDown };
+            comboBoxList = new List<ComboBox> { timeBeforeRemindComboBox };
         }
         private void RemindsPropertiesLoad()
         {
-            startDateTimePicker.Value = Remind.StartRemindDate;
-            reminderNameTextBox.Text = Remind.RemindName;
-            endDateTimePicker.Value = Remind.EndRemindDate;
-            reminderDescriptionTextBox.Text = Remind.RemindDescription;
+            startDateTimePicker.Value = Remind.StartDate;
+            reminderNameTextBox.Text = Remind.Name;
+            endDateTimePicker.Value = Remind.EndDate;
+            reminderDescriptionTextBox.Text = Remind.Description;
             foreach (var dateToRimind in Remind.DateToRimind)
             {
-                timeBeforeRemindnumericUpDown.Value = dateToRimind.TimeBeforeRemind;
+                timeBeforeRemindnumericUpDown.Value = dateToRimind.PeriodAmount;
                 timeBeforeRemindComboBox.Text = dateToRimind.Period;
             }
             foreach (var task in Remind.TasksList)
             {
-                if (task.CheckStatus == CheckStatus.ToDo)
+                if (task.Status == TaskStatus.ToDo)
                 {
-                    toDoReminderTasksRichTextBox.Text += task.TaskText + '\n';
+                    toDoReminderTasksRichTextBox.Text += task.Text + '\n';
                 }
-                if (task.CheckStatus == CheckStatus.InProgress)
+                if (task.Status == TaskStatus.InProgress)
                 {
-                    inProgressReminderTasksRichTextBox.Text += task.TaskText + '\n';
+                    inProgressReminderTasksRichTextBox.Text += task.Text + '\n';
                 }
-                if (task.CheckStatus == CheckStatus.Done)
+                if (task.Status == TaskStatus.Done)
                 {
-                    doneReminderTasksRichTextBox.Text += task.TaskText + '\n';
+                    doneReminderTasksRichTextBox.Text += task.Text + '\n';
                 }
             }
         }
@@ -61,19 +61,17 @@ namespace MyProjectApp
         {
             if (reminderNameTextBox.Text != "")
             {
-                Remind.StartRemindDate = startDateTimePicker.Value;
-                Remind.RemindName = reminderNameTextBox.Text;
-                Remind.EndRemindDate = endDateTimePicker.Value;
-                Remind.RemindDescription = reminderDescriptionTextBox.Text;
-                Remind.DateToRimind = new List<DateToRimind> { new DateToRimind(Convert.ToInt32(timeBeforeRemindnumericUpDown.Value), timeBeforeRemindComboBox.Text) };
-                Remind.DateTimeToRemind = new List<DateTime> { CountDate(Convert.ToInt32(timeBeforeRemindnumericUpDown.Value), timeBeforeRemindComboBox.Text) };
+                Remind.StartDate = startDateTimePicker.Value;
+                Remind.Name = reminderNameTextBox.Text;
+                Remind.EndDate = endDateTimePicker.Value;
+                Remind.Description = reminderDescriptionTextBox.Text;
+                Remind.DateToRimind = new List<Notification> { new Notification(Convert.ToInt32(timeBeforeRemindnumericUpDown.Value), timeBeforeRemindComboBox.Text) };
                 Remind.TasksList = toDoReminderTasksRichTextBox.Text.Split(new string[] { "\n" }, StringSplitOptions.RemoveEmptyEntries)
-                    .Select(x => new RemindsTask(x)).ToList();
+                    .Select(x => new RemindTask(x)).ToList();
                 Remind.TasksList.AddRange(inProgressReminderTasksRichTextBox.Text.Split(new string[] { "\n" }, StringSplitOptions.RemoveEmptyEntries)
-                    .Select(x => new RemindsTask(x, CheckStatus.InProgress)).ToList());
+                    .Select(x => new RemindTask(x, TaskStatus.InProgress)).ToList());
                 Remind.TasksList.AddRange(doneReminderTasksRichTextBox.Text.Split(new string[] { "\n" }, StringSplitOptions.RemoveEmptyEntries)
-                   .Select(x => new RemindsTask(x, CheckStatus.Done)).ToList());
-
+                   .Select(x => new RemindTask(x, TaskStatus.Done)).ToList());
                 FileSystem.SaveRemind(Remind);
                 SaveButtonClicked = true;
                 Close();
@@ -82,24 +80,6 @@ namespace MyProjectApp
             {
                 MessageBox.Show("Пожалуйста, укажите имя события");
             }
-        }
-        private DateTime CountDate(int timeBeforeRemind, string period)
-        {
-
-            if (period == "Дни")
-            {
-                return Remind.EndRemindDate.AddDays(-1 * timeBeforeRemind);
-            }
-            if (period == "Часы")
-            {
-                return Remind.EndRemindDate.AddHours(-1 * timeBeforeRemind);
-            }
-            if (period == "Минуты")
-            {
-                return Remind.EndRemindDate.AddMinutes(-1 * timeBeforeRemind);
-            }
-            else
-            { return Remind.EndRemindDate; }
         }
         private void button1_Click(object sender, EventArgs e)
         {
@@ -122,6 +102,13 @@ namespace MyProjectApp
             Controls.Add(num);
             Controls.Add(com);
             Controls.Add(buttonShow);
+            numericUpDownList.Add(num);
+            comboBoxList.Add(com);
+            countButtons++;
+            if (countButtons >= 5)
+            {
+                buttonShow.Visible = false;
+            }
         }
     }
 }

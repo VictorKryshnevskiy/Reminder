@@ -6,14 +6,13 @@ using System.Threading.Tasks;
 
 namespace ReminderClassLibrary
 {
-    interface IRepository<T> : IDisposable
-        where T : class
+    interface IRepository<Remind> : IDisposable
     {
-        IEnumerable<T> GetRemindList();
-        T GetRemind(int id); 
-        void Create(T item); 
-        void Update(T item);
-        void Delete(int id); 
+        IEnumerable<Remind> GetRemindList();
+        Remind GetRemind(Guid id); 
+        void Create(Remind item); 
+        void Update(Remind item);
+        void Delete(Guid id); 
         void Save();  
     }
 }

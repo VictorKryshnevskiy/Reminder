@@ -16,7 +16,7 @@ namespace ReminderClassLibrary
             throw new NotImplementedException();
         }
 
-        public void Delete(int id)
+        public void Delete(Guid id)
         {
             throw new NotImplementedException();
         }
@@ -26,7 +26,7 @@ namespace ReminderClassLibrary
             throw new NotImplementedException();
         }
 
-        public Remind GetRemind(int id)
+        public Remind GetRemind(Guid id)
         {
             throw new NotImplementedException();
         }
