@@ -36,19 +36,19 @@
             this.reminderNameTextBox = new System.Windows.Forms.TextBox();
             this.reminderDescriptionTextBox = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
-            this.timeBeforeRemindComboBox = new System.Windows.Forms.ComboBox();
+            this.com = new System.Windows.Forms.ComboBox();
             this.saveRemindButton = new System.Windows.Forms.Button();
             this.startDateTimePicker = new System.Windows.Forms.DateTimePicker();
             this.endDateTimePicker = new System.Windows.Forms.DateTimePicker();
             this.toDoReminderTasksRichTextBox = new System.Windows.Forms.RichTextBox();
             this.label7 = new System.Windows.Forms.Label();
-            this.timeBeforeRemindnumericUpDown = new System.Windows.Forms.NumericUpDown();
+            this.num = new System.Windows.Forms.NumericUpDown();
             this.inProgressReminderTasksRichTextBox = new System.Windows.Forms.RichTextBox();
             this.doneReminderTasksRichTextBox = new System.Windows.Forms.RichTextBox();
             this.label8 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
             this.button1 = new System.Windows.Forms.Button();
-            ((System.ComponentModel.ISupportInitialize)(this.timeBeforeRemindnumericUpDown)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.num)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
@@ -121,15 +121,12 @@
             // 
             // timeBeforeRemindComboBox
             // 
-            this.timeBeforeRemindComboBox.FormattingEnabled = true;
-            this.timeBeforeRemindComboBox.Items.AddRange(new object[] {
-            "Минуты",
-            "Часы",
-            "Дни"});
-            this.timeBeforeRemindComboBox.Location = new System.Drawing.Point(114, 188);
-            this.timeBeforeRemindComboBox.Name = "timeBeforeRemindComboBox";
-            this.timeBeforeRemindComboBox.Size = new System.Drawing.Size(121, 21);
-            this.timeBeforeRemindComboBox.TabIndex = 11;
+            this.com.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.com.FormattingEnabled = true;
+            this.com.Location = new System.Drawing.Point(114, 188);
+            this.com.Name = "timeBeforeRemindComboBox";
+            this.com.Size = new System.Drawing.Size(121, 21);
+            this.com.TabIndex = 11;
             // 
             // saveRemindButton
             // 
@@ -180,10 +177,10 @@
             // 
             // timeBeforeRemindnumericUpDown
             // 
-            this.timeBeforeRemindnumericUpDown.Location = new System.Drawing.Point(114, 162);
-            this.timeBeforeRemindnumericUpDown.Name = "timeBeforeRemindnumericUpDown";
-            this.timeBeforeRemindnumericUpDown.Size = new System.Drawing.Size(120, 20);
-            this.timeBeforeRemindnumericUpDown.TabIndex = 19;
+            this.num.Location = new System.Drawing.Point(114, 162);
+            this.num.Name = "timeBeforeRemindnumericUpDown";
+            this.num.Size = new System.Drawing.Size(120, 20);
+            this.num.TabIndex = 19;
             // 
             // inProgressReminderTasksRichTextBox
             // 
@@ -234,8 +231,8 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(817, 450);
-            this.Controls.Add(this.timeBeforeRemindComboBox);
-            this.Controls.Add(this.timeBeforeRemindnumericUpDown);
+            this.Controls.Add(this.com);
+            this.Controls.Add(this.num);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.label9);
             this.Controls.Add(this.label8);
@@ -257,7 +254,7 @@
             this.Name = "CreateReminderForm";
             this.Text = "CreateReminderFor";
             this.Load += new System.EventHandler(this.CreateReminderForm_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.timeBeforeRemindnumericUpDown)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.num)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -272,13 +269,13 @@
         private System.Windows.Forms.TextBox reminderNameTextBox;
         private System.Windows.Forms.TextBox reminderDescriptionTextBox;
         private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.ComboBox timeBeforeRemindComboBox;
+        private System.Windows.Forms.ComboBox com;
         private System.Windows.Forms.Button saveRemindButton;
         private System.Windows.Forms.DateTimePicker startDateTimePicker;
         private System.Windows.Forms.DateTimePicker endDateTimePicker;
         private System.Windows.Forms.RichTextBox toDoReminderTasksRichTextBox;
         private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.NumericUpDown timeBeforeRemindnumericUpDown;
+        private System.Windows.Forms.NumericUpDown num;
         private System.Windows.Forms.RichTextBox inProgressReminderTasksRichTextBox;
         private System.Windows.Forms.RichTextBox doneReminderTasksRichTextBox;
         private System.Windows.Forms.Label label8;

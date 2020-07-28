@@ -28,37 +28,37 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.listBox3 = new System.Windows.Forms.ListBox();
-            this.listBox1 = new System.Windows.Forms.ListBox();
-            this.listBox2 = new System.Windows.Forms.ListBox();
+            this.doneListBox = new System.Windows.Forms.ListBox();
+            this.toDoListBox = new System.Windows.Forms.ListBox();
+            this.inProgressListBox = new System.Windows.Forms.ListBox();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
-            // listBox3
+            // doneListBox
             // 
-            this.listBox3.FormattingEnabled = true;
-            this.listBox3.Location = new System.Drawing.Point(466, 108);
-            this.listBox3.Name = "listBox3";
-            this.listBox3.Size = new System.Drawing.Size(173, 121);
-            this.listBox3.TabIndex = 2;
+            this.doneListBox.FormattingEnabled = true;
+            this.doneListBox.Location = new System.Drawing.Point(466, 108);
+            this.doneListBox.Name = "doneListBox";
+            this.doneListBox.Size = new System.Drawing.Size(173, 121);
+            this.doneListBox.TabIndex = 2;
             // 
-            // listBox1
+            // toDoListBox
             // 
-            this.listBox1.FormattingEnabled = true;
-            this.listBox1.Location = new System.Drawing.Point(29, 108);
-            this.listBox1.Name = "listBox1";
-            this.listBox1.Size = new System.Drawing.Size(173, 121);
-            this.listBox1.TabIndex = 3;
+            this.toDoListBox.FormattingEnabled = true;
+            this.toDoListBox.Location = new System.Drawing.Point(29, 108);
+            this.toDoListBox.Name = "toDoListBox";
+            this.toDoListBox.Size = new System.Drawing.Size(173, 121);
+            this.toDoListBox.TabIndex = 3;
             // 
-            // listBox2
+            // inProgressListBox
             // 
-            this.listBox2.FormattingEnabled = true;
-            this.listBox2.Location = new System.Drawing.Point(246, 108);
-            this.listBox2.Name = "listBox2";
-            this.listBox2.Size = new System.Drawing.Size(173, 121);
-            this.listBox2.TabIndex = 4;
+            this.inProgressListBox.FormattingEnabled = true;
+            this.inProgressListBox.Location = new System.Drawing.Point(246, 108);
+            this.inProgressListBox.Name = "inProgressListBox";
+            this.inProgressListBox.Size = new System.Drawing.Size(173, 121);
+            this.inProgressListBox.TabIndex = 4;
             // 
             // label1
             // 
@@ -95,11 +95,12 @@
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.listBox2);
-            this.Controls.Add(this.listBox1);
-            this.Controls.Add(this.listBox3);
+            this.Controls.Add(this.inProgressListBox);
+            this.Controls.Add(this.toDoListBox);
+            this.Controls.Add(this.doneListBox);
             this.Name = "Kanban";
             this.Text = "Kanban";
+            this.Load += new System.EventHandler(this.Kanban_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -107,9 +108,9 @@
 
         #endregion
 
-        private System.Windows.Forms.ListBox listBox3;
-        private System.Windows.Forms.ListBox listBox1;
-        private System.Windows.Forms.ListBox listBox2;
+        private System.Windows.Forms.ListBox doneListBox;
+        private System.Windows.Forms.ListBox toDoListBox;
+        private System.Windows.Forms.ListBox inProgressListBox;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;

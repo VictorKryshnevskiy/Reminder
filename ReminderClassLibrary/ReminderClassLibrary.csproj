@@ -84,6 +84,7 @@
     <Compile Include="FileSystem.cs" />
     <Compile Include="IRepository.cs" />
     <Compile Include="JsonHelper.cs" />
+    <Compile Include="NotificationPeriod.cs" />
     <Compile Include="Remind.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RemindContext.cs" />

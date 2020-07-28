@@ -23,12 +23,15 @@ namespace MyProjectApp
         private void CreateReminderForm_Load(object sender, EventArgs e)
         {
             SaveButtonClicked = false;
+            com.Items
+                .AddRange(new object[] { NotificationPeriod.Minutes, NotificationPeriod.Hours, NotificationPeriod.Days });
+            numericUpDownList = new List<NumericUpDown> { num };
+            comboBoxList = new List<ComboBox> { com };
             if (Remind.Name != default)
             {
                 RemindsPropertiesLoad();
             }
-            numericUpDownList = new List<NumericUpDown> { timeBeforeRemindnumericUpDown };
-            comboBoxList = new List<ComboBox> { timeBeforeRemindComboBox };
+            
         }
         private void RemindsPropertiesLoad()
         {
@@ -38,8 +41,9 @@ namespace MyProjectApp
             reminderDescriptionTextBox.Text = Remind.Description;
             foreach (var dateToRimind in Remind.DateToRimind)
             {
-                timeBeforeRemindnumericUpDown.Value = dateToRimind.PeriodAmount;
-                timeBeforeRemindComboBox.Text = dateToRimind.Period;
+                num.Value = dateToRimind.PeriodAmount;
+                com.Text = dateToRimind.Period;
+                button1_Click(button1, default);
             }
             foreach (var task in Remind.TasksList)
             {
@@ -65,12 +69,23 @@ namespace MyProjectApp
                 Remind.Name = reminderNameTextBox.Text;
                 Remind.EndDate = endDateTimePicker.Value;
                 Remind.Description = reminderDescriptionTextBox.Text;
-                Remind.DateToRimind = new List<Notification> { new Notification(Convert.ToInt32(timeBeforeRemindnumericUpDown.Value), timeBeforeRemindComboBox.Text) };
-                Remind.TasksList = toDoReminderTasksRichTextBox.Text.Split(new string[] { "\n" }, StringSplitOptions.RemoveEmptyEntries)
+                Remind.DateToRimind = new List<Notification> { new Notification(Convert.ToInt32(num.Value)
+                    , com.Text) };
+                for (int i = 0; i < comboBoxList.Count; i++)
+                {
+                    if (comboBoxList[i].Text != "")
+                    {
+                        Remind.DateToRimind.Add(new Notification((int)numericUpDownList[i].Value, comboBoxList[i].Text));
+                    }
+                }
+                Remind.TasksList = toDoReminderTasksRichTextBox.Text.Split(new string[] { "\n" }
+                , StringSplitOptions.RemoveEmptyEntries)
                     .Select(x => new RemindTask(x)).ToList();
-                Remind.TasksList.AddRange(inProgressReminderTasksRichTextBox.Text.Split(new string[] { "\n" }, StringSplitOptions.RemoveEmptyEntries)
+                Remind.TasksList.AddRange(inProgressReminderTasksRichTextBox.Text.Split(new string[] { "\n" }
+                , StringSplitOptions.RemoveEmptyEntries)
                     .Select(x => new RemindTask(x, TaskStatus.InProgress)).ToList());
-                Remind.TasksList.AddRange(doneReminderTasksRichTextBox.Text.Split(new string[] { "\n" }, StringSplitOptions.RemoveEmptyEntries)
+                Remind.TasksList.AddRange(doneReminderTasksRichTextBox.Text.Split(new string[] { "\n" }
+                , StringSplitOptions.RemoveEmptyEntries)
                    .Select(x => new RemindTask(x, TaskStatus.Done)).ToList());
                 FileSystem.SaveRemind(Remind);
                 SaveButtonClicked = true;
@@ -87,17 +102,18 @@ namespace MyProjectApp
             button.Visible = false;
             var num = new NumericUpDown();
             var com = new ComboBox();
-            com.Items.AddRange(new string[] { "Минуты", "Часы", "Дни" });
+            com.DropDownStyle = ComboBoxStyle.DropDownList;
+            com.Items.AddRange(new object[] { NotificationPeriod.Minutes, NotificationPeriod.Hours, NotificationPeriod.Days });
             Button buttonShow = new Button
             {
                 Text = "Добавить напоминание",
                 Width = num.Width
             };
             buttonShow.Location = new Point(button.Location.X + button.Width + 10, button.Location.Y);
-            num.Location = new Point(buttonShow.Location.X + timeBeforeRemindnumericUpDown.Width + 10,
-                timeBeforeRemindnumericUpDown.Location.Y);
-            com.Location = new Point(buttonShow.Location.X + timeBeforeRemindComboBox.Width + 10,
-                timeBeforeRemindComboBox.Location.Y);
+            num.Location = new Point(buttonShow.Location.X + this.num.Width + 10,
+                this.num.Location.Y);
+            com.Location = new Point(buttonShow.Location.X + this.com.Width + 10,
+                this.com.Location.Y);
             buttonShow.Click += new EventHandler(button1_Click);
             Controls.Add(num);
             Controls.Add(com);

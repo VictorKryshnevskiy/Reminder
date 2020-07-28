@@ -82,5 +82,16 @@ namespace MyProjectApp
             reminderDataGridView.Rows.Clear();
             WriteRemindsToGrid();
         }
+
+        private void reminderDataGridView_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex >= 0 && e.RowIndex < remindersList.Count)
+            {
+                var remindIndex = FindIndexInArray(e.RowIndex);
+                var form = new Kanban(remindersList[remindIndex]);
+                form.ShowDialog();
+            }
+          
+        }
     }
 }
