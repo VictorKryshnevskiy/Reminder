@@ -100,6 +100,7 @@
             this.Controls.Add(this.doneListBox);
             this.Name = "Kanban";
             this.Text = "Kanban";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Kanban_FormClosing);
             this.Load += new System.EventHandler(this.Kanban_Load);
             this.ResumeLayout(false);
             this.PerformLayout();

@@ -90,6 +90,11 @@ namespace MyProjectApp
                 var remindIndex = FindIndexInArray(e.RowIndex);
                 var form = new Kanban(remindersList[remindIndex]);
                 form.ShowDialog();
+                remindersList.RemoveAt(remindIndex);
+                reminderDataGridView.Rows.RemoveAt(e.RowIndex);
+                remindersList.Insert(remindIndex, Kanban.Remind);
+                FileSystem.SaveRemind(remindersList);
+                UpdateGrid();
             }
           
         }

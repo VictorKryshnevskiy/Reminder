@@ -43,7 +43,7 @@ namespace MyProjectApp
             {
                 num.Value = dateToRimind.PeriodAmount;
                 com.Text = dateToRimind.Period;
-                button1_Click(button1, default);
+                addNotificationbutton_Click(button1, default);
             }
             foreach (var task in Remind.TasksList)
             {
@@ -96,7 +96,7 @@ namespace MyProjectApp
                 MessageBox.Show("Пожалуйста, укажите имя события");
             }
         }
-        private void button1_Click(object sender, EventArgs e)
+        private void addNotificationbutton_Click(object sender, EventArgs e)
         {
             Button button = (Button)sender;
             button.Visible = false;
@@ -114,7 +114,7 @@ namespace MyProjectApp
                 this.num.Location.Y);
             com.Location = new Point(buttonShow.Location.X + this.com.Width + 10,
                 this.com.Location.Y);
-            buttonShow.Click += new EventHandler(button1_Click);
+            buttonShow.Click += new EventHandler(addNotificationbutton_Click);
             Controls.Add(num);
             Controls.Add(com);
             Controls.Add(buttonShow);
