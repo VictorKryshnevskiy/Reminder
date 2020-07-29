@@ -3,21 +3,17 @@ using ReminderClassLibrary;
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
+using Tulpep.NotificationWindow;
 
 namespace MyProjectApp
 {
     public partial class UserInterfaceForm : Form
     {
+        PopupNotifier popup;
         List<Remind> remindersList;
         public UserInterfaceForm()
         {
             InitializeComponent();
-        }
-        private void createReminderButton_Click(object sender, EventArgs e)
-        {
-            Form form = new CreateReminderForm(new Remind());
-            form.ShowDialog();
-            UpdateGrid();
         }
         private void UserInterfaceForm_Load(object sender, EventArgs e)
         {
@@ -25,6 +21,24 @@ namespace MyProjectApp
             {
                 WriteRemindsToGrid();
             }
+            PopupLoad();
+        }
+
+        private void PopupLoad()
+        {
+            popup = new PopupNotifier();
+            popup.Image = Properties.Resources.pictureReminder;
+            popup.ImageSize = new System.Drawing.Size(100, 100);
+            popup.TitleText = "Reminder";
+            popup.ContentText = "Look at this remind!";
+
+        }
+
+        private void createReminderButton_Click(object sender, EventArgs e)
+        {
+            Form form = new CreateReminderForm(new Remind());
+            form.ShowDialog();
+            UpdateGrid();
         }
         private void deleteReminderButton_Click(object sender, EventArgs e)
         {
@@ -92,6 +106,11 @@ namespace MyProjectApp
                 UpdateGrid();
             }
           
+        }
+
+        private void sendNotificationButton_Click(object sender, EventArgs e)
+        {
+            popup.Popup();
         }
     }
 }

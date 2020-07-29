@@ -37,6 +37,7 @@
             this.createReminderButton = new System.Windows.Forms.Button();
             this.editReminderButton = new System.Windows.Forms.Button();
             this.deleteReminderButton = new System.Windows.Forms.Button();
+            this.sendNotificationButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.reminderDataGridView)).BeginInit();
             this.SuspendLayout();
             // 
@@ -126,11 +127,22 @@
             this.deleteReminderButton.UseVisualStyleBackColor = true;
             this.deleteReminderButton.Click += new System.EventHandler(this.deleteReminderButton_Click);
             // 
+            // sendNotificationButton
+            // 
+            this.sendNotificationButton.Location = new System.Drawing.Point(662, 233);
+            this.sendNotificationButton.Name = "sendNotificationButton";
+            this.sendNotificationButton.Size = new System.Drawing.Size(87, 38);
+            this.sendNotificationButton.TabIndex = 4;
+            this.sendNotificationButton.Text = "Отправить уведомление";
+            this.sendNotificationButton.UseVisualStyleBackColor = true;
+            this.sendNotificationButton.Click += new System.EventHandler(this.sendNotificationButton_Click);
+            // 
             // UserInterfaceForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.sendNotificationButton);
             this.Controls.Add(this.deleteReminderButton);
             this.Controls.Add(this.editReminderButton);
             this.Controls.Add(this.createReminderButton);
@@ -154,6 +166,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn endDateColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn descriptionColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn guidColumn;
+        private System.Windows.Forms.Button sendNotificationButton;
     }
 }
 
