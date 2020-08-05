@@ -1,8 +1,6 @@
 ﻿using System.Text.Json;
 using System.Text.Unicode;
-using System.IO;
 using System.Text.Encodings.Web;
-using System.Collections.Generic;
 
 namespace ReminderClassLibrary
 {
@@ -13,7 +11,7 @@ namespace ReminderClassLibrary
             Encoder = JavaScriptEncoder.Create(UnicodeRanges.All),
             WriteIndented = true
         };
-        public static string SerializeString(object value)
+        public static string SerializeObject(object value)
         {
             return JsonSerializer.Serialize(value, options);
         }

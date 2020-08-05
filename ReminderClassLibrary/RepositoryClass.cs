@@ -23,9 +23,9 @@ namespace ReminderClassLibrary
             throw new NotImplementedException();
         }
 
-        public Remind GetRemind(Guid id)
+        public List<Remind> GetRemind()
         {
-            throw new NotImplementedException();
+           return FileSystem.GetRemind();
         }
 
         public IEnumerable<Remind> GetRemindList()

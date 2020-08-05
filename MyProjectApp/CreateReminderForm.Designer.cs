@@ -36,19 +36,21 @@
             this.reminderNameTextBox = new System.Windows.Forms.TextBox();
             this.reminderDescriptionTextBox = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
-            this.com = new System.Windows.Forms.ComboBox();
+            this.notificationComboBox = new System.Windows.Forms.ComboBox();
             this.saveRemindButton = new System.Windows.Forms.Button();
             this.startDateTimePicker = new System.Windows.Forms.DateTimePicker();
             this.endDateTimePicker = new System.Windows.Forms.DateTimePicker();
             this.toDoReminderTasksRichTextBox = new System.Windows.Forms.RichTextBox();
             this.label7 = new System.Windows.Forms.Label();
-            this.num = new System.Windows.Forms.NumericUpDown();
+            this.notificationNumeric = new System.Windows.Forms.NumericUpDown();
             this.inProgressReminderTasksRichTextBox = new System.Windows.Forms.RichTextBox();
             this.doneReminderTasksRichTextBox = new System.Windows.Forms.RichTextBox();
             this.label8 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
-            this.button1 = new System.Windows.Forms.Button();
-            ((System.ComponentModel.ISupportInitialize)(this.num)).BeginInit();
+            this.NotificationButton = new System.Windows.Forms.Button();
+            this.notificationPanel = new System.Windows.Forms.Panel();
+            ((System.ComponentModel.ISupportInitialize)(this.notificationNumeric)).BeginInit();
+            this.notificationPanel.SuspendLayout();
             this.SuspendLayout();
             // 
             // label1
@@ -119,14 +121,14 @@
             this.label6.TabIndex = 10;
             this.label6.Text = "Когда напомнить";
             // 
-            // com
+            // notificationComboBox
             // 
-            this.com.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.com.FormattingEnabled = true;
-            this.com.Location = new System.Drawing.Point(114, 188);
-            this.com.Name = "com";
-            this.com.Size = new System.Drawing.Size(121, 21);
-            this.com.TabIndex = 11;
+            this.notificationComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.notificationComboBox.FormattingEnabled = true;
+            this.notificationComboBox.Location = new System.Drawing.Point(0, 26);
+            this.notificationComboBox.Name = "notificationComboBox";
+            this.notificationComboBox.Size = new System.Drawing.Size(121, 21);
+            this.notificationComboBox.TabIndex = 11;
             // 
             // saveRemindButton
             // 
@@ -175,12 +177,12 @@
             this.label7.TabIndex = 18;
             this.label7.Text = "Задачи";
             // 
-            // num
+            // notificationNumeric
             // 
-            this.num.Location = new System.Drawing.Point(114, 162);
-            this.num.Name = "num";
-            this.num.Size = new System.Drawing.Size(120, 20);
-            this.num.TabIndex = 19;
+            this.notificationNumeric.Location = new System.Drawing.Point(0, 0);
+            this.notificationNumeric.Name = "notificationNumeric";
+            this.notificationNumeric.Size = new System.Drawing.Size(120, 20);
+            this.notificationNumeric.TabIndex = 19;
             // 
             // inProgressReminderTasksRichTextBox
             // 
@@ -216,24 +218,32 @@
             this.label9.TabIndex = 23;
             this.label9.Text = "Сделано";
             // 
-            // button1
+            // NotificationButton
             // 
-            this.button1.Location = new System.Drawing.Point(12, 223);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(92, 43);
-            this.button1.TabIndex = 25;
-            this.button1.Text = "Добавить напоминание";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.addNotificationbutton_Click);
+            this.NotificationButton.Location = new System.Drawing.Point(3, 56);
+            this.NotificationButton.Name = "NotificationButton";
+            this.NotificationButton.Size = new System.Drawing.Size(92, 43);
+            this.NotificationButton.TabIndex = 25;
+            this.NotificationButton.Text = "Добавить напоминание";
+            this.NotificationButton.UseVisualStyleBackColor = true;
+            this.NotificationButton.Click += new System.EventHandler(this.addNotificationbutton_Click);
+            // 
+            // notificationPanel
+            // 
+            this.notificationPanel.Controls.Add(this.notificationNumeric);
+            this.notificationPanel.Controls.Add(this.NotificationButton);
+            this.notificationPanel.Controls.Add(this.notificationComboBox);
+            this.notificationPanel.Location = new System.Drawing.Point(125, 164);
+            this.notificationPanel.Name = "notificationPanel";
+            this.notificationPanel.Size = new System.Drawing.Size(127, 102);
+            this.notificationPanel.TabIndex = 26;
             // 
             // CreateReminderForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(817, 450);
-            this.Controls.Add(this.com);
-            this.Controls.Add(this.num);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.notificationPanel);
             this.Controls.Add(this.label9);
             this.Controls.Add(this.label8);
             this.Controls.Add(this.doneReminderTasksRichTextBox);
@@ -254,7 +264,8 @@
             this.Name = "CreateReminderForm";
             this.Text = "CreateReminderFor";
             this.Load += new System.EventHandler(this.CreateReminderForm_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.num)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.notificationNumeric)).EndInit();
+            this.notificationPanel.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -269,17 +280,18 @@
         private System.Windows.Forms.TextBox reminderNameTextBox;
         private System.Windows.Forms.TextBox reminderDescriptionTextBox;
         private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.ComboBox com;
+        private System.Windows.Forms.ComboBox notificationComboBox;
         private System.Windows.Forms.Button saveRemindButton;
         private System.Windows.Forms.DateTimePicker startDateTimePicker;
         private System.Windows.Forms.DateTimePicker endDateTimePicker;
         private System.Windows.Forms.RichTextBox toDoReminderTasksRichTextBox;
         private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.NumericUpDown num;
+        private System.Windows.Forms.NumericUpDown notificationNumeric;
         private System.Windows.Forms.RichTextBox inProgressReminderTasksRichTextBox;
         private System.Windows.Forms.RichTextBox doneReminderTasksRichTextBox;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Label label9;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button NotificationButton;
+        private System.Windows.Forms.Panel notificationPanel;
     }
 }

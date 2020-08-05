@@ -14,8 +14,13 @@ namespace MyProjectApp
         public static Remind Remind { get; private set; }
         List<NumericUpDown> numericUpDownList;
         List<ComboBox> comboBoxList;
+        List<Panel> panelList;
+        NumericUpDown numeric;
+        ComboBox comboBox;
+        Button buttonShow;
         int countButtons = 1;
         RepositoryClass repository;
+        int panelCount = 1;
         public CreateReminderForm(Remind rem)
         {
             InitializeComponent();
@@ -25,10 +30,11 @@ namespace MyProjectApp
         {
             repository = new RepositoryClass();
             SaveButtonClicked = false;
-            com.Items
+            notificationComboBox.Items
                 .AddRange(new object[] { NotificationPeriod.Minutes, NotificationPeriod.Hours, NotificationPeriod.Days });
-            numericUpDownList = new List<NumericUpDown> { num };
-            comboBoxList = new List<ComboBox> { com };
+            panelList = new List<Panel> {notificationPanel};
+            numericUpDownList = new List<NumericUpDown> { notificationNumeric };
+            comboBoxList = new List<ComboBox> { notificationComboBox };
             if (Remind.Name != default)
             {
                 RemindsPropertiesLoad();
@@ -40,12 +46,23 @@ namespace MyProjectApp
             reminderNameTextBox.Text = Remind.Name;
             endDateTimePicker.Value = Remind.EndDate;
             reminderDescriptionTextBox.Text = Remind.Description;
-            foreach (var dateToRimind in Remind.DateToRimind)
+            for (int i = 0; i < Remind.DateToRimind.Count; i++)
             {
-                num.Value = dateToRimind.PeriodAmount;
-                com.Text = dateToRimind.Period;
-                addNotificationbutton_Click(button1, default);
-            }
+                if (i == 0)
+                {
+                    notificationNumeric.Value = Remind.DateToRimind[i].PeriodAmount;
+                    notificationComboBox.Text = Remind.DateToRimind[i].Period;
+                    i++;
+                }
+                if (panelCount != Remind.DateToRimind.Count)
+                {
+                    AddPanel(); 
+                    numeric.Value = Remind.DateToRimind[i].PeriodAmount;
+                    comboBox.Text = Remind.DateToRimind[i].Period;
+                    buttonShow.Visible = false;
+                }
+                
+            }            
             foreach (var task in Remind.TasksList)
             {
                 if (task.Status == TaskStatus.ToDo)
@@ -70,9 +87,8 @@ namespace MyProjectApp
                 Remind.Name = reminderNameTextBox.Text;
                 Remind.EndDate = endDateTimePicker.Value;
                 Remind.Description = reminderDescriptionTextBox.Text;
-                Remind.DateToRimind = new List<Notification> { new Notification(Convert.ToInt32(num.Value)
-                    , com.Text) };
-                for (int i = 0; i < comboBoxList.Count; i++)
+                Remind.DateToRimind = new List<Notification> { };
+                for (int i = 0; i < panelList.Count; i++)
                 {
                     if (comboBoxList[i].Text != "")
                     {
@@ -101,31 +117,46 @@ namespace MyProjectApp
         {
             Button button = (Button)sender;
             button.Visible = false;
-            var num = new NumericUpDown();
-            var com = new ComboBox();
-            com.DropDownStyle = ComboBoxStyle.DropDownList;
-            com.Items.AddRange(new object[] { NotificationPeriod.Minutes, NotificationPeriod.Hours, NotificationPeriod.Days });
-            Button buttonShow = new Button
+            AddPanel();
+        }
+
+        private void AddPanel()
+        {
+            
+            var panel = new Panel
+            {
+                Size = notificationPanel.Size
+            };
+            numeric = new NumericUpDown();
+            comboBox = new ComboBox
+            {
+                DropDownStyle = ComboBoxStyle.DropDownList
+            };
+            comboBox.Items.AddRange(new object[] { NotificationPeriod.Minutes, NotificationPeriod.Hours, NotificationPeriod.Days });
+            buttonShow = new Button
             {
                 Text = "Добавить напоминание",
-                Width = num.Width
+                Size = NotificationButton.Size
             };
-            buttonShow.Location = new Point(button.Location.X + button.Width + 10, button.Location.Y);
-            num.Location = new Point(buttonShow.Location.X + this.num.Width + 10,
-                this.num.Location.Y);
-            com.Location = new Point(buttonShow.Location.X + this.com.Width + 10,
-                this.com.Location.Y);
+            buttonShow.Location = new Point(NotificationButton.Location.X, NotificationButton.Location.Y);
+            panel.Location = new Point(notificationPanel.Location.X + panel.Width * panelCount,
+                notificationPanel.Location.Y);
+            numeric.Location = new Point(notificationNumeric.Location.X, notificationNumeric.Location.Y);
+            comboBox.Location = new Point(notificationComboBox.Location.X, notificationComboBox.Location.Y);
             buttonShow.Click += new EventHandler(addNotificationbutton_Click);
-            Controls.Add(num);
-            Controls.Add(com);
-            Controls.Add(buttonShow);
-            numericUpDownList.Add(num);
-            comboBoxList.Add(com);
+            Controls.Add(panel);
+            panel.Controls.Add(numeric);
+            panel.Controls.Add(comboBox);
+            panel.Controls.Add(buttonShow);
+            panelList.Add(panel);
+            numericUpDownList.Add(numeric);
+            comboBoxList.Add(comboBox);
             countButtons++;
             if (countButtons >= 5)
             {
                 buttonShow.Visible = false;
             }
+            panelCount++;
         }
     }
 }

@@ -80,7 +80,7 @@ namespace MyProjectApp
         }
         private void WriteRemindsToGrid()
         {
-            remindersList = FileSystem.GetRemind();
+            remindersList = repository.GetRemind();
             foreach (var remind in remindersList)
             {
                 reminderDataGridView.Rows.Add(remind.StartDate, remind.Name, remind.EndDate,
