@@ -1,12 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ReminderClassLibrary
 {
-    class RepositoryClass : IRepository<Remind>
+    public class RepositoryClass : IRemindRepository
     {
         public RepositoryClass()
         { }
@@ -36,9 +33,13 @@ namespace ReminderClassLibrary
             throw new NotImplementedException();
         }
 
-        public void Save()
+        public void Save(Remind remind)
         {
-            throw new NotImplementedException();
+            FileSystem.SaveRemind(remind);
+        }
+        public void Save(List<Remind> remind)
+        {
+            FileSystem.SaveRemind(remind);
         }
 
         public void Update(Remind item)

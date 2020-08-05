@@ -11,32 +11,33 @@ namespace MyProjectApp
     {
         PopupNotifier popup;
         List<Remind> remindersList;
+        RepositoryClass repository;
         public UserInterfaceForm()
         {
             InitializeComponent();
         }
         private void UserInterfaceForm_Load(object sender, EventArgs e)
         {
+            repository = new RepositoryClass();
             if (FileSystem.IsExist("Reminder.json"))
             {
                 WriteRemindsToGrid();
             }
-            PopupLoad();
         }
-
-        private void PopupLoad()
+        private void Remind_RemindDateEnd(object sender, RemindEventArgs e)
         {
-            popup = new PopupNotifier();
-            popup.Image = Properties.Resources.pictureReminder;
-            popup.ImageSize = new System.Drawing.Size(100, 100);
-            popup.TitleText = "Reminder";
-            popup.ContentText = "Look at this remind!";
-
+            popup = new PopupNotifier
+            {
+                Image = Properties.Resources.pictureReminder,
+                ImageSize = new System.Drawing.Size(100, 100),
+                TitleText = e.Remind.Name,
+                ContentText = "Look at this remind! Its outdated!"
+            };
+            popup.Popup();
         }
-
         private void createReminderButton_Click(object sender, EventArgs e)
         {
-            Form form = new CreateReminderForm(new Remind());
+            Form form = new CreateReminderForm(new Remind(default));
             form.ShowDialog();
             UpdateGrid();
         }
@@ -48,7 +49,7 @@ namespace MyProjectApp
                 var listElementToDelete = FindIndexInArray(indexToDelete);
                 remindersList.RemoveAt(listElementToDelete);
                 reminderDataGridView.Rows.RemoveAt(indexToDelete);
-                FileSystem.SaveRemind(remindersList);
+                repository.Save(remindersList);
             }
             else { MessageBox.Show("Пожалуйста, выберите строку корректно"); }
         }
@@ -66,7 +67,7 @@ namespace MyProjectApp
                     remindersList.RemoveAt(listElementToEdit);
                     reminderDataGridView.Rows.RemoveAt(indexToEdit);
                     remindersList.Insert(listElementToEdit, CreateReminderForm.Remind);
-                    FileSystem.SaveRemind(remindersList);
+                    repository.Save(remindersList);
                     UpdateGrid();
                 }
             }
@@ -84,6 +85,7 @@ namespace MyProjectApp
             {
                 reminderDataGridView.Rows.Add(remind.StartDate, remind.Name, remind.EndDate,
                     remind.Description, remind.GetGuid);
+                remind.RemindDateEnd += Remind_RemindDateEnd;
             }
         }
         private void UpdateGrid()
@@ -91,7 +93,6 @@ namespace MyProjectApp
             reminderDataGridView.Rows.Clear();
             WriteRemindsToGrid();
         }
-
         private void reminderDataGridView_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex >= 0 && e.RowIndex < remindersList.Count)
@@ -102,15 +103,9 @@ namespace MyProjectApp
                 remindersList.RemoveAt(remindIndex);
                 reminderDataGridView.Rows.RemoveAt(e.RowIndex);
                 remindersList.Insert(remindIndex, Kanban.Remind);
-                FileSystem.SaveRemind(remindersList);
+                repository.Save(remindersList);
                 UpdateGrid();
             }
-          
-        }
-
-        private void sendNotificationButton_Click(object sender, EventArgs e)
-        {
-            popup.Popup();
         }
     }
 }

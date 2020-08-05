@@ -15,6 +15,7 @@ namespace MyProjectApp
         List<NumericUpDown> numericUpDownList;
         List<ComboBox> comboBoxList;
         int countButtons = 1;
+        RepositoryClass repository;
         public CreateReminderForm(Remind rem)
         {
             InitializeComponent();
@@ -22,6 +23,7 @@ namespace MyProjectApp
         }
         private void CreateReminderForm_Load(object sender, EventArgs e)
         {
+            repository = new RepositoryClass();
             SaveButtonClicked = false;
             com.Items
                 .AddRange(new object[] { NotificationPeriod.Minutes, NotificationPeriod.Hours, NotificationPeriod.Days });
@@ -31,7 +33,6 @@ namespace MyProjectApp
             {
                 RemindsPropertiesLoad();
             }
-            
         }
         private void RemindsPropertiesLoad()
         {
@@ -87,7 +88,7 @@ namespace MyProjectApp
                 Remind.TasksList.AddRange(doneReminderTasksRichTextBox.Text.Split(new string[] { "\n" }
                 , StringSplitOptions.RemoveEmptyEntries)
                    .Select(x => new RemindTask(x, TaskStatus.Done)).ToList());
-                FileSystem.SaveRemind(Remind);
+                repository.Save(Remind);
                 SaveButtonClicked = true;
                 Close();
             }

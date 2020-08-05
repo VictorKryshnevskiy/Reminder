@@ -119,12 +119,12 @@
             this.label6.TabIndex = 10;
             this.label6.Text = "Когда напомнить";
             // 
-            // timeBeforeRemindComboBox
+            // com
             // 
             this.com.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.com.FormattingEnabled = true;
             this.com.Location = new System.Drawing.Point(114, 188);
-            this.com.Name = "timeBeforeRemindComboBox";
+            this.com.Name = "com";
             this.com.Size = new System.Drawing.Size(121, 21);
             this.com.TabIndex = 11;
             // 
@@ -140,23 +140,23 @@
             // 
             // startDateTimePicker
             // 
-            this.startDateTimePicker.CustomFormat = "MMMMdd, yyyy  |  HH:mm";
+            this.startDateTimePicker.CustomFormat = "MMMMdd, yyyy  |  HH:mm:ss";
             this.startDateTimePicker.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.startDateTimePicker.Location = new System.Drawing.Point(164, 12);
             this.startDateTimePicker.Name = "startDateTimePicker";
             this.startDateTimePicker.Size = new System.Drawing.Size(200, 20);
             this.startDateTimePicker.TabIndex = 14;
-            this.startDateTimePicker.Value = new System.DateTime(2020, 7, 15, 19, 49, 11, 0);
+            this.startDateTimePicker.Value = new System.DateTime(2020, 7, 30, 0, 0, 0, 0);
             // 
             // endDateTimePicker
             // 
-            this.endDateTimePicker.CustomFormat = "MMMMdd, yyyy  |  HH:mm";
+            this.endDateTimePicker.CustomFormat = "MMMMdd, yyyy  |  HH:mm:ss";
             this.endDateTimePicker.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.endDateTimePicker.Location = new System.Drawing.Point(164, 93);
             this.endDateTimePicker.Name = "endDateTimePicker";
             this.endDateTimePicker.Size = new System.Drawing.Size(200, 20);
             this.endDateTimePicker.TabIndex = 15;
-            this.endDateTimePicker.Value = new System.DateTime(2020, 7, 15, 19, 49, 50, 0);
+            this.endDateTimePicker.Value = new System.DateTime(2020, 7, 30, 0, 0, 0, 0);
             // 
             // toDoReminderTasksRichTextBox
             // 
@@ -175,10 +175,10 @@
             this.label7.TabIndex = 18;
             this.label7.Text = "Задачи";
             // 
-            // timeBeforeRemindnumericUpDown
+            // num
             // 
             this.num.Location = new System.Drawing.Point(114, 162);
-            this.num.Name = "timeBeforeRemindnumericUpDown";
+            this.num.Name = "num";
             this.num.Size = new System.Drawing.Size(120, 20);
             this.num.TabIndex = 19;
             // 
