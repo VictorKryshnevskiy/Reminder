@@ -9,15 +9,15 @@ namespace ReminderClassLibrary
         public List<Remind> GetReminds()
         {
             var jsonString = FileSystem.ReadAllText(fileName);
-            var listReminds = JsonHelper.Deserialize(ref jsonString);
+            var listReminds = JsonHelper.Deserialize<List<Remind>,string>(ref jsonString);
             return listReminds;
         }
         public void Save(Remind remind)
         {
             if (FileSystem.IsExist(fileName))
             {
-                var json = FileSystem.ReadAllText(fileName);
-                var remindsList = JsonHelper.Deserialize(ref json);
+                var jsonString = FileSystem.ReadAllText(fileName);
+                var remindsList = JsonHelper.Deserialize<List<Remind>, string>(ref jsonString);
                 remindsList.Add(remind);
                 Save(remindsList);
             }

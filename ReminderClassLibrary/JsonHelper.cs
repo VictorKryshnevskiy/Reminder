@@ -17,9 +17,9 @@ namespace ReminderClassLibrary
         {
             return JsonSerializer.Serialize(value, options);
         }
-        public static List<Remind> Deserialize<B>(ref B json) 
+        public static A Deserialize<A,B>(ref B json) 
         {
-            return JsonSerializer.Deserialize<List<Remind>>(Convert.ToString(json), options);
+            return JsonSerializer.Deserialize<A>(Convert.ToString(json), options);
         }
     }
 }
