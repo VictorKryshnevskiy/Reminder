@@ -37,7 +37,7 @@ namespace MyProjectApp
         }
         private void createReminderButton_Click(object sender, EventArgs e)
         {
-            Form form = new CreateReminderForm(new Remind(default));
+            Form form = new CreateReminderForm(new Remind());
             form.ShowDialog();
             UpdateGrid();
         }
@@ -85,7 +85,6 @@ namespace MyProjectApp
             {
                 reminderDataGridView.Rows.Add(remind.StartDate, remind.Name, remind.EndDate,
                     remind.Description, remind.GetGuid);
-                remind.RemindDateEnd += Remind_RemindDateEnd;
             }
         }
         private void UpdateGrid()
@@ -100,9 +99,7 @@ namespace MyProjectApp
                 var remindIndex = FindIndexInArray(e.RowIndex);
                 var form = new Kanban(remindersList[remindIndex]);
                 form.ShowDialog();
-                remindersList.RemoveAt(remindIndex);
-                reminderDataGridView.Rows.RemoveAt(e.RowIndex);
-                remindersList.Insert(remindIndex, Kanban.Remind);
+                remindersList[remindIndex] = Kanban.Remind;
                 repository.Save(remindersList);
                 UpdateGrid();
             }

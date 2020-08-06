@@ -11,6 +11,7 @@ namespace MyProjectApp
         public static Remind Remind;
         int selectedItemIndex;
         ListBox selectedListBox;
+        RemindRepository repository;
         public Kanban(Remind rem)
         {
             InitializeComponent();
@@ -18,6 +19,7 @@ namespace MyProjectApp
         }
         private void Kanban_Load(object sender, EventArgs e)
         {
+            repository = new RemindRepository();
             foreach (var task in Remind.TasksList)
             {
                 if (task.Status == TaskStatus.ToDo)
@@ -73,7 +75,6 @@ namespace MyProjectApp
             }
             RewriteTasks();
         }
-
         private void RewriteTasks()
         {
             Remind.TasksList = new List<RemindTask> { };
@@ -90,10 +91,9 @@ namespace MyProjectApp
                 Remind.TasksList.Add(new RemindTask(task.ToString(), TaskStatus.Done));
             }
         }
-
         private void Kanban_FormClosing(object sender, FormClosingEventArgs e)
         {
-            FileSystem.SaveRemind(Remind);
+            repository.Save(Remind);
         }
     }
 }

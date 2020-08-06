@@ -6,6 +6,7 @@ namespace ReminderClassLibrary
 {
     public class Remind
     {
+        public const string fileName = "Reminder.json";
         public DateTime StartDate { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
@@ -14,11 +15,10 @@ namespace ReminderClassLibrary
         private Guid guid = Guid.NewGuid(); 
         public Guid GetGuid { get { return guid; }}
         public List<Notification> DateToRimind { get; set; }
-        public event EventHandler<RemindEventArgs> RemindDateEnd;
 
-        public Remind(DateTime startRemindDate = default, string remindName = default,
-            DateTime endRemindDate = default, string remindDescription = default,
-            List<RemindTask> tasksList = default)
+        public Remind(DateTime startRemindDate, string remindName,
+            DateTime endRemindDate, string remindDescription,
+            List<RemindTask> tasksList)
         {
             StartDate = startRemindDate;
             Name = remindName;

@@ -3,21 +3,11 @@ using System.Collections.Generic;
 
 namespace ReminderClassLibrary
 {
-    public class RepositoryClass : IRemindRepository
+    public class RemindRepository : IRemindRepository
     {
         public const string fileName = "Reminder.json";
-        public RepositoryClass()
+        public RemindRepository()
         { }
-
-        public void Create(Remind item)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void Delete(Guid id)
-        {
-            throw new NotImplementedException();
-        }
 
         public void Dispose()
         {
@@ -26,26 +16,32 @@ namespace ReminderClassLibrary
 
         public List<Remind> GetRemind()
         {
-           return FileSystem.GetRemind();
+            var jsonString = FileSystem.ReadAllText(fileName);
+            var array = JsonHelper.DeserializeListRemind(jsonString);
+            return array;
         }
-
-        public IEnumerable<Remind> GetRemindList()
-        {
-            throw new NotImplementedException();
-        }
-
         public void Save(Remind remind)
         {
-            
+            if (FileSystem.IsExist(fileName))
+            {
+                var json = FileSystem.ReadAllText(fileName);
+                var history = JsonHelper.DeserializeListRemind(json);
+                history.Add(remind);
+                var jsonString = JsonHelper.SerializeObject(history);
+                FileSystem.WriteAllText(fileName, jsonString);
+            }
+            else
+            {
+                FileSystem.FileCreate(fileName);
+                var list = new List<Remind> { remind };
+                var jsonString = JsonHelper.SerializeObject(list);
+                FileSystem.WriteAllText(fileName, jsonString);
+            }
         }
         public void Save(List<Remind> remind)
         {
-            FileSystem.SaveRemind(remind);
-        }
-
-        public void Update(Remind item)
-        {
-            throw new NotImplementedException();
+            var jsonString = JsonHelper.SerializeObject(remind);
+            FileSystem.WriteAllText(fileName, jsonString);
         }
     }
 }
