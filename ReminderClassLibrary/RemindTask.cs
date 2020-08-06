@@ -12,7 +12,7 @@ namespace ReminderClassLibrary
         public string Text { get; set; }
         public TaskStatus Status { get; set; }
 
-        public RemindTask(string text, TaskStatus status = default)
+        public RemindTask(string text, TaskStatus status = TaskStatus.ToDo)
         {
             Text = text;
             Status = status;

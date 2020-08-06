@@ -9,8 +9,8 @@ namespace MyProjectApp
     public partial class Kanban : Form
     {
         public static Remind Remind;
-        int itemIndex;
-        ListBox listBox;
+        int selectedItemIndex;
+        ListBox selectedListBox;
         public Kanban(Remind rem)
         {
             InitializeComponent();
@@ -48,10 +48,10 @@ namespace MyProjectApp
         }
         private void ListBox_MouseDown(object sender, MouseEventArgs e)
         {
-            listBox = sender as ListBox;
-            if (listBox.Items.Count == 0 || listBox.SelectedIndex == -1) return;
-            itemIndex = listBox.SelectedIndex;
-            DoDragDrop(listBox.SelectedItem.ToString(), DragDropEffects.All);
+            selectedListBox = sender as ListBox;
+            if (selectedListBox.Items.Count == 0 || selectedListBox.SelectedIndex == -1) return;
+            selectedItemIndex = selectedListBox.SelectedIndex;
+            DoDragDrop(selectedListBox.SelectedItem.ToString(), DragDropEffects.All);
         }
         private void ListBox_DragOver(object sender, DragEventArgs e)
         {
@@ -69,7 +69,7 @@ namespace MyProjectApp
                 else
                     lbx.Items.Insert(index, (string)e.Data.GetData(DataFormats.StringFormat));
 
-                if (itemIndex != -1 && listBox != null) listBox.Items.RemoveAt(itemIndex);
+                if (selectedItemIndex != -1 && selectedListBox != null) selectedListBox.Items.RemoveAt(selectedItemIndex);
             }
             RewriteTasks();
         }

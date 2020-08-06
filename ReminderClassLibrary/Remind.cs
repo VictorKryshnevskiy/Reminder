@@ -6,8 +6,6 @@ namespace ReminderClassLibrary
 {
     public class Remind
     {
-        public const string fileName = "Reminder.json";
-        static Timer timer = new Timer();
         public DateTime StartDate { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
@@ -27,30 +25,11 @@ namespace ReminderClassLibrary
             Description = remindDescription;
             EndDate = endRemindDate;
             TasksList = tasksList;
-            timer.Start();
-            timer.Interval = 10;
-            timer.Tick += Timer_Tick;
         }
-
-        private void Timer_Tick(object sender, EventArgs e)
-        {
-            DateCheck();
-        }
-
         //для десериализации
         public Remind() 
         {
-            timer.Start();
-            timer.Interval = 50;
-            timer.Tick += Timer_Tick;
-        }
 
-        private void DateCheck()
-        {
-            if (EndDate == DateTime.Now.Date)
-            {
-                RemindDateEnd.Invoke(this, new RemindEventArgs(this));
-            }
         }
     }
 

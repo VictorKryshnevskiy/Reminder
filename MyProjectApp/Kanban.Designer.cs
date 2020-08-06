@@ -31,9 +31,9 @@
             this.doneListBox = new System.Windows.Forms.ListBox();
             this.toDoListBox = new System.Windows.Forms.ListBox();
             this.inProgressListBox = new System.Windows.Forms.ListBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
+            this.toDoLabel = new System.Windows.Forms.Label();
+            this.inProcessLabel = new System.Windows.Forms.Label();
+            this.doneLabel = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // doneListBox
@@ -60,41 +60,41 @@
             this.inProgressListBox.Size = new System.Drawing.Size(173, 121);
             this.inProgressListBox.TabIndex = 4;
             // 
-            // label1
+            // toDoLabel
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(85, 69);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(49, 13);
-            this.label1.TabIndex = 5;
-            this.label1.Text = "Сделать";
+            this.toDoLabel.AutoSize = true;
+            this.toDoLabel.Location = new System.Drawing.Point(85, 69);
+            this.toDoLabel.Name = "toDoLabel";
+            this.toDoLabel.Size = new System.Drawing.Size(49, 13);
+            this.toDoLabel.TabIndex = 5;
+            this.toDoLabel.Text = "Сделать";
             // 
-            // label2
+            // inProcessLabel
             // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(302, 69);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(65, 13);
-            this.label2.TabIndex = 6;
-            this.label2.Text = "В процессе";
+            this.inProcessLabel.AutoSize = true;
+            this.inProcessLabel.Location = new System.Drawing.Point(302, 69);
+            this.inProcessLabel.Name = "inProcessLabel";
+            this.inProcessLabel.Size = new System.Drawing.Size(65, 13);
+            this.inProcessLabel.TabIndex = 6;
+            this.inProcessLabel.Text = "В процессе";
             // 
-            // label3
+            // doneLabel
             // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(530, 69);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(50, 13);
-            this.label3.TabIndex = 7;
-            this.label3.Text = "Сделано";
+            this.doneLabel.AutoSize = true;
+            this.doneLabel.Location = new System.Drawing.Point(530, 69);
+            this.doneLabel.Name = "doneLabel";
+            this.doneLabel.Size = new System.Drawing.Size(50, 13);
+            this.doneLabel.TabIndex = 7;
+            this.doneLabel.Text = "Сделано";
             // 
             // Kanban
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(681, 323);
-            this.Controls.Add(this.label3);
-            this.Controls.Add(this.label2);
-            this.Controls.Add(this.label1);
+            this.Controls.Add(this.doneLabel);
+            this.Controls.Add(this.inProcessLabel);
+            this.Controls.Add(this.toDoLabel);
             this.Controls.Add(this.inProgressListBox);
             this.Controls.Add(this.toDoListBox);
             this.Controls.Add(this.doneListBox);
@@ -112,8 +112,8 @@
         private System.Windows.Forms.ListBox doneListBox;
         private System.Windows.Forms.ListBox toDoListBox;
         private System.Windows.Forms.ListBox inProgressListBox;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label toDoLabel;
+        private System.Windows.Forms.Label inProcessLabel;
+        private System.Windows.Forms.Label doneLabel;
     }
 }

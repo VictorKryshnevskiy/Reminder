@@ -11,14 +11,14 @@ namespace MyProjectApp
     {
         PopupNotifier popup;
         List<Remind> remindersList;
-        RepositoryClass repository;
+        RemindRepository repository;
         public UserInterfaceForm()
         {
             InitializeComponent();
         }
         private void UserInterfaceForm_Load(object sender, EventArgs e)
         {
-            repository = new RepositoryClass();
+            repository = new RemindRepository();
             if (FileSystem.IsExist("Reminder.json"))
             {
                 WriteRemindsToGrid();

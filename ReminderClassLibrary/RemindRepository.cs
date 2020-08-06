@@ -5,6 +5,7 @@ namespace ReminderClassLibrary
 {
     public class RepositoryClass : IRemindRepository
     {
+        public const string fileName = "Reminder.json";
         public RepositoryClass()
         { }
 
@@ -35,7 +36,7 @@ namespace ReminderClassLibrary
 
         public void Save(Remind remind)
         {
-            FileSystem.SaveRemind(remind);
+            
         }
         public void Save(List<Remind> remind)
         {
