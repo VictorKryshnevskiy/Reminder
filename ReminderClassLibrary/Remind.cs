@@ -6,7 +6,6 @@ namespace ReminderClassLibrary
 {
     public class Remind
     {
-        public const string fileName = "Reminder.json";
         public DateTime StartDate { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }

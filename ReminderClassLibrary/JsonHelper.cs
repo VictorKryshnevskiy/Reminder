@@ -2,6 +2,7 @@
 using System.Text.Unicode;
 using System.Text.Encodings.Web;
 using System.Collections.Generic;
+using System;
 
 namespace ReminderClassLibrary
 {
@@ -16,10 +17,9 @@ namespace ReminderClassLibrary
         {
             return JsonSerializer.Serialize(value, options);
         }
-        // как сделать обобщение?
-        public static List<Remind> DeserializeListRemind(string json) 
+        public static List<Remind> Deserialize<B>(ref B json) 
         {
-            return JsonSerializer.Deserialize<List<Remind>>(json, options);
+            return JsonSerializer.Deserialize<List<Remind>>(Convert.ToString(json), options);
         }
     }
 }

@@ -12,7 +12,7 @@ namespace ReminderClassLibrary
         {
             return File.Exists(path);
         }
-        public static void FileCreate(string fileName)
+        public static void Create(string fileName)
         {
             using (FileStream fs = File.Create(fileName)) { }
         }

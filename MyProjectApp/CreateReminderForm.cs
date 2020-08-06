@@ -19,7 +19,7 @@ namespace MyProjectApp
         ComboBox comboBox;
         Button buttonShow;
         int countButtons = 1;
-        RemindRepository repository;
+        IRemindRepository repository;
         int panelCount = 1;
         public CreateReminderForm(Remind rem)
         {
@@ -28,7 +28,7 @@ namespace MyProjectApp
         }
         private void CreateReminderForm_Load(object sender, EventArgs e)
         {
-            repository = new RemindRepository();
+            repository = new RemindFileRepository();
             SaveButtonClicked = false;
             notificationComboBox.Items
                 .AddRange(new object[] { NotificationPeriod.Minutes, NotificationPeriod.Hours, NotificationPeriod.Days });

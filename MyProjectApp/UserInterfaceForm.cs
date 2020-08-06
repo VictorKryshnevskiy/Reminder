@@ -11,14 +11,14 @@ namespace MyProjectApp
     {
         PopupNotifier popup;
         List<Remind> remindersList;
-        RemindRepository repository;
+        IRemindRepository repository;
         public UserInterfaceForm()
         {
             InitializeComponent();
         }
         private void UserInterfaceForm_Load(object sender, EventArgs e)
         {
-            repository = new RemindRepository();
+            repository = new RemindFileRepository();
             if (FileSystem.IsExist("Reminder.json"))
             {
                 WriteRemindsToGrid();
@@ -80,7 +80,7 @@ namespace MyProjectApp
         }
         private void WriteRemindsToGrid()
         {
-            remindersList = repository.GetRemind();
+            remindersList = repository.GetReminds();
             foreach (var remind in remindersList)
             {
                 reminderDataGridView.Rows.Add(remind.StartDate, remind.Name, remind.EndDate,

@@ -11,7 +11,7 @@ namespace MyProjectApp
         public static Remind Remind;
         int selectedItemIndex;
         ListBox selectedListBox;
-        RemindRepository repository;
+        IRemindRepository repository;
         public Kanban(Remind rem)
         {
             InitializeComponent();
@@ -19,7 +19,7 @@ namespace MyProjectApp
         }
         private void Kanban_Load(object sender, EventArgs e)
         {
-            repository = new RemindRepository();
+            repository = new RemindFileRepository();
             foreach (var task in Remind.TasksList)
             {
                 if (task.Status == TaskStatus.ToDo)

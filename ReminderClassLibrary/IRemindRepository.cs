@@ -1,11 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 namespace ReminderClassLibrary
 {
-    interface IRemindRepository : IDisposable
+    public interface IRemindRepository
     {
-        List<Remind> GetRemind(); 
-        void Save(Remind item);  
+        List<Remind> GetReminds(); 
+        void Save(Remind item);
+        void Save(List<Remind> item);
     }
 }
