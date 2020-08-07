@@ -20,7 +20,7 @@ namespace MyProjectApp
         Button buttonShow;
         int countButtons = 1;
         IRemindRepository repository;
-        int panelCount = 1;
+        int notificationPanelsCount = 1;
         public CreateReminderForm(Remind rem)
         {
             InitializeComponent();
@@ -46,19 +46,20 @@ namespace MyProjectApp
             reminderNameTextBox.Text = Remind.Name;
             endDateTimePicker.Value = Remind.EndDate;
             reminderDescriptionTextBox.Text = Remind.Description;
-            for (int i = 0; i < Remind.DateToRimind.Count; i++)
+            for (int i = 0; i < Remind.Notifications.Count; i++)
             {
+                // по умолчанию на форме есть 1 panel
                 if (i == 0)
                 {
-                    notificationNumeric.Value = Remind.DateToRimind[i].PeriodAmount;
-                    notificationComboBox.SelectedItem = Remind.DateToRimind[i].Period;
-                    i++;
+                    notificationNumeric.Value = Remind.Notifications[i].PeriodAmount;
+                    notificationComboBox.SelectedItem = Remind.Notifications[i].Period;
+                    continue;
                 }
-                if (panelCount != Remind.DateToRimind.Count)
+                if (notificationPanelsCount != Remind.Notifications.Count)
                 {
                     AddPanel(); 
-                    numeric.Value = Remind.DateToRimind[i].PeriodAmount;
-                    comboBox.SelectedItem = Remind.DateToRimind[i].Period;
+                    numeric.Value = Remind.Notifications[i].PeriodAmount;
+                    comboBox.SelectedItem = Remind.Notifications[i].Period;
                     buttonShow.Visible = false;
                 }
                 
@@ -87,12 +88,12 @@ namespace MyProjectApp
                 Remind.Name = reminderNameTextBox.Text;
                 Remind.EndDate = endDateTimePicker.Value;
                 Remind.Description = reminderDescriptionTextBox.Text;
-                Remind.DateToRimind = new List<Notification> { };
+                Remind.Notifications = new List<Notification> { };
                 for (int i = 0; i < panelList.Count; i++)
                 {
                     if (comboBoxList[i].Text != "")
                     {
-                        Remind.DateToRimind.Add(new Notification((int)numericUpDownList[i].Value, (NotificationPeriod)comboBoxList[i].SelectedItem));
+                        Remind.Notifications.Add(new Notification((int)numericUpDownList[i].Value, (NotificationPeriod)comboBoxList[i].SelectedItem));
                     }
                 }
                 Remind.TasksList = toDoReminderTasksRichTextBox.Text.Split(new string[] { "\n" }
@@ -139,7 +140,7 @@ namespace MyProjectApp
                 Size = NotificationButton.Size
             };
             buttonShow.Location = new Point(NotificationButton.Location.X, NotificationButton.Location.Y);
-            panel.Location = new Point(notificationPanel.Location.X + panel.Width * panelCount,
+            panel.Location = new Point(notificationPanel.Location.X + panel.Width * notificationPanelsCount,
                 notificationPanel.Location.Y);
             numeric.Location = new Point(notificationNumeric.Location.X, notificationNumeric.Location.Y);
             comboBox.Location = new Point(notificationComboBox.Location.X, notificationComboBox.Location.Y);
@@ -156,7 +157,7 @@ namespace MyProjectApp
             {
                 buttonShow.Visible = false;
             }
-            panelCount++;
+            notificationPanelsCount++;
         }
     }
 }

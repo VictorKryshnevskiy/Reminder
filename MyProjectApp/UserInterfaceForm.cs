@@ -132,6 +132,12 @@ namespace MyProjectApp
             };
             popup.Delay = 10000;
             popup.Popup();
+            popup.Click += Popup_Click;
+        }
+
+        private void Popup_Click(object sender, EventArgs e)
+        {
+            throw new NotImplementedException();
         }
     }
 }

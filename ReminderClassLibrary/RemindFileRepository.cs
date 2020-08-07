@@ -29,7 +29,7 @@ namespace ReminderClassLibrary
         }
         public void Save(List<Remind> remind)
         {
-            var jsonString = JsonHelper.SerializeObject(remind);
+            var jsonString = JsonHelper.Serialize(remind);
             FileSystem.WriteAllText(fileName, jsonString);
         }
     }

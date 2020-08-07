@@ -13,7 +13,7 @@ namespace ReminderClassLibrary
         public List<RemindTask> TasksList { get; set; }
         private Guid guid = Guid.NewGuid(); 
         public Guid GetGuid { get { return guid; }}
-        public List<Notification> DateToRimind { get; set; }
+        public List<Notification> Notifications { get; set; }
 
         public Remind(DateTime startRemindDate, string remindName,
             DateTime endRemindDate, string remindDescription,

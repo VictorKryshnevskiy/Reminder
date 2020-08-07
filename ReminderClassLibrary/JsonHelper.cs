@@ -11,7 +11,7 @@ namespace ReminderClassLibrary
             Encoder = JavaScriptEncoder.Create(UnicodeRanges.All),
             WriteIndented = true
         };
-        public static string SerializeObject(object value)
+        public static string Serialize<T>(T value)
         {
             return JsonSerializer.Serialize(value, options);
         }

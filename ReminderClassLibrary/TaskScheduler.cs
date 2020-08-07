@@ -28,7 +28,7 @@ namespace ReminderClassLibrary
         {
             foreach (var remind in RemindList)
             {
-                foreach (var notification in remind.DateToRimind)
+                foreach (var notification in remind.Notifications)
                 {
                     if (notification.Period == NotificationPeriod.Days)
                     {
