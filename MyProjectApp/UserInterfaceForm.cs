@@ -24,17 +24,6 @@ namespace MyProjectApp
                 WriteRemindsToGrid();
             }
         }
-        private void Remind_RemindDateEnd(object sender, RemindEventArgs e)
-        {
-            popup = new PopupNotifier
-            {
-                Image = Properties.Resources.pictureReminder,
-                ImageSize = new System.Drawing.Size(100, 100),
-                TitleText = e.Remind.Name,
-                ContentText = "Look at this remind! Its outdated!"
-            };
-            popup.Popup();
-        }
         private void createReminderButton_Click(object sender, EventArgs e)
         {
             Form form = new CreateReminderForm(new Remind());
@@ -103,6 +92,46 @@ namespace MyProjectApp
                 repository.Save(remindersList);
                 UpdateGrid();
             }
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            TaskScheduler taskScheduler = new TaskScheduler(remindersList);
+            taskScheduler.EndedRemind += TaskScheduler_EndedRemind;
+            taskScheduler.CheckDate();
+        }
+
+        private void TaskScheduler_EndedRemind(object sender, RemindEventArgs e)
+        {
+            popup = new PopupNotifier
+            {
+                Image = Properties.Resources.pictureReminder,
+                ImageSize = new System.Drawing.Size(100, 100),
+                TitleText = e.Remind.Name,
+                ContentText = "Look at this remind! Its outdated!"
+            };
+            popup.Delay = 10000;
+            popup.Popup();
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            TaskScheduler taskScheduler = new TaskScheduler(remindersList);
+            taskScheduler.RemindNotification += TaskScheduler_RemindNotification;
+            taskScheduler.CheckNotification();
+        }
+
+        private void TaskScheduler_RemindNotification(object sender, RemindEventArgs e)
+        {
+            popup = new PopupNotifier
+            {
+                Image = Properties.Resources.pictureReminder,
+                ImageSize = new System.Drawing.Size(100, 100),
+                TitleText = e.Remind.Name,
+                ContentText = "Look at this notification! Try to remember!"
+            };
+            popup.Delay = 10000;
+            popup.Popup();
         }
     }
 }

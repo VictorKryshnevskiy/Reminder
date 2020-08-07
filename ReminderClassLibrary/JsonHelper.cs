@@ -1,8 +1,6 @@
 ﻿using System.Text.Json;
 using System.Text.Unicode;
 using System.Text.Encodings.Web;
-using System.Collections.Generic;
-using System;
 
 namespace ReminderClassLibrary
 {
@@ -17,9 +15,9 @@ namespace ReminderClassLibrary
         {
             return JsonSerializer.Serialize(value, options);
         }
-        public static ReturningType Deserialize<ReturningType,Parametr>(ref Parametr json) 
+        public static T Deserialize<T>(string json) 
         {
-            return JsonSerializer.Deserialize<ReturningType>(Convert.ToString(json), options);
+            return JsonSerializer.Deserialize<T>(json, options);
         }
     }
 }

@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 namespace ReminderClassLibrary
 {
@@ -9,7 +8,7 @@ namespace ReminderClassLibrary
         public List<Remind> GetReminds()
         {
             var jsonString = FileSystem.ReadAllText(fileName);
-            var listReminds = JsonHelper.Deserialize<List<Remind>,string>(ref jsonString);
+            var listReminds = JsonHelper.Deserialize<List<Remind>>(jsonString);
             return listReminds;
         }
         public void Save(Remind remind)
@@ -17,7 +16,7 @@ namespace ReminderClassLibrary
             if (FileSystem.IsExist(fileName))
             {
                 var jsonString = FileSystem.ReadAllText(fileName);
-                var remindsList = JsonHelper.Deserialize<List<Remind>, string>(ref jsonString);
+                var remindsList = JsonHelper.Deserialize<List<Remind>>(jsonString);
                 remindsList.Add(remind);
                 Save(remindsList);
             }

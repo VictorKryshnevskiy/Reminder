@@ -6,6 +6,6 @@ namespace ReminderClassLibrary
     {
         List<Remind> GetReminds(); 
         void Save(Remind item);
-        void Save(List<Remind> item);
+        void Save(List<Remind> items);
     }
 }

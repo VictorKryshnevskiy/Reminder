@@ -9,8 +9,8 @@ namespace ReminderClassLibrary
     public class Notification
     {
         public int PeriodAmount{get;  set;}
-        public string Period { get;  set; }
-        public Notification(int timeBeforeRemind, string period)
+        public NotificationPeriod Period { get;  set; }
+        public Notification(int timeBeforeRemind, NotificationPeriod period)
         {
             PeriodAmount = timeBeforeRemind;
             Period = period;

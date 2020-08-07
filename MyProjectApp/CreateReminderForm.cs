@@ -31,7 +31,7 @@ namespace MyProjectApp
             repository = new RemindFileRepository();
             SaveButtonClicked = false;
             notificationComboBox.Items
-                .AddRange(new object[] { NotificationPeriod.Minutes, NotificationPeriod.Hours, NotificationPeriod.Days });
+                .AddRange(new object[] {NotificationPeriod.Minutes, NotificationPeriod.Hours, NotificationPeriod.Days, "" });
             panelList = new List<Panel> {notificationPanel};
             numericUpDownList = new List<NumericUpDown> { notificationNumeric };
             comboBoxList = new List<ComboBox> { notificationComboBox };
@@ -51,14 +51,14 @@ namespace MyProjectApp
                 if (i == 0)
                 {
                     notificationNumeric.Value = Remind.DateToRimind[i].PeriodAmount;
-                    notificationComboBox.Text = Remind.DateToRimind[i].Period;
+                    notificationComboBox.SelectedItem = Remind.DateToRimind[i].Period;
                     i++;
                 }
                 if (panelCount != Remind.DateToRimind.Count)
                 {
                     AddPanel(); 
                     numeric.Value = Remind.DateToRimind[i].PeriodAmount;
-                    comboBox.Text = Remind.DateToRimind[i].Period;
+                    comboBox.SelectedItem = Remind.DateToRimind[i].Period;
                     buttonShow.Visible = false;
                 }
                 
@@ -92,7 +92,7 @@ namespace MyProjectApp
                 {
                     if (comboBoxList[i].Text != "")
                     {
-                        Remind.DateToRimind.Add(new Notification((int)numericUpDownList[i].Value, comboBoxList[i].Text));
+                        Remind.DateToRimind.Add(new Notification((int)numericUpDownList[i].Value, (NotificationPeriod)comboBoxList[i].SelectedItem));
                     }
                 }
                 Remind.TasksList = toDoReminderTasksRichTextBox.Text.Split(new string[] { "\n" }
@@ -132,7 +132,7 @@ namespace MyProjectApp
             {
                 DropDownStyle = ComboBoxStyle.DropDownList
             };
-            comboBox.Items.AddRange(new object[] { NotificationPeriod.Minutes, NotificationPeriod.Hours, NotificationPeriod.Days });
+            comboBox.Items.AddRange(new object[] { NotificationPeriod.Minutes, NotificationPeriod.Hours, NotificationPeriod.Days, "" });
             buttonShow = new Button
             {
                 Text = "Добавить напоминание",
