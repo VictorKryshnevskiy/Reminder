@@ -23,7 +23,17 @@ namespace MyProjectApp
             {
                 WriteRemindsToGrid();
             }
+            TaskSchedulerStart();
         }
+
+        private void TaskSchedulerStart()
+        {
+            TaskScheduler taskScheduler = new TaskScheduler(remindersList);
+            taskScheduler.EndedRemind += TaskScheduler_EndedRemind;
+            taskScheduler.RemindNotification += TaskScheduler_RemindNotification;
+            taskScheduler.CheckNotification();
+        }
+
         private void createReminderButton_Click(object sender, EventArgs e)
         {
             Form form = new CreateReminderForm(new Remind());
@@ -93,14 +103,6 @@ namespace MyProjectApp
                 UpdateGrid();
             }
         }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-            TaskScheduler taskScheduler = new TaskScheduler(remindersList);
-            taskScheduler.EndedRemind += TaskScheduler_EndedRemind;
-            taskScheduler.CheckDate();
-        }
-
         private void TaskScheduler_EndedRemind(object sender, RemindEventArgs e)
         {
             popup = new PopupNotifier
@@ -113,14 +115,6 @@ namespace MyProjectApp
             popup.Delay = 10000;
             popup.Popup();
         }
-
-        private void button2_Click(object sender, EventArgs e)
-        {
-            TaskScheduler taskScheduler = new TaskScheduler(remindersList);
-            taskScheduler.RemindNotification += TaskScheduler_RemindNotification;
-            taskScheduler.CheckNotification();
-        }
-
         private void TaskScheduler_RemindNotification(object sender, RemindEventArgs e)
         {
             popup = new PopupNotifier
