@@ -82,7 +82,7 @@ namespace MyProjectApp
         }
         private void saveRemindButton_Click(object sender, EventArgs e)
         {
-            if (reminderNameTextBox.Text != "")
+            if (!Validation.hasValidationErrors(Controls))
             {
                 Remind.StartDate = startDateTimePicker.Value;
                 Remind.Name = reminderNameTextBox.Text;
@@ -111,7 +111,8 @@ namespace MyProjectApp
             }
             else
             {
-                MessageBox.Show("Пожалуйста, укажите имя события");
+                return;
+                //MessageBox.Show("Пожалуйста, укажите имя события");
             }
         }
         private void addNotificationbutton_Click(object sender, EventArgs e)
@@ -158,6 +159,17 @@ namespace MyProjectApp
                 buttonShow.Visible = false;
             }
             notificationPanelsCount++;
+        }
+
+        private void reminderNameTextBox_Validating(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            if (reminderNameTextBox.Text.Trim() == String.Empty)
+            {
+                errorProvider.SetError(reminderNameTextBox, "Введите имя события");
+                e.Cancel = true;
+            }
+            else
+                errorProvider.SetError(reminderNameTextBox, "");
         }
     }
 }

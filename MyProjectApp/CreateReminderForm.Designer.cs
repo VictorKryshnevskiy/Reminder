@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
@@ -49,8 +50,10 @@
             this.label9 = new System.Windows.Forms.Label();
             this.NotificationButton = new System.Windows.Forms.Button();
             this.notificationPanel = new System.Windows.Forms.Panel();
+            this.errorProvider = new System.Windows.Forms.ErrorProvider(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.notificationNumeric)).BeginInit();
             this.notificationPanel.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
@@ -104,6 +107,7 @@
             this.reminderNameTextBox.Name = "reminderNameTextBox";
             this.reminderNameTextBox.Size = new System.Drawing.Size(130, 20);
             this.reminderNameTextBox.TabIndex = 7;
+            this.reminderNameTextBox.Validating += new System.ComponentModel.CancelEventHandler(this.reminderNameTextBox_Validating);
             // 
             // reminderDescriptionTextBox
             // 
@@ -238,10 +242,15 @@
             this.notificationPanel.Size = new System.Drawing.Size(127, 102);
             this.notificationPanel.TabIndex = 26;
             // 
+            // errorProvider1
+            // 
+            this.errorProvider.ContainerControl = this;
+            // 
             // CreateReminderForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
             this.ClientSize = new System.Drawing.Size(817, 450);
             this.Controls.Add(this.notificationPanel);
             this.Controls.Add(this.label9);
@@ -266,6 +275,7 @@
             this.Load += new System.EventHandler(this.CreateReminderForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.notificationNumeric)).EndInit();
             this.notificationPanel.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -293,5 +303,6 @@
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Button NotificationButton;
         private System.Windows.Forms.Panel notificationPanel;
+        private System.Windows.Forms.ErrorProvider errorProvider;
     }
 }
