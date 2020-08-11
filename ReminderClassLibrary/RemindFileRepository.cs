@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Windows.Forms;
 
 namespace ReminderClassLibrary
 {
@@ -13,6 +15,10 @@ namespace ReminderClassLibrary
         }
         public void Save(Remind remind)
         {
+            if (!IsValid(remind))
+            {
+                return;
+            }
             if (FileSystem.IsExist(fileName))
             {
                 var jsonString = FileSystem.ReadAllText(fileName);
@@ -27,10 +33,35 @@ namespace ReminderClassLibrary
                 Save(remindsList);
             }
         }
-        public void Save(List<Remind> remind)
+        public void Save(List<Remind> reminds)
         {
-            var jsonString = JsonHelper.Serialize(remind);
+            var jsonString = JsonHelper.Serialize(reminds);
             FileSystem.WriteAllText(fileName, jsonString);
+        }
+
+        private bool IsValid(Remind remind)
+        {
+            try
+            {
+                if (remind.StartDate > remind.EndDate)
+                {
+                    throw new Exception("Дата начала события не может быть позже даты конца события");
+                }
+                if (remind.Description.Length > 100)
+                {
+                    throw new Exception("Описание событие не может быть длинее 100 символов");
+                }
+                if (remind.EndDate < DateTime.Now)
+                {
+                    throw new Exception("Дата конца события не может быть в прошлом");
+                }
+                return true;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                return false;
+            }
         }
     }
 }

@@ -112,7 +112,6 @@ namespace MyProjectApp
             else
             {
                 return;
-                //MessageBox.Show("Пожалуйста, укажите имя события");
             }
         }
         private void addNotificationbutton_Click(object sender, EventArgs e)
@@ -163,7 +162,7 @@ namespace MyProjectApp
 
         private void reminderNameTextBox_Validating(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            if (reminderNameTextBox.Text.Trim() == String.Empty)
+            if (reminderNameTextBox.Text.Trim() == string.Empty)
             {
                 errorProvider.SetError(reminderNameTextBox, "Введите имя события");
                 e.Cancel = true;
