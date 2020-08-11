@@ -29,6 +29,7 @@ namespace MyProjectApp
         private void CreateReminderForm_Load(object sender, EventArgs e)
         {
             repository = new RemindFileRepository();
+            RemindFileRepository.Error += RemindFileRepository_Error;
             SaveButtonClicked = false;
             notificationComboBox.Items
                 .AddRange(new object[] {NotificationPeriod.Minutes, NotificationPeriod.Hours, NotificationPeriod.Days, "" });
@@ -40,6 +41,12 @@ namespace MyProjectApp
                 RemindsPropertiesLoad();
             }
         }
+
+        private void RemindFileRepository_Error(object sender, string e)
+        {
+            MessageBox.Show(e);
+        }
+
         private void RemindsPropertiesLoad()
         {
             startDateTimePicker.Value = Remind.StartDate;

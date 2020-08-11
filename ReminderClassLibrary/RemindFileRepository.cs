@@ -7,6 +7,7 @@ namespace ReminderClassLibrary
     public class RemindFileRepository : IRemindRepository
     {
         public const string fileName = "Reminder.json";
+        public static event EventHandler<string> Error;
         public List<Remind> GetReminds()
         {
             var jsonString = FileSystem.ReadAllText(fileName);
@@ -59,7 +60,7 @@ namespace ReminderClassLibrary
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message);
+                Error.Invoke(ex, ex.Message);
                 return false;
             }
         }

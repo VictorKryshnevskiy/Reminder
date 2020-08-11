@@ -38,20 +38,20 @@ namespace ReminderClassLibrary
                 }
                 foreach (var notification in remind.Notifications)
                 {
-                    if (notification.Period == NotificationPeriod.Days && !remind.shownNotification)
+                    if (notification.Period == NotificationPeriod.Days && !notification.shownNotification)
                     {
                         if (remind.EndDate.AddDays(notification.PeriodAmount * -1) <= DateTime.Now)
                         {
                             RemindNotification.Invoke(this, new RemindEventArgs(remind));
-                            remind.shownNotification = true;
+                            notification.shownNotification = true;
                         }
                     }
-                    if (notification.Period == NotificationPeriod.Hours && !remind.shownNotification)
+                    if (notification.Period == NotificationPeriod.Hours && !notification.shownNotification)
                     {
                         if (remind.EndDate.AddHours(notification.PeriodAmount * -1) <= DateTime.Now)
                         {
                             RemindNotification.Invoke(this, new RemindEventArgs(remind));
-                            remind.shownNotification = true;
+                            notification.shownNotification = true;
                         }
                     }
                     if (notification.Period == NotificationPeriod.Minutes && !remind.shownNotification)
@@ -59,9 +59,10 @@ namespace ReminderClassLibrary
                         if (remind.EndDate.AddMinutes(notification.PeriodAmount * -1) <= DateTime.Now)
                         {
                             RemindNotification.Invoke(this, new RemindEventArgs(remind));
-                            remind.shownNotification = true;
+                            notification.shownNotification = true;
                         }
                     }
+
                 }
             }
         }
