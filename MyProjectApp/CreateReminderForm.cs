@@ -33,6 +33,8 @@ namespace MyProjectApp
             SaveButtonClicked = false;
             notificationComboBox.Items
                 .AddRange(new object[] {NotificationPeriod.Minutes, NotificationPeriod.Hours, NotificationPeriod.Days, "" });
+            cyclicalNotificationComboBox.Items
+                .AddRange(new object[] { NotificationPeriod.Minutes, NotificationPeriod.Hours, NotificationPeriod.Days, "" });
             panelList = new List<Panel> {notificationPanel};
             numericUpDownList = new List<NumericUpDown> { notificationNumeric };
             comboBoxList = new List<ComboBox> { notificationComboBox };
@@ -64,13 +66,12 @@ namespace MyProjectApp
                 }
                 if (notificationPanelsCount != Remind.Notifications.Count)
                 {
-                    AddPanel(); 
+                    AddPanel();
                     numeric.Value = Remind.Notifications[i].PeriodAmount;
                     comboBox.SelectedItem = Remind.Notifications[i].Period;
                     buttonShow.Visible = false;
                 }
-                
-            }            
+            }
             foreach (var task in Remind.TasksList)
             {
                 if (task.Status == TaskStatus.ToDo)
@@ -85,6 +86,13 @@ namespace MyProjectApp
                 {
                     doneReminderTasksRichTextBox.Text += task.Text + '\n';
                 }
+            }
+            if (Remind.CyclicalNotification != null)
+            {
+                startCyclicalNotification.Value = Remind.CyclicalNotification.Start;
+                endCyclicalNotification.Value = Remind.CyclicalNotification.End;
+                cyclicalNotificationNumeric.Value = Remind.CyclicalNotification.PeriodAmount;
+                cyclicalNotificationComboBox.SelectedItem = Remind.CyclicalNotification.Period;
             }
         }
         private void saveRemindButton_Click(object sender, EventArgs e)
@@ -102,6 +110,16 @@ namespace MyProjectApp
                     {
                         Remind.Notifications.Add(new Notification((int)numericUpDownList[i].Value, (NotificationPeriod)comboBoxList[i].SelectedItem));
                     }
+                }
+                if (cyclicalNotificationComboBox.Text != "")
+                {
+                    Remind.CyclicalNotification = new CyclicalNotifications(startCyclicalNotification.Value,
+                    endCyclicalNotification.Value, (int)cyclicalNotificationNumeric.Value,
+                    (NotificationPeriod)cyclicalNotificationComboBox.SelectedItem);
+                }
+                else
+                {
+                    Remind.CyclicalNotification = null;
                 }
                 Remind.TasksList = toDoReminderTasksRichTextBox.Text.Split(new string[] { "\n" }
                 , StringSplitOptions.RemoveEmptyEntries)

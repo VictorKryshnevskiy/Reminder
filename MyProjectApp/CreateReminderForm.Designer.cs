@@ -36,7 +36,6 @@
             this.label5 = new System.Windows.Forms.Label();
             this.reminderNameTextBox = new System.Windows.Forms.TextBox();
             this.reminderDescriptionTextBox = new System.Windows.Forms.TextBox();
-            this.label6 = new System.Windows.Forms.Label();
             this.notificationComboBox = new System.Windows.Forms.ComboBox();
             this.saveRemindButton = new System.Windows.Forms.Button();
             this.startDateTimePicker = new System.Windows.Forms.DateTimePicker();
@@ -51,9 +50,17 @@
             this.NotificationButton = new System.Windows.Forms.Button();
             this.notificationPanel = new System.Windows.Forms.Panel();
             this.errorProvider = new System.Windows.Forms.ErrorProvider(this.components);
+            this.endCyclicalNotification = new System.Windows.Forms.DateTimePicker();
+            this.startCyclicalNotification = new System.Windows.Forms.DateTimePicker();
+            this.label6 = new System.Windows.Forms.Label();
+            this.label10 = new System.Windows.Forms.Label();
+            this.cyclicalNotificationNumeric = new System.Windows.Forms.NumericUpDown();
+            this.label11 = new System.Windows.Forms.Label();
+            this.cyclicalNotificationComboBox = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.notificationNumeric)).BeginInit();
             this.notificationPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.cyclicalNotificationNumeric)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
@@ -68,7 +75,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(12, 133);
+            this.label2.Location = new System.Drawing.Point(12, 132);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(103, 13);
             this.label2.TabIndex = 3;
@@ -77,7 +84,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(12, 93);
+            this.label3.Location = new System.Drawing.Point(12, 92);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(135, 13);
             this.label3.TabIndex = 4;
@@ -86,7 +93,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(12, 53);
+            this.label4.Location = new System.Drawing.Point(12, 52);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(75, 13);
             this.label4.TabIndex = 5;
@@ -95,7 +102,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(38, 326);
+            this.label5.Location = new System.Drawing.Point(61, 326);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(49, 13);
             this.label5.TabIndex = 6;
@@ -103,27 +110,18 @@
             // 
             // reminderNameTextBox
             // 
-            this.reminderNameTextBox.Location = new System.Drawing.Point(164, 53);
+            this.reminderNameTextBox.Location = new System.Drawing.Point(164, 52);
             this.reminderNameTextBox.Name = "reminderNameTextBox";
-            this.reminderNameTextBox.Size = new System.Drawing.Size(130, 20);
+            this.reminderNameTextBox.Size = new System.Drawing.Size(196, 20);
             this.reminderNameTextBox.TabIndex = 7;
             this.reminderNameTextBox.Validating += new System.ComponentModel.CancelEventHandler(this.reminderNameTextBox_Validating);
             // 
             // reminderDescriptionTextBox
             // 
-            this.reminderDescriptionTextBox.Location = new System.Drawing.Point(164, 133);
+            this.reminderDescriptionTextBox.Location = new System.Drawing.Point(164, 132);
             this.reminderDescriptionTextBox.Name = "reminderDescriptionTextBox";
             this.reminderDescriptionTextBox.Size = new System.Drawing.Size(196, 20);
             this.reminderDescriptionTextBox.TabIndex = 8;
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(12, 164);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(95, 13);
-            this.label6.TabIndex = 10;
-            this.label6.Text = "Когда напомнить";
             // 
             // notificationComboBox
             // 
@@ -152,30 +150,30 @@
             this.startDateTimePicker.Name = "startDateTimePicker";
             this.startDateTimePicker.Size = new System.Drawing.Size(200, 20);
             this.startDateTimePicker.TabIndex = 14;
-            this.startDateTimePicker.Value = new System.DateTime(2020, 7, 30, 0, 0, 0, 0);
+            this.startDateTimePicker.Value = new System.DateTime(2020, 8, 12, 0, 0, 0, 0);
             // 
             // endDateTimePicker
             // 
             this.endDateTimePicker.CustomFormat = "MMMMdd, yyyy  |  HH:mm:ss";
             this.endDateTimePicker.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.endDateTimePicker.Location = new System.Drawing.Point(164, 93);
+            this.endDateTimePicker.Location = new System.Drawing.Point(164, 92);
             this.endDateTimePicker.Name = "endDateTimePicker";
             this.endDateTimePicker.Size = new System.Drawing.Size(200, 20);
             this.endDateTimePicker.TabIndex = 15;
-            this.endDateTimePicker.Value = new System.DateTime(2020, 7, 30, 0, 0, 0, 0);
+            this.endDateTimePicker.Value = new System.DateTime(2020, 8, 12, 0, 0, 0, 0);
             // 
             // toDoReminderTasksRichTextBox
             // 
             this.toDoReminderTasksRichTextBox.Location = new System.Drawing.Point(15, 342);
             this.toDoReminderTasksRichTextBox.Name = "toDoReminderTasksRichTextBox";
-            this.toDoReminderTasksRichTextBox.Size = new System.Drawing.Size(100, 96);
+            this.toDoReminderTasksRichTextBox.Size = new System.Drawing.Size(140, 96);
             this.toDoReminderTasksRichTextBox.TabIndex = 16;
             this.toDoReminderTasksRichTextBox.Text = "";
             // 
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(209, 288);
+            this.label7.Location = new System.Drawing.Point(226, 291);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(43, 13);
             this.label7.TabIndex = 18;
@@ -190,24 +188,24 @@
             // 
             // inProgressReminderTasksRichTextBox
             // 
-            this.inProgressReminderTasksRichTextBox.Location = new System.Drawing.Point(183, 342);
+            this.inProgressReminderTasksRichTextBox.Location = new System.Drawing.Point(174, 342);
             this.inProgressReminderTasksRichTextBox.Name = "inProgressReminderTasksRichTextBox";
-            this.inProgressReminderTasksRichTextBox.Size = new System.Drawing.Size(100, 96);
+            this.inProgressReminderTasksRichTextBox.Size = new System.Drawing.Size(140, 96);
             this.inProgressReminderTasksRichTextBox.TabIndex = 20;
             this.inProgressReminderTasksRichTextBox.Text = "";
             // 
             // doneReminderTasksRichTextBox
             // 
-            this.doneReminderTasksRichTextBox.Location = new System.Drawing.Point(353, 342);
+            this.doneReminderTasksRichTextBox.Location = new System.Drawing.Point(333, 342);
             this.doneReminderTasksRichTextBox.Name = "doneReminderTasksRichTextBox";
-            this.doneReminderTasksRichTextBox.Size = new System.Drawing.Size(100, 96);
+            this.doneReminderTasksRichTextBox.Size = new System.Drawing.Size(140, 96);
             this.doneReminderTasksRichTextBox.TabIndex = 21;
             this.doneReminderTasksRichTextBox.Text = "";
             // 
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(199, 326);
+            this.label8.Location = new System.Drawing.Point(214, 326);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(65, 13);
             this.label8.TabIndex = 22;
@@ -237,14 +235,75 @@
             this.notificationPanel.Controls.Add(this.notificationNumeric);
             this.notificationPanel.Controls.Add(this.NotificationButton);
             this.notificationPanel.Controls.Add(this.notificationComboBox);
-            this.notificationPanel.Location = new System.Drawing.Point(125, 164);
+            this.notificationPanel.Location = new System.Drawing.Point(20, 176);
             this.notificationPanel.Name = "notificationPanel";
             this.notificationPanel.Size = new System.Drawing.Size(127, 102);
             this.notificationPanel.TabIndex = 26;
             // 
-            // errorProvider1
+            // errorProvider
             // 
             this.errorProvider.ContainerControl = this;
+            // 
+            // endCyclicalNotification
+            // 
+            this.endCyclicalNotification.CustomFormat = "MMMMdd, yyyy  |  HH:mm:ss";
+            this.endCyclicalNotification.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.endCyclicalNotification.Location = new System.Drawing.Point(590, 88);
+            this.endCyclicalNotification.Name = "endCyclicalNotification";
+            this.endCyclicalNotification.Size = new System.Drawing.Size(191, 20);
+            this.endCyclicalNotification.TabIndex = 27;
+            // 
+            // startCyclicalNotification
+            // 
+            this.startCyclicalNotification.CustomFormat = "MMMMdd, yyyy  |  HH:mm:ss";
+            this.startCyclicalNotification.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.startCyclicalNotification.Location = new System.Drawing.Point(590, 35);
+            this.startCyclicalNotification.Name = "startCyclicalNotification";
+            this.startCyclicalNotification.Size = new System.Drawing.Size(191, 20);
+            this.startCyclicalNotification.TabIndex = 28;
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(590, 12);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(217, 13);
+            this.label6.TabIndex = 29;
+            this.label6.Text = "Начало периода цикличных напоминаний";
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(587, 65);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(211, 13);
+            this.label10.TabIndex = 30;
+            this.label10.Text = "Конец периода цикличных напоминаний";
+            // 
+            // cyclicalNotificationNumeric
+            // 
+            this.cyclicalNotificationNumeric.Location = new System.Drawing.Point(590, 141);
+            this.cyclicalNotificationNumeric.Name = "cyclicalNotificationNumeric";
+            this.cyclicalNotificationNumeric.Size = new System.Drawing.Size(120, 20);
+            this.cyclicalNotificationNumeric.TabIndex = 32;
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(590, 118);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(120, 13);
+            this.label11.TabIndex = 33;
+            this.label11.Text = "Частота напоминаний";
+            // 
+            // cyclicalNotificationComboBox
+            // 
+            this.cyclicalNotificationComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cyclicalNotificationComboBox.FormattingEnabled = true;
+            this.cyclicalNotificationComboBox.Location = new System.Drawing.Point(590, 171);
+            this.cyclicalNotificationComboBox.Name = "cyclicalNotificationComboBox";
+            this.cyclicalNotificationComboBox.Size = new System.Drawing.Size(121, 21);
+            this.cyclicalNotificationComboBox.TabIndex = 34;
             // 
             // CreateReminderForm
             // 
@@ -252,6 +311,13 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
             this.ClientSize = new System.Drawing.Size(817, 450);
+            this.Controls.Add(this.cyclicalNotificationComboBox);
+            this.Controls.Add(this.label11);
+            this.Controls.Add(this.cyclicalNotificationNumeric);
+            this.Controls.Add(this.label10);
+            this.Controls.Add(this.label6);
+            this.Controls.Add(this.startCyclicalNotification);
+            this.Controls.Add(this.endCyclicalNotification);
             this.Controls.Add(this.notificationPanel);
             this.Controls.Add(this.label9);
             this.Controls.Add(this.label8);
@@ -262,7 +328,6 @@
             this.Controls.Add(this.endDateTimePicker);
             this.Controls.Add(this.startDateTimePicker);
             this.Controls.Add(this.saveRemindButton);
-            this.Controls.Add(this.label6);
             this.Controls.Add(this.reminderDescriptionTextBox);
             this.Controls.Add(this.reminderNameTextBox);
             this.Controls.Add(this.label5);
@@ -276,6 +341,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.notificationNumeric)).EndInit();
             this.notificationPanel.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.cyclicalNotificationNumeric)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -289,7 +355,6 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.TextBox reminderNameTextBox;
         private System.Windows.Forms.TextBox reminderDescriptionTextBox;
-        private System.Windows.Forms.Label label6;
         private System.Windows.Forms.ComboBox notificationComboBox;
         private System.Windows.Forms.Button saveRemindButton;
         private System.Windows.Forms.DateTimePicker startDateTimePicker;
@@ -304,5 +369,12 @@
         private System.Windows.Forms.Button NotificationButton;
         private System.Windows.Forms.Panel notificationPanel;
         private System.Windows.Forms.ErrorProvider errorProvider;
+        private System.Windows.Forms.ComboBox cyclicalNotificationComboBox;
+        private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.NumericUpDown cyclicalNotificationNumeric;
+        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.DateTimePicker startCyclicalNotification;
+        private System.Windows.Forms.DateTimePicker endCyclicalNotification;
     }
 }

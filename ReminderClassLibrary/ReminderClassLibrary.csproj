@@ -101,6 +101,7 @@
     <Compile Include="TaskScheduler.cs" />
     <Compile Include="TaskStatus.cs" />
     <Compile Include="Validation.cs" />
+    <Compile Include="CyclicalNotifications.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
