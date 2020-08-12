@@ -31,7 +31,6 @@ namespace MyProjectApp
             TaskScheduler taskScheduler = new TaskScheduler(remindersList);
             taskScheduler.EndedRemind += TaskScheduler_EndedRemind;
             taskScheduler.RemindNotification += TaskScheduler_RemindNotification;
-            taskScheduler.CheckNotification();
         }
 
         private void createReminderButton_Click(object sender, EventArgs e)

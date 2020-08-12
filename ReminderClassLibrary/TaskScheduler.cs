@@ -26,7 +26,7 @@ namespace ReminderClassLibrary
         {
             CheckNotification();
         }
-        public void CheckNotification()
+        private void CheckNotification()
         {
             foreach (var remind in RemindList)
             {
