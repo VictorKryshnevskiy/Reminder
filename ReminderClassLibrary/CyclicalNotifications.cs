@@ -10,12 +10,14 @@ namespace ReminderClassLibrary
     {
         public DateTime Start { get; set; }
         public DateTime End { get; set; }
+        public DateTime CountDate { get; set; }
         public CyclicalNotifications(DateTime start, DateTime end, int timeBeforeRemind, NotificationPeriod period)
         {
             Start = start;
             End = end;
             PeriodAmount = timeBeforeRemind;
             Period = period;
+            CountDate = Start;
         }
         //для десериализации
         public CyclicalNotifications()
