@@ -50,10 +50,8 @@
             this.NotificationButton = new System.Windows.Forms.Button();
             this.notificationPanel = new System.Windows.Forms.Panel();
             this.errorProvider = new System.Windows.Forms.ErrorProvider(this.components);
-            this.endCyclicalNotification = new System.Windows.Forms.DateTimePicker();
             this.startCyclicalNotification = new System.Windows.Forms.DateTimePicker();
             this.label6 = new System.Windows.Forms.Label();
-            this.label10 = new System.Windows.Forms.Label();
             this.cyclicalNotificationNumeric = new System.Windows.Forms.NumericUpDown();
             this.label11 = new System.Windows.Forms.Label();
             this.cyclicalNotificationComboBox = new System.Windows.Forms.ComboBox();
@@ -150,7 +148,7 @@
             this.startDateTimePicker.Name = "startDateTimePicker";
             this.startDateTimePicker.Size = new System.Drawing.Size(200, 20);
             this.startDateTimePicker.TabIndex = 14;
-            this.startDateTimePicker.Value = new System.DateTime(2020, 8, 12, 0, 0, 0, 0);
+            this.startDateTimePicker.Value = new System.DateTime(2020, 8, 15, 14, 54, 59, 0);
             // 
             // endDateTimePicker
             // 
@@ -160,7 +158,7 @@
             this.endDateTimePicker.Name = "endDateTimePicker";
             this.endDateTimePicker.Size = new System.Drawing.Size(200, 20);
             this.endDateTimePicker.TabIndex = 15;
-            this.endDateTimePicker.Value = new System.DateTime(2020, 8, 12, 0, 0, 0, 0);
+            this.endDateTimePicker.Value = new System.DateTime(2020, 8, 15, 14, 54, 41, 0);
             // 
             // toDoReminderTasksRichTextBox
             // 
@@ -235,7 +233,7 @@
             this.notificationPanel.Controls.Add(this.notificationNumeric);
             this.notificationPanel.Controls.Add(this.NotificationButton);
             this.notificationPanel.Controls.Add(this.notificationComboBox);
-            this.notificationPanel.Location = new System.Drawing.Point(20, 176);
+            this.notificationPanel.Location = new System.Drawing.Point(28, 184);
             this.notificationPanel.Name = "notificationPanel";
             this.notificationPanel.Size = new System.Drawing.Size(127, 102);
             this.notificationPanel.TabIndex = 26;
@@ -244,20 +242,11 @@
             // 
             this.errorProvider.ContainerControl = this;
             // 
-            // endCyclicalNotification
-            // 
-            this.endCyclicalNotification.CustomFormat = "MMMMdd, yyyy  |  HH:mm:ss";
-            this.endCyclicalNotification.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.endCyclicalNotification.Location = new System.Drawing.Point(590, 88);
-            this.endCyclicalNotification.Name = "endCyclicalNotification";
-            this.endCyclicalNotification.Size = new System.Drawing.Size(191, 20);
-            this.endCyclicalNotification.TabIndex = 27;
-            // 
             // startCyclicalNotification
             // 
             this.startCyclicalNotification.CustomFormat = "MMMMdd, yyyy  |  HH:mm:ss";
             this.startCyclicalNotification.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.startCyclicalNotification.Location = new System.Drawing.Point(590, 35);
+            this.startCyclicalNotification.Location = new System.Drawing.Point(562, 38);
             this.startCyclicalNotification.Name = "startCyclicalNotification";
             this.startCyclicalNotification.Size = new System.Drawing.Size(191, 20);
             this.startCyclicalNotification.TabIndex = 28;
@@ -265,24 +254,15 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(590, 12);
+            this.label6.Location = new System.Drawing.Point(562, 14);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(217, 13);
             this.label6.TabIndex = 29;
             this.label6.Text = "Начало периода цикличных напоминаний";
             // 
-            // label10
-            // 
-            this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(587, 65);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(211, 13);
-            this.label10.TabIndex = 30;
-            this.label10.Text = "Конец периода цикличных напоминаний";
-            // 
             // cyclicalNotificationNumeric
             // 
-            this.cyclicalNotificationNumeric.Location = new System.Drawing.Point(590, 141);
+            this.cyclicalNotificationNumeric.Location = new System.Drawing.Point(562, 93);
             this.cyclicalNotificationNumeric.Name = "cyclicalNotificationNumeric";
             this.cyclicalNotificationNumeric.Size = new System.Drawing.Size(120, 20);
             this.cyclicalNotificationNumeric.TabIndex = 32;
@@ -290,7 +270,7 @@
             // label11
             // 
             this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(590, 118);
+            this.label11.Location = new System.Drawing.Point(562, 69);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(120, 13);
             this.label11.TabIndex = 33;
@@ -300,7 +280,7 @@
             // 
             this.cyclicalNotificationComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cyclicalNotificationComboBox.FormattingEnabled = true;
-            this.cyclicalNotificationComboBox.Location = new System.Drawing.Point(590, 171);
+            this.cyclicalNotificationComboBox.Location = new System.Drawing.Point(562, 124);
             this.cyclicalNotificationComboBox.Name = "cyclicalNotificationComboBox";
             this.cyclicalNotificationComboBox.Size = new System.Drawing.Size(121, 21);
             this.cyclicalNotificationComboBox.TabIndex = 34;
@@ -314,10 +294,8 @@
             this.Controls.Add(this.cyclicalNotificationComboBox);
             this.Controls.Add(this.label11);
             this.Controls.Add(this.cyclicalNotificationNumeric);
-            this.Controls.Add(this.label10);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.startCyclicalNotification);
-            this.Controls.Add(this.endCyclicalNotification);
             this.Controls.Add(this.notificationPanel);
             this.Controls.Add(this.label9);
             this.Controls.Add(this.label8);
@@ -372,9 +350,7 @@
         private System.Windows.Forms.ComboBox cyclicalNotificationComboBox;
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.NumericUpDown cyclicalNotificationNumeric;
-        private System.Windows.Forms.Label label10;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.DateTimePicker startCyclicalNotification;
-        private System.Windows.Forms.DateTimePicker endCyclicalNotification;
     }
 }

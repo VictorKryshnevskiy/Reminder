@@ -29,13 +29,12 @@ namespace MyProjectApp
         private void CreateReminderForm_Load(object sender, EventArgs e)
         {
             repository = new RemindFileRepository();
-            RemindFileRepository.Error += RemindFileRepository_Error;
             SaveButtonClicked = false;
             notificationComboBox.Items
-                .AddRange(new object[] {NotificationPeriod.Minutes, NotificationPeriod.Hours, NotificationPeriod.Days, "" });
+                .AddRange(new object[] { NotificationPeriod.Minutes, NotificationPeriod.Hours, NotificationPeriod.Days, "" });
             cyclicalNotificationComboBox.Items
                 .AddRange(new object[] { NotificationPeriod.Minutes, NotificationPeriod.Hours, NotificationPeriod.Days, "" });
-            panelList = new List<Panel> {notificationPanel};
+            panelList = new List<Panel> { notificationPanel };
             numericUpDownList = new List<NumericUpDown> { notificationNumeric };
             comboBoxList = new List<ComboBox> { notificationComboBox };
             if (Remind.Name != default)
@@ -43,12 +42,6 @@ namespace MyProjectApp
                 RemindsPropertiesLoad();
             }
         }
-
-        private void RemindFileRepository_Error(object sender, string e)
-        {
-            MessageBox.Show(e);
-        }
-
         private void RemindsPropertiesLoad()
         {
             startDateTimePicker.Value = Remind.StartDate;
@@ -90,14 +83,17 @@ namespace MyProjectApp
             if (Remind.CyclicalNotification != null)
             {
                 startCyclicalNotification.Value = Remind.CyclicalNotification.Start;
-                endCyclicalNotification.Value = Remind.CyclicalNotification.End;
                 cyclicalNotificationNumeric.Value = Remind.CyclicalNotification.PeriodAmount;
                 cyclicalNotificationComboBox.SelectedItem = Remind.CyclicalNotification.Period;
             }
         }
         private void saveRemindButton_Click(object sender, EventArgs e)
         {
-            if (!Validation.hasValidationErrors(Controls))
+            if (Validation.hasValidationErrors(Controls))
+            {
+                return;
+            }
+            try
             {
                 Remind.StartDate = startDateTimePicker.Value;
                 Remind.Name = reminderNameTextBox.Text;
@@ -114,7 +110,7 @@ namespace MyProjectApp
                 if (cyclicalNotificationComboBox.Text != "")
                 {
                     Remind.CyclicalNotification = new CyclicalNotifications(startCyclicalNotification.Value,
-                    endCyclicalNotification.Value, (int)cyclicalNotificationNumeric.Value,
+                    endDateTimePicker.Value, (int)cyclicalNotificationNumeric.Value,
                     (NotificationPeriod)cyclicalNotificationComboBox.SelectedItem);
                 }
                 else
@@ -134,10 +130,11 @@ namespace MyProjectApp
                 SaveButtonClicked = true;
                 Close();
             }
-            else
+            catch (Exception ex)
             {
-                return;
+                MessageBox.Show(ex.Message);
             }
+            
         }
         private void addNotificationbutton_Click(object sender, EventArgs e)
         {
@@ -148,7 +145,7 @@ namespace MyProjectApp
 
         private void AddPanel()
         {
-            
+
             var panel = new Panel
             {
                 Size = notificationPanel.Size

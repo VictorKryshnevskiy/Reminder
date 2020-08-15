@@ -34,16 +34,16 @@ namespace ReminderClassLibrary
         private static bool IsValid(object eventSource)
         {
             string name = "EventValidating";
-
+            //получаем тип
             Type targetType = eventSource.GetType();
-
+            // разбираем на поля класса
             do
             {
                 FieldInfo[] fields = targetType.GetFields(
                      BindingFlags.Static |
                      BindingFlags.Instance |
                      BindingFlags.NonPublic);
-
+                // перебираем каждое поле
                 foreach (FieldInfo field in fields)
                 {
                     if (field.Name == name)

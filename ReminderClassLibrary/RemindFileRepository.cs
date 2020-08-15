@@ -7,7 +7,6 @@ namespace ReminderClassLibrary
     public class RemindFileRepository : IRemindRepository
     {
         public const string fileName = "Reminder.json";
-        public static event EventHandler<string> Error;
         public List<Remind> GetReminds()
         {
             var jsonString = FileSystem.ReadAllText(fileName);
@@ -16,10 +15,7 @@ namespace ReminderClassLibrary
         }
         public void Save(Remind remind)
         {
-            if (!IsValid(remind))
-            {
-                return;
-            }
+            Validate(remind);
             if (FileSystem.IsExist(fileName))
             {
                 var jsonString = FileSystem.ReadAllText(fileName);
@@ -40,28 +36,19 @@ namespace ReminderClassLibrary
             FileSystem.WriteAllText(fileName, jsonString);
         }
 
-        private bool IsValid(Remind remind)
+        private void Validate(Remind remind)
         {
-            try
+            if (remind.StartDate > remind.EndDate)
             {
-                if (remind.StartDate > remind.EndDate)
-                {
-                    throw new Exception("Дата начала события не может быть позже даты конца события");
-                }
-                if (remind.Description.Length > 100)
-                {
-                    throw new Exception("Описание событие не может быть длинее 100 символов");
-                }
-                if (remind.EndDate < DateTime.Now)
-                {
-                    throw new Exception("Дата конца события не может быть в прошлом");
-                }
-                return true;
+                throw new Exception("Дата начала события не может быть позже даты конца события");
             }
-            catch (Exception ex)
+            if (remind.Description.Length > 100)
             {
-                Error.Invoke(ex, ex.Message);
-                return false;
+                throw new Exception("Описание событие не может быть длинее 100 символов");
+            }
+            if (remind.EndDate < DateTime.Now)
+            {
+                throw new Exception("Дата конца события не может быть в прошлом");
             }
         }
     }

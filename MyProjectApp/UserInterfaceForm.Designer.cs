@@ -137,6 +137,7 @@
             this.Controls.Add(this.reminderDataGridView);
             this.Name = "UserInterfaceForm";
             this.Text = "Form1";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.UserInterfaceForm_FormClosing);
             this.Load += new System.EventHandler(this.UserInterfaceForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.reminderDataGridView)).EndInit();
             this.ResumeLayout(false);

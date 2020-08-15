@@ -132,5 +132,10 @@ namespace MyProjectApp
         {
             throw new NotImplementedException();
         }
+
+        private void UserInterfaceForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            repository.Save(remindersList);
+        }
     }
 }

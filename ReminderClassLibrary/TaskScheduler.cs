@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace ReminderClassLibrary
@@ -68,24 +67,22 @@ namespace ReminderClassLibrary
                     if (remind.CyclicalNotification.Start < DateTime.Now && remind.CyclicalNotification.End > DateTime.Now)
                     {
                         
-                        if (remind.CyclicalNotification.Period == NotificationPeriod.Days && !remind.CyclicalNotification.shownNotification)
+                        if (remind.CyclicalNotification.Period == NotificationPeriod.Days)
                         {
                             if (remind.CyclicalNotification.CountDate.AddDays(remind.CyclicalNotification.PeriodAmount) <= DateTime.Now)
                             {
-                                if (remind.CyclicalNotification.CountDate.AddDays(remind.CyclicalNotification.PeriodAmount * 2) > DateTime.Now
-                                   && !remind.CyclicalNotification.shownNotification)
+                                if (remind.CyclicalNotification.CountDate.AddDays(remind.CyclicalNotification.PeriodAmount * 2) > DateTime.Now)
                                 {
                                     RemindNotification.Invoke(this, new RemindEventArgs(remind));
-                                    remind.CyclicalNotification.shownNotification = true;
+                                    remind.CyclicalNotification.CountDate = remind.CyclicalNotification.CountDate.AddDays(remind.CyclicalNotification.PeriodAmount);
                                 }
                                 else
                                 {
                                     remind.CyclicalNotification.CountDate = remind.CyclicalNotification.CountDate.AddDays(remind.CyclicalNotification.PeriodAmount);
-                                    remind.CyclicalNotification.shownNotification = false;
                                 }
                             }
                         }
-                        if (remind.CyclicalNotification.Period == NotificationPeriod.Hours && !remind.CyclicalNotification.shownNotification)
+                        if (remind.CyclicalNotification.Period == NotificationPeriod.Hours)
                         {
                             if (remind.CyclicalNotification.CountDate.AddHours(remind.CyclicalNotification.PeriodAmount) < DateTime.Now)
                             {
@@ -93,29 +90,26 @@ namespace ReminderClassLibrary
                                     && !remind.CyclicalNotification.shownNotification)
                                 {
                                     RemindNotification.Invoke(this, new RemindEventArgs(remind));
-                                    remind.CyclicalNotification.shownNotification = true;
+                                    remind.CyclicalNotification.CountDate = remind.CyclicalNotification.CountDate.AddHours(remind.CyclicalNotification.PeriodAmount);
                                 }
                                 else
                                 {
                                     remind.CyclicalNotification.CountDate = remind.CyclicalNotification.CountDate.AddHours(remind.CyclicalNotification.PeriodAmount);
-                                    remind.CyclicalNotification.shownNotification = false;
                                 }
                             }
                         }
-                        if (remind.CyclicalNotification.Period == NotificationPeriod.Minutes && !remind.shownNotification)
+                        if (remind.CyclicalNotification.Period == NotificationPeriod.Minutes)
                         {
                             if (remind.CyclicalNotification.CountDate.AddMinutes(remind.CyclicalNotification.PeriodAmount) < DateTime.Now)
                             {
-                                if (remind.CyclicalNotification.CountDate.AddMinutes(remind.CyclicalNotification.PeriodAmount * 2) > DateTime.Now
-                                    && !remind.CyclicalNotification.shownNotification)
+                                if (remind.CyclicalNotification.CountDate.AddMinutes(remind.CyclicalNotification.PeriodAmount * 2) > DateTime.Now)
                                 {
                                     RemindNotification.Invoke(this, new RemindEventArgs(remind));
-                                    remind.CyclicalNotification.shownNotification = true;
+                                    remind.CyclicalNotification.CountDate = remind.CyclicalNotification.CountDate.AddMinutes(remind.CyclicalNotification.PeriodAmount);
                                 }
                                 else
                                 {
                                     remind.CyclicalNotification.CountDate = remind.CyclicalNotification.CountDate.AddMinutes(remind.CyclicalNotification.PeriodAmount);
-                                    remind.CyclicalNotification.shownNotification = false;
                                 }
                             }
                         }
