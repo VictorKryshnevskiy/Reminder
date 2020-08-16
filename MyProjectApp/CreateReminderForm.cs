@@ -12,15 +12,18 @@ namespace MyProjectApp
     {
         public static bool SaveButtonClicked { get; private set; }
         public static Remind Remind { get; private set; }
-        List<NumericUpDown> numericUpDownList;
-        List<ComboBox> comboBoxList;
-        List<Panel> panelList;
+        List<NumericUpDown> numericsUpDownList;
+        List<ComboBox> comboBoxesList;
+        List<Panel> panelsList;
+        List<Button> buttonsToDeleteList;
         NumericUpDown numeric;
         ComboBox comboBox;
         Button buttonShow;
+        Button deleteButton;
         int countButtons = 1;
         IRemindRepository repository;
         int notificationPanelsCount = 1;
+        List<int> deletedPanels;
         public CreateReminderForm(Remind rem)
         {
             InitializeComponent();
@@ -30,13 +33,15 @@ namespace MyProjectApp
         {
             repository = new RemindFileRepository();
             SaveButtonClicked = false;
+            deletedPanels = new List<int> { };
             notificationComboBox.Items
                 .AddRange(new object[] { NotificationPeriod.Minutes, NotificationPeriod.Hours, NotificationPeriod.Days, "" });
             cyclicalNotificationComboBox.Items
                 .AddRange(new object[] { NotificationPeriod.Minutes, NotificationPeriod.Hours, NotificationPeriod.Days, "" });
-            panelList = new List<Panel> { notificationPanel };
-            numericUpDownList = new List<NumericUpDown> { notificationNumeric };
-            comboBoxList = new List<ComboBox> { notificationComboBox };
+            panelsList = new List<Panel> { notificationPanel };
+            numericsUpDownList = new List<NumericUpDown> { notificationNumeric };
+            comboBoxesList = new List<ComboBox> { notificationComboBox };
+            buttonsToDeleteList = new List<Button> { deleteNotificationbutton };
             if (Remind.Name != default)
             {
                 RemindsPropertiesLoad();
@@ -100,11 +105,11 @@ namespace MyProjectApp
                 Remind.EndDate = endDateTimePicker.Value;
                 Remind.Description = reminderDescriptionTextBox.Text;
                 Remind.Notifications = new List<Notification> { };
-                for (int i = 0; i < panelList.Count; i++)
+                for (int i = 0; i < panelsList.Count; i++)
                 {
-                    if (comboBoxList[i].Text != "")
+                    if (comboBoxesList[i].Text != "")
                     {
-                        Remind.Notifications.Add(new Notification((int)numericUpDownList[i].Value, (NotificationPeriod)comboBoxList[i].SelectedItem));
+                        Remind.Notifications.Add(new Notification((int)numericsUpDownList[i].Value, (NotificationPeriod)comboBoxesList[i].SelectedItem));
                     }
                 }
                 if (cyclicalNotificationComboBox.Text != "")
@@ -134,7 +139,7 @@ namespace MyProjectApp
             {
                 MessageBox.Show(ex.Message);
             }
-            
+
         }
         private void addNotificationbutton_Click(object sender, EventArgs e)
         {
@@ -161,19 +166,28 @@ namespace MyProjectApp
                 Text = "Добавить напоминание",
                 Size = NotificationButton.Size
             };
+            deleteButton = new Button
+            {
+                Text = "Удалить напоминание",
+                Size = deleteNotificationbutton.Size
+            };
             buttonShow.Location = new Point(NotificationButton.Location.X, NotificationButton.Location.Y);
-            panel.Location = new Point(notificationPanel.Location.X + panel.Width * notificationPanelsCount,
+            panel.Location = new Point(notificationPanel.Location.X + panel.Width * CountPanelLocation(),
                 notificationPanel.Location.Y);
             numeric.Location = new Point(notificationNumeric.Location.X, notificationNumeric.Location.Y);
             comboBox.Location = new Point(notificationComboBox.Location.X, notificationComboBox.Location.Y);
+            deleteButton.Location = new Point(deleteNotificationbutton.Location.X, deleteNotificationbutton.Location.Y);
             buttonShow.Click += new EventHandler(addNotificationbutton_Click);
             Controls.Add(panel);
             panel.Controls.Add(numeric);
             panel.Controls.Add(comboBox);
             panel.Controls.Add(buttonShow);
-            panelList.Add(panel);
-            numericUpDownList.Add(numeric);
-            comboBoxList.Add(comboBox);
+            panel.Controls.Add(deleteButton);
+            panelsList.Add(panel);
+            deleteButton.Click += new EventHandler(deleteButton_Click);
+            numericsUpDownList.Add(numeric);
+            comboBoxesList.Add(comboBox);
+            buttonsToDeleteList.Add(deleteButton);
             countButtons++;
             if (countButtons >= 5)
             {
@@ -191,6 +205,58 @@ namespace MyProjectApp
             }
             else
                 errorProvider.SetError(reminderNameTextBox, "");
+        }
+
+        private void deleteCyclicalNotificationbutton_Click(object sender, EventArgs e)
+        {
+            cyclicalNotificationNumeric.Value = default;
+            cyclicalNotificationComboBox.SelectedItem = "";
+        }
+
+        private void deleteNotificationbutton_Click(object sender, EventArgs e)
+        {
+            notificationNumeric.Value = default;
+            notificationComboBox.SelectedItem = "";
+            
+        }
+        private void deleteButton_Click(object sender, EventArgs e)
+        {
+            Button button = (Button)sender;
+            var selectedPanel = button.Parent;
+            for (int i = 0; i < selectedPanel.Controls.Count; i++)
+            {
+                if (selectedPanel.Controls[i] is ComboBox)
+                {
+                    selectedPanel.Controls[i].Text = "";
+                }
+                if (selectedPanel.Controls[i] is NumericUpDown)
+                {
+                    selectedPanel.Controls[i].Text = "0";
+                }
+            }
+            var panelIndex = panelsList.IndexOf((Panel)selectedPanel);
+            Controls.Remove(selectedPanel);
+            panelsList.RemoveAt(panelIndex);
+            deletedPanels.Add(panelIndex);
+            for (int i = 0; i < panelsList[panelIndex - 1].Controls.Count; i++)
+            {
+                if (panelsList[panelIndex - 1].Controls[i] is Button)
+                {
+                    panelsList[panelIndex - 1].Controls[i].Visible = true;
+                }
+            }
+            countButtons--;
+            notificationPanelsCount--;
+        }
+        private int CountPanelLocation()
+        {
+            if (deletedPanels.Count > 0)
+            {
+                int index = deletedPanels[0];
+                deletedPanels.RemoveAt(0);
+                return index;
+            }
+            return notificationPanelsCount;
         }
     }
 }

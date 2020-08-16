@@ -95,7 +95,7 @@
     <Compile Include="NotificationPeriod.cs" />
     <Compile Include="Remind.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="RemindEventArgs.cs" />
+    <Compile Include="ObjectEventArgs.cs" />
     <Compile Include="RemindTask.cs" />
     <Compile Include="RemindFileRepository.cs" />
     <Compile Include="TaskScheduler.cs" />

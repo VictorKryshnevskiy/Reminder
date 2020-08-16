@@ -49,12 +49,14 @@
             this.label9 = new System.Windows.Forms.Label();
             this.NotificationButton = new System.Windows.Forms.Button();
             this.notificationPanel = new System.Windows.Forms.Panel();
+            this.deleteNotificationbutton = new System.Windows.Forms.Button();
             this.errorProvider = new System.Windows.Forms.ErrorProvider(this.components);
             this.startCyclicalNotification = new System.Windows.Forms.DateTimePicker();
             this.label6 = new System.Windows.Forms.Label();
             this.cyclicalNotificationNumeric = new System.Windows.Forms.NumericUpDown();
             this.label11 = new System.Windows.Forms.Label();
             this.cyclicalNotificationComboBox = new System.Windows.Forms.ComboBox();
+            this.deleteCyclicalNotificationbutton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.notificationNumeric)).BeginInit();
             this.notificationPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).BeginInit();
@@ -100,7 +102,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(61, 326);
+            this.label5.Location = new System.Drawing.Point(53, 362);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(49, 13);
             this.label5.TabIndex = 6;
@@ -162,7 +164,7 @@
             // 
             // toDoReminderTasksRichTextBox
             // 
-            this.toDoReminderTasksRichTextBox.Location = new System.Drawing.Point(15, 342);
+            this.toDoReminderTasksRichTextBox.Location = new System.Drawing.Point(7, 378);
             this.toDoReminderTasksRichTextBox.Name = "toDoReminderTasksRichTextBox";
             this.toDoReminderTasksRichTextBox.Size = new System.Drawing.Size(140, 96);
             this.toDoReminderTasksRichTextBox.TabIndex = 16;
@@ -171,7 +173,7 @@
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(226, 291);
+            this.label7.Location = new System.Drawing.Point(206, 328);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(43, 13);
             this.label7.TabIndex = 18;
@@ -186,7 +188,7 @@
             // 
             // inProgressReminderTasksRichTextBox
             // 
-            this.inProgressReminderTasksRichTextBox.Location = new System.Drawing.Point(174, 342);
+            this.inProgressReminderTasksRichTextBox.Location = new System.Drawing.Point(166, 378);
             this.inProgressReminderTasksRichTextBox.Name = "inProgressReminderTasksRichTextBox";
             this.inProgressReminderTasksRichTextBox.Size = new System.Drawing.Size(140, 96);
             this.inProgressReminderTasksRichTextBox.TabIndex = 20;
@@ -194,7 +196,7 @@
             // 
             // doneReminderTasksRichTextBox
             // 
-            this.doneReminderTasksRichTextBox.Location = new System.Drawing.Point(333, 342);
+            this.doneReminderTasksRichTextBox.Location = new System.Drawing.Point(325, 378);
             this.doneReminderTasksRichTextBox.Name = "doneReminderTasksRichTextBox";
             this.doneReminderTasksRichTextBox.Size = new System.Drawing.Size(140, 96);
             this.doneReminderTasksRichTextBox.TabIndex = 21;
@@ -203,7 +205,7 @@
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(214, 326);
+            this.label8.Location = new System.Drawing.Point(206, 362);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(65, 13);
             this.label8.TabIndex = 22;
@@ -212,7 +214,7 @@
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(378, 326);
+            this.label9.Location = new System.Drawing.Point(370, 362);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(50, 13);
             this.label9.TabIndex = 23;
@@ -220,23 +222,36 @@
             // 
             // NotificationButton
             // 
+            this.NotificationButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
             this.NotificationButton.Location = new System.Drawing.Point(3, 56);
             this.NotificationButton.Name = "NotificationButton";
-            this.NotificationButton.Size = new System.Drawing.Size(92, 43);
+            this.NotificationButton.Size = new System.Drawing.Size(89, 43);
             this.NotificationButton.TabIndex = 25;
             this.NotificationButton.Text = "Добавить напоминание";
-            this.NotificationButton.UseVisualStyleBackColor = true;
+            this.NotificationButton.UseVisualStyleBackColor = false;
             this.NotificationButton.Click += new System.EventHandler(this.addNotificationbutton_Click);
             // 
             // notificationPanel
             // 
+            this.notificationPanel.Controls.Add(this.deleteNotificationbutton);
             this.notificationPanel.Controls.Add(this.notificationNumeric);
             this.notificationPanel.Controls.Add(this.NotificationButton);
             this.notificationPanel.Controls.Add(this.notificationComboBox);
-            this.notificationPanel.Location = new System.Drawing.Point(28, 184);
+            this.notificationPanel.Location = new System.Drawing.Point(15, 162);
             this.notificationPanel.Name = "notificationPanel";
-            this.notificationPanel.Size = new System.Drawing.Size(127, 102);
+            this.notificationPanel.Size = new System.Drawing.Size(137, 142);
             this.notificationPanel.TabIndex = 26;
+            // 
+            // deleteNotificationbutton
+            // 
+            this.deleteNotificationbutton.BackColor = System.Drawing.Color.Red;
+            this.deleteNotificationbutton.Location = new System.Drawing.Point(3, 99);
+            this.deleteNotificationbutton.Name = "deleteNotificationbutton";
+            this.deleteNotificationbutton.Size = new System.Drawing.Size(89, 43);
+            this.deleteNotificationbutton.TabIndex = 36;
+            this.deleteNotificationbutton.Text = "Удалить напоминание";
+            this.deleteNotificationbutton.UseVisualStyleBackColor = false;
+            this.deleteNotificationbutton.Click += new System.EventHandler(this.deleteNotificationbutton_Click);
             // 
             // errorProvider
             // 
@@ -285,12 +300,23 @@
             this.cyclicalNotificationComboBox.Size = new System.Drawing.Size(121, 21);
             this.cyclicalNotificationComboBox.TabIndex = 34;
             // 
+            // deleteCyclicalNotificationbutton
+            // 
+            this.deleteCyclicalNotificationbutton.Location = new System.Drawing.Point(715, 92);
+            this.deleteCyclicalNotificationbutton.Name = "deleteCyclicalNotificationbutton";
+            this.deleteCyclicalNotificationbutton.Size = new System.Drawing.Size(83, 55);
+            this.deleteCyclicalNotificationbutton.TabIndex = 35;
+            this.deleteCyclicalNotificationbutton.Text = "Удалить напоминание";
+            this.deleteCyclicalNotificationbutton.UseVisualStyleBackColor = true;
+            this.deleteCyclicalNotificationbutton.Click += new System.EventHandler(this.deleteCyclicalNotificationbutton_Click);
+            // 
             // CreateReminderForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
-            this.ClientSize = new System.Drawing.Size(817, 450);
+            this.ClientSize = new System.Drawing.Size(817, 489);
+            this.Controls.Add(this.deleteCyclicalNotificationbutton);
             this.Controls.Add(this.cyclicalNotificationComboBox);
             this.Controls.Add(this.label11);
             this.Controls.Add(this.cyclicalNotificationNumeric);
@@ -352,5 +378,7 @@
         private System.Windows.Forms.NumericUpDown cyclicalNotificationNumeric;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.DateTimePicker startCyclicalNotification;
+        private System.Windows.Forms.Button deleteCyclicalNotificationbutton;
+        private System.Windows.Forms.Button deleteNotificationbutton;
     }
 }
