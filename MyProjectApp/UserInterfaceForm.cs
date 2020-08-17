@@ -102,7 +102,7 @@ namespace MyProjectApp
                 UpdateGrid();
             }
         }
-        private void TaskScheduler_EndedRemind(object sender, ObjectEventArgs e)
+        private void TaskScheduler_EndedRemind(object sender, RemindEventArgs e)
         {
             popup = new PopupNotifier
             {
@@ -114,7 +114,7 @@ namespace MyProjectApp
             popup.Delay = 10000;
             popup.Popup();
         }
-        private void TaskScheduler_RemindNotification(object sender, ObjectEventArgs e)
+        private void TaskScheduler_RemindNotification(object sender, RemindEventArgs e)
         {
             popup = new PopupNotifier
             {
