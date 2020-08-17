@@ -5,6 +5,7 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
+using System.ComponentModel;
 
 namespace MyProjectApp
 {
@@ -34,10 +35,8 @@ namespace MyProjectApp
             repository = new RemindFileRepository();
             SaveButtonClicked = false;
             deletedPanels = new List<int> { };
-            notificationComboBox.Items
-                .AddRange(new object[] { NotificationPeriod.Minutes, NotificationPeriod.Hours, NotificationPeriod.Days, "" });
-            cyclicalNotificationComboBox.Items
-                .AddRange(new object[] { NotificationPeriod.Minutes, NotificationPeriod.Hours, NotificationPeriod.Days, "" });
+            FillComboBox(notificationComboBox);
+            FillComboBox(cyclicalNotificationComboBox);
             panelsList = new List<Panel> { notificationPanel };
             numericsUpDownList = new List<NumericUpDown> { notificationNumeric };
             comboBoxesList = new List<ComboBox> { notificationComboBox };
@@ -109,14 +108,14 @@ namespace MyProjectApp
                 {
                     if (comboBoxesList[i].Text != "")
                     {
-                        Remind.Notifications.Add(new Notification((int)numericsUpDownList[i].Value, (NotificationPeriod)comboBoxesList[i].SelectedItem));
+                        Remind.Notifications.Add(new Notification((int)numericsUpDownList[i].Value, (NotificationPeriod)comboBoxesList[i].SelectedValue));
                     }
                 }
                 if (cyclicalNotificationComboBox.Text != "")
                 {
                     Remind.CyclicalNotification = new CyclicalNotifications(startCyclicalNotification.Value,
                     endDateTimePicker.Value, (int)cyclicalNotificationNumeric.Value,
-                    (NotificationPeriod)cyclicalNotificationComboBox.SelectedItem);
+                    (NotificationPeriod)cyclicalNotificationComboBox.SelectedValue);
                 }
                 else
                 {
@@ -160,7 +159,7 @@ namespace MyProjectApp
             {
                 DropDownStyle = ComboBoxStyle.DropDownList
             };
-            comboBox.Items.AddRange(new object[] { NotificationPeriod.Minutes, NotificationPeriod.Hours, NotificationPeriod.Days, "" });
+            FillComboBox(comboBox);
             buttonShow = new Button
             {
                 Text = "Добавить напоминание",
@@ -196,7 +195,7 @@ namespace MyProjectApp
             notificationPanelsCount++;
         }
 
-        private void reminderNameTextBox_Validating(object sender, System.ComponentModel.CancelEventArgs e)
+        private void reminderNameTextBox_Validating(object sender, CancelEventArgs e)
         {
             if (reminderNameTextBox.Text.Trim() == string.Empty)
             {
@@ -217,7 +216,7 @@ namespace MyProjectApp
         {
             notificationNumeric.Value = default;
             notificationComboBox.SelectedItem = "";
-            
+
         }
         private void deleteButton_Click(object sender, EventArgs e)
         {
@@ -257,6 +256,18 @@ namespace MyProjectApp
                 return index;
             }
             return notificationPanelsCount;
+        }
+        private void FillComboBox(ComboBox comboBox)
+        {
+            comboBox.DisplayMember = "Description";
+            comboBox.ValueMember = "Value";
+            comboBox.DataSource = Enum.GetValues(typeof(NotificationPeriod)).Cast<Enum>().Select(value => new
+            {
+                (Attribute.GetCustomAttribute(value.GetType().GetField(value.ToString()), typeof(DescriptionAttribute)) as DescriptionAttribute).Description,
+                value
+            })
+             .OrderBy(item => item.value)
+             .ToList();
         }
     }
 }
