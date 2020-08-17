@@ -209,13 +209,13 @@ namespace MyProjectApp
         private void deleteCyclicalNotificationbutton_Click(object sender, EventArgs e)
         {
             cyclicalNotificationNumeric.Value = default;
-            cyclicalNotificationComboBox.SelectedItem = "";
+            cyclicalNotificationComboBox.SelectedValue = NotificationPeriod.None;
         }
 
         private void deleteNotificationbutton_Click(object sender, EventArgs e)
         {
             notificationNumeric.Value = default;
-            notificationComboBox.SelectedItem = "";
+            notificationComboBox.SelectedValue = NotificationPeriod.None;
 
         }
         private void deleteButton_Click(object sender, EventArgs e)
