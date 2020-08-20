@@ -15,6 +15,8 @@ namespace MyProjectApp
         public UserInterfaceForm()
         {
             InitializeComponent();
+            notifyIcon.Visible = false;
+            notifyIcon.ContextMenuStrip = notifyIconContextMenuStrip;
         }
         private void UserInterfaceForm_Load(object sender, EventArgs e)
         {
@@ -25,14 +27,12 @@ namespace MyProjectApp
             }
             TaskSchedulerStart();
         }
-
         private void TaskSchedulerStart()
         {
             TaskScheduler taskScheduler = new TaskScheduler(remindersList);
             taskScheduler.EndedRemind += TaskScheduler_EndedRemind;
             taskScheduler.RemindNotification += TaskScheduler_RemindNotification;
         }
-
         private void createReminderButton_Click(object sender, EventArgs e)
         {
             Form form = new CreateReminderForm(new Remind());
@@ -137,6 +137,35 @@ namespace MyProjectApp
         {
             if(remindersList != null)
             repository.Save(remindersList);
+        }
+        private void UserInterfaceForm_Resize_1(object sender, EventArgs e)
+        {
+            if (WindowState == FormWindowState.Minimized)
+            {
+                ShowInTaskbar = false;
+                notifyIcon.Visible = true;
+            }
+        }
+        private void notifyIcon_MouseClick(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Left)
+            {
+                notifyIcon.Visible = false;
+                ShowInTaskbar = true;
+                WindowState = FormWindowState.Normal;
+            }
+        }
+
+        private void toolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            notifyIcon.Visible = false;
+            ShowInTaskbar = true;
+            WindowState = FormWindowState.Normal;
+        }
+
+        private void toolStripMenuItem2_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
         }
     }
 }
