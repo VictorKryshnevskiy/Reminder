@@ -8,7 +8,7 @@ namespace ReminderClassLibrary
 {
     public class Notification
     {
-        public bool shownNotification;
+        public bool ShownNotification;
         public int PeriodAmount{get;  set;}
         public NotificationPeriod Period { get;  set; }
         public Notification(int timeBeforeRemind, NotificationPeriod period)

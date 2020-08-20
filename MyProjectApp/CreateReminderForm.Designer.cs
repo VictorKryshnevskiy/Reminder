@@ -29,10 +29,10 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
+            this.startDateLabel = new System.Windows.Forms.Label();
+            this.discriptionRemindLabel = new System.Windows.Forms.Label();
+            this.endDateLabel = new System.Windows.Forms.Label();
+            this.nameRemindLabel = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.reminderNameTextBox = new System.Windows.Forms.TextBox();
             this.reminderDescriptionTextBox = new System.Windows.Forms.TextBox();
@@ -52,9 +52,9 @@
             this.deleteNotificationbutton = new System.Windows.Forms.Button();
             this.errorProvider = new System.Windows.Forms.ErrorProvider(this.components);
             this.startCyclicalNotification = new System.Windows.Forms.DateTimePicker();
-            this.label6 = new System.Windows.Forms.Label();
+            this.startCyclingRemindDateLabel = new System.Windows.Forms.Label();
             this.cyclicalNotificationNumeric = new System.Windows.Forms.NumericUpDown();
-            this.label11 = new System.Windows.Forms.Label();
+            this.periodicityRemindLabel = new System.Windows.Forms.Label();
             this.cyclicalNotificationComboBox = new System.Windows.Forms.ComboBox();
             this.deleteCyclicalNotificationbutton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.notificationNumeric)).BeginInit();
@@ -63,41 +63,41 @@
             ((System.ComponentModel.ISupportInitialize)(this.cyclicalNotificationNumeric)).BeginInit();
             this.SuspendLayout();
             // 
-            // label1
+            // startDateLabel
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(12, 12);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(117, 13);
-            this.label1.TabIndex = 2;
-            this.label1.Text = "Дата начала события";
+            this.startDateLabel.AutoSize = true;
+            this.startDateLabel.Location = new System.Drawing.Point(12, 12);
+            this.startDateLabel.Name = "startDateLabel";
+            this.startDateLabel.Size = new System.Drawing.Size(117, 13);
+            this.startDateLabel.TabIndex = 2;
+            this.startDateLabel.Text = "Дата начала события";
             // 
-            // label2
+            // discriptionRemindLabel
             // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(12, 132);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(103, 13);
-            this.label2.TabIndex = 3;
-            this.label2.Text = "Описание события";
+            this.discriptionRemindLabel.AutoSize = true;
+            this.discriptionRemindLabel.Location = new System.Drawing.Point(12, 132);
+            this.discriptionRemindLabel.Name = "discriptionRemindLabel";
+            this.discriptionRemindLabel.Size = new System.Drawing.Size(103, 13);
+            this.discriptionRemindLabel.TabIndex = 3;
+            this.discriptionRemindLabel.Text = "Описание события";
             // 
-            // label3
+            // endDateLabel
             // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(12, 92);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(135, 13);
-            this.label3.TabIndex = 4;
-            this.label3.Text = "Дата окончания события";
+            this.endDateLabel.AutoSize = true;
+            this.endDateLabel.Location = new System.Drawing.Point(12, 92);
+            this.endDateLabel.Name = "endDateLabel";
+            this.endDateLabel.Size = new System.Drawing.Size(135, 13);
+            this.endDateLabel.TabIndex = 4;
+            this.endDateLabel.Text = "Дата окончания события";
             // 
-            // label4
+            // nameRemindLabel
             // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(12, 52);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(75, 13);
-            this.label4.TabIndex = 5;
-            this.label4.Text = "Имя события";
+            this.nameRemindLabel.AutoSize = true;
+            this.nameRemindLabel.Location = new System.Drawing.Point(12, 52);
+            this.nameRemindLabel.Name = "nameRemindLabel";
+            this.nameRemindLabel.Size = new System.Drawing.Size(75, 13);
+            this.nameRemindLabel.TabIndex = 5;
+            this.nameRemindLabel.Text = "Имя события";
             // 
             // label5
             // 
@@ -266,14 +266,14 @@
             this.startCyclicalNotification.Size = new System.Drawing.Size(191, 20);
             this.startCyclicalNotification.TabIndex = 28;
             // 
-            // label6
+            // startCyclingRemindDateLabel
             // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(562, 14);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(217, 13);
-            this.label6.TabIndex = 29;
-            this.label6.Text = "Начало периода цикличных напоминаний";
+            this.startCyclingRemindDateLabel.AutoSize = true;
+            this.startCyclingRemindDateLabel.Location = new System.Drawing.Point(562, 14);
+            this.startCyclingRemindDateLabel.Name = "startCyclingRemindDateLabel";
+            this.startCyclingRemindDateLabel.Size = new System.Drawing.Size(217, 13);
+            this.startCyclingRemindDateLabel.TabIndex = 29;
+            this.startCyclingRemindDateLabel.Text = "Начало периода цикличных напоминаний";
             // 
             // cyclicalNotificationNumeric
             // 
@@ -282,14 +282,14 @@
             this.cyclicalNotificationNumeric.Size = new System.Drawing.Size(120, 20);
             this.cyclicalNotificationNumeric.TabIndex = 32;
             // 
-            // label11
+            // periodicityRemindLabel
             // 
-            this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(562, 69);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(120, 13);
-            this.label11.TabIndex = 33;
-            this.label11.Text = "Частота напоминаний";
+            this.periodicityRemindLabel.AutoSize = true;
+            this.periodicityRemindLabel.Location = new System.Drawing.Point(562, 69);
+            this.periodicityRemindLabel.Name = "periodicityRemindLabel";
+            this.periodicityRemindLabel.Size = new System.Drawing.Size(120, 13);
+            this.periodicityRemindLabel.TabIndex = 33;
+            this.periodicityRemindLabel.Text = "Частота напоминаний";
             // 
             // cyclicalNotificationComboBox
             // 
@@ -318,9 +318,9 @@
             this.ClientSize = new System.Drawing.Size(817, 489);
             this.Controls.Add(this.deleteCyclicalNotificationbutton);
             this.Controls.Add(this.cyclicalNotificationComboBox);
-            this.Controls.Add(this.label11);
+            this.Controls.Add(this.periodicityRemindLabel);
             this.Controls.Add(this.cyclicalNotificationNumeric);
-            this.Controls.Add(this.label6);
+            this.Controls.Add(this.startCyclingRemindDateLabel);
             this.Controls.Add(this.startCyclicalNotification);
             this.Controls.Add(this.notificationPanel);
             this.Controls.Add(this.label9);
@@ -335,10 +335,10 @@
             this.Controls.Add(this.reminderDescriptionTextBox);
             this.Controls.Add(this.reminderNameTextBox);
             this.Controls.Add(this.label5);
-            this.Controls.Add(this.label4);
-            this.Controls.Add(this.label3);
-            this.Controls.Add(this.label2);
-            this.Controls.Add(this.label1);
+            this.Controls.Add(this.nameRemindLabel);
+            this.Controls.Add(this.endDateLabel);
+            this.Controls.Add(this.discriptionRemindLabel);
+            this.Controls.Add(this.startDateLabel);
             this.Name = "CreateReminderForm";
             this.Text = "CreateReminderFor";
             this.Load += new System.EventHandler(this.CreateReminderForm_Load);
@@ -352,10 +352,10 @@
         }
 
         #endregion
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label startDateLabel;
+        private System.Windows.Forms.Label discriptionRemindLabel;
+        private System.Windows.Forms.Label endDateLabel;
+        private System.Windows.Forms.Label nameRemindLabel;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.TextBox reminderNameTextBox;
         private System.Windows.Forms.TextBox reminderDescriptionTextBox;
@@ -374,9 +374,9 @@
         private System.Windows.Forms.Panel notificationPanel;
         private System.Windows.Forms.ErrorProvider errorProvider;
         private System.Windows.Forms.ComboBox cyclicalNotificationComboBox;
-        private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.Label periodicityRemindLabel;
         private System.Windows.Forms.NumericUpDown cyclicalNotificationNumeric;
-        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Label startCyclingRemindDateLabel;
         private System.Windows.Forms.DateTimePicker startCyclicalNotification;
         private System.Windows.Forms.Button deleteCyclicalNotificationbutton;
         private System.Windows.Forms.Button deleteNotificationbutton;
