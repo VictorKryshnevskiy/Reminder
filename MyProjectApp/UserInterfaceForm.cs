@@ -135,6 +135,7 @@ namespace MyProjectApp
 
         private void UserInterfaceForm_FormClosing(object sender, FormClosingEventArgs e)
         {
+            if(remindersList != null)
             repository.Save(remindersList);
         }
     }

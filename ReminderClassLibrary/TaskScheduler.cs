@@ -23,7 +23,8 @@ namespace ReminderClassLibrary
 
         private void Timer_Tick(object sender, EventArgs e)
         {
-            CheckNotification();
+            if (RemindList != null)
+                CheckNotification();
         }
         private void CheckNotification()
         {
