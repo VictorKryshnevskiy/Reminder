@@ -163,12 +163,14 @@ namespace MyProjectApp
             buttonShow = new Button
             {
                 Text = "Добавить напоминание",
-                Size = NotificationButton.Size
+                Size = NotificationButton.Size,
+                BackColor = Color.Green
             };
             deleteButton = new Button
             {
                 Text = "Удалить напоминание",
-                Size = deleteNotificationbutton.Size
+                Size = deleteNotificationbutton.Size,
+                BackColor = Color.Red
             };
             buttonShow.Location = new Point(NotificationButton.Location.X, NotificationButton.Location.Y);
             panel.Location = new Point(notificationPanel.Location.X + panel.Width * CountPanelLocation(),

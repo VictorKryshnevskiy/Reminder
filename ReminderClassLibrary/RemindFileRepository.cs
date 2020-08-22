@@ -32,8 +32,20 @@ namespace ReminderClassLibrary
         }
         public void Save(List<Remind> reminds)
         {
+            TryUpdateId(reminds);
             var jsonString = JsonHelper.Serialize(reminds);
             FileSystem.WriteAllText(fileName, jsonString);
+        }
+
+        private void TryUpdateId(List<Remind> reminds)
+        {
+            foreach (var remind in reminds)
+            {
+                if (remind.Id == Guid.Empty)
+                {
+                    remind.Id = Guid.NewGuid();
+                }
+            }
         }
 
         private void Validate(Remind remind)

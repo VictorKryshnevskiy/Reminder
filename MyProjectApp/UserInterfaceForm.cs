@@ -73,7 +73,7 @@ namespace MyProjectApp
         }
         private int FindIndexInArray(int indexInTable)
         {
-            return remindersList.FindIndex(x => x.GetGuid.ToString() == reminderDataGridView[guidColumn.Index, indexInTable]
+            return remindersList.FindIndex(x => x.Id.ToString() == reminderDataGridView[guidColumn.Index, indexInTable]
             .Value.ToString());
         }
         private void WriteRemindsToGrid()
@@ -82,7 +82,7 @@ namespace MyProjectApp
             foreach (var remind in remindersList)
             {
                 reminderDataGridView.Rows.Add(remind.StartDate, remind.Name, remind.EndDate,
-                    remind.Description, remind.GetGuid);
+                    remind.Description, remind.Id);
             }
         }
         private void UpdateGrid()

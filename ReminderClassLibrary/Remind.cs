@@ -12,8 +12,7 @@ namespace ReminderClassLibrary
         public string Description { get; set; }
         public DateTime EndDate { get; set; }
         public List<RemindTask> TasksList { get; set; }
-        private Guid guid = Guid.NewGuid(); 
-        public Guid GetGuid { get { return guid; }}
+        public Guid Id { get; set; }
         public List<Notification> Notifications { get; set; }
         public CyclicalNotifications CyclicalNotification { get; set; }
 
