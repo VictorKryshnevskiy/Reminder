@@ -91,7 +91,7 @@ namespace MyProjectApp
         }
         private void saveRemindButton_Click(object sender, EventArgs e)
         {
-            if (Validation.hasValidationErrors(Controls))
+            if (Validation.HasValidationErrors(Controls))
             {
                 return;
             }
@@ -171,8 +171,6 @@ namespace MyProjectApp
                 BackColor = Color.Red
             };
             buttonShow.Location = new Point(NotificationButton.Location.X, NotificationButton.Location.Y);
-            //panel.Location = new Point(notificationPanel.Location.X + panel.Width * CountPanelLocation(),
-            //    notificationPanel.Location.Y);
             numeric.Location = new Point(notificationNumeric.Location.X, notificationNumeric.Location.Y);
             comboBox.Location = new Point(notificationComboBox.Location.X, notificationComboBox.Location.Y);
             deleteButton.Location = new Point(deleteNotificationbutton.Location.X, deleteNotificationbutton.Location.Y);

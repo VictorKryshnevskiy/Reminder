@@ -7,7 +7,7 @@ namespace ReminderClassLibrary
 {
     public class Validation
     {
-        public static bool hasValidationErrors(Control.ControlCollection controls)
+        public static bool HasValidationErrors(Control.ControlCollection controls)
         {
             bool hasError = false;
             // Now we need to loop through the controls and deterime if any of them have errors
@@ -22,7 +22,7 @@ namespace ReminderClassLibrary
                 // If its a container control then it may have children that need to be checked
                 if (control.HasChildren)
                 {
-                    if (hasValidationErrors(control.Controls))
+                    if (HasValidationErrors(control.Controls))
                         hasError = true;
                 }
             }
