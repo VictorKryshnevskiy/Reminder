@@ -24,7 +24,6 @@ namespace MyProjectApp
         int countButtons = 1;
         IRemindRepository repository;
         int notificationPanelsCount = 1;
-        List<int> deletedPanels;
         public CreateReminderForm(Remind rem)
         {
             InitializeComponent();
@@ -34,7 +33,6 @@ namespace MyProjectApp
         {
             repository = new RemindFileRepository();
             SaveButtonClicked = false;
-            deletedPanels = new List<int> { };
             FillComboBox(notificationComboBox);
             FillComboBox(cyclicalNotificationComboBox);
             panelsList = new List<Panel> { notificationPanel };
@@ -173,8 +171,8 @@ namespace MyProjectApp
                 BackColor = Color.Red
             };
             buttonShow.Location = new Point(NotificationButton.Location.X, NotificationButton.Location.Y);
-            panel.Location = new Point(notificationPanel.Location.X + panel.Width * CountPanelLocation(),
-                notificationPanel.Location.Y);
+            //panel.Location = new Point(notificationPanel.Location.X + panel.Width * CountPanelLocation(),
+            //    notificationPanel.Location.Y);
             numeric.Location = new Point(notificationNumeric.Location.X, notificationNumeric.Location.Y);
             comboBox.Location = new Point(notificationComboBox.Location.X, notificationComboBox.Location.Y);
             deleteButton.Location = new Point(deleteNotificationbutton.Location.X, deleteNotificationbutton.Location.Y);
@@ -195,6 +193,7 @@ namespace MyProjectApp
                 buttonShow.Visible = false;
             }
             notificationPanelsCount++;
+            notificationsTableLayoutPanel.Controls.Add(panel);
         }
 
         private void reminderNameTextBox_Validating(object sender, CancelEventArgs e)
@@ -236,28 +235,11 @@ namespace MyProjectApp
                 }
             }
             var panelIndex = panelsList.IndexOf((Panel)selectedPanel);
-            Controls.Remove(selectedPanel);
+            notificationsTableLayoutPanel.Controls.RemoveAt(panelIndex);
             panelsList.RemoveAt(panelIndex);
-            deletedPanels.Add(panelIndex);
-            for (int i = 0; i < panelsList[panelIndex - 1].Controls.Count; i++)
-            {
-                if (panelsList[panelIndex - 1].Controls[i] is Button)
-                {
-                    panelsList[panelIndex - 1].Controls[i].Visible = true;
-                }
-            }
             countButtons--;
             notificationPanelsCount--;
-        }
-        private int CountPanelLocation()
-        {
-            if (deletedPanels.Count > 0)
-            {
-                int index = deletedPanels[0];
-                deletedPanels.RemoveAt(0);
-                return index;
-            }
-            return notificationPanelsCount;
+            NotificationButton.Visible = true;
         }
         private void FillComboBox(ComboBox comboBox)
         {

@@ -57,10 +57,12 @@
             this.periodicityRemindLabel = new System.Windows.Forms.Label();
             this.cyclicalNotificationComboBox = new System.Windows.Forms.ComboBox();
             this.deleteCyclicalNotificationbutton = new System.Windows.Forms.Button();
+            this.notificationsTableLayoutPanel = new System.Windows.Forms.TableLayoutPanel();
             ((System.ComponentModel.ISupportInitialize)(this.notificationNumeric)).BeginInit();
             this.notificationPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.cyclicalNotificationNumeric)).BeginInit();
+            this.notificationsTableLayoutPanel.SuspendLayout();
             this.SuspendLayout();
             // 
             // startDateLabel
@@ -237,7 +239,7 @@
             this.notificationPanel.Controls.Add(this.notificationNumeric);
             this.notificationPanel.Controls.Add(this.NotificationButton);
             this.notificationPanel.Controls.Add(this.notificationComboBox);
-            this.notificationPanel.Location = new System.Drawing.Point(15, 162);
+            this.notificationPanel.Location = new System.Drawing.Point(3, 3);
             this.notificationPanel.Name = "notificationPanel";
             this.notificationPanel.Size = new System.Drawing.Size(137, 142);
             this.notificationPanel.TabIndex = 26;
@@ -310,19 +312,35 @@
             this.deleteCyclicalNotificationbutton.UseVisualStyleBackColor = true;
             this.deleteCyclicalNotificationbutton.Click += new System.EventHandler(this.deleteCyclicalNotificationbutton_Click);
             // 
+            // notificationsTableLayoutPanel
+            // 
+            this.notificationsTableLayoutPanel.ColumnCount = 5;
+            this.notificationsTableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
+            this.notificationsTableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
+            this.notificationsTableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
+            this.notificationsTableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
+            this.notificationsTableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
+            this.notificationsTableLayoutPanel.Controls.Add(this.notificationPanel, 0, 0);
+            this.notificationsTableLayoutPanel.Location = new System.Drawing.Point(7, 190);
+            this.notificationsTableLayoutPanel.Name = "notificationsTableLayoutPanel";
+            this.notificationsTableLayoutPanel.RowCount = 1;
+            this.notificationsTableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.notificationsTableLayoutPanel.Size = new System.Drawing.Size(791, 151);
+            this.notificationsTableLayoutPanel.TabIndex = 36;
+            // 
             // CreateReminderForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
             this.ClientSize = new System.Drawing.Size(817, 489);
+            this.Controls.Add(this.notificationsTableLayoutPanel);
             this.Controls.Add(this.deleteCyclicalNotificationbutton);
             this.Controls.Add(this.cyclicalNotificationComboBox);
             this.Controls.Add(this.periodicityRemindLabel);
             this.Controls.Add(this.cyclicalNotificationNumeric);
             this.Controls.Add(this.startCyclingRemindDateLabel);
             this.Controls.Add(this.startCyclicalNotification);
-            this.Controls.Add(this.notificationPanel);
             this.Controls.Add(this.label9);
             this.Controls.Add(this.label8);
             this.Controls.Add(this.doneReminderTasksRichTextBox);
@@ -346,6 +364,7 @@
             this.notificationPanel.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.cyclicalNotificationNumeric)).EndInit();
+            this.notificationsTableLayoutPanel.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -380,5 +399,6 @@
         private System.Windows.Forms.DateTimePicker startCyclicalNotification;
         private System.Windows.Forms.Button deleteCyclicalNotificationbutton;
         private System.Windows.Forms.Button deleteNotificationbutton;
+        private System.Windows.Forms.TableLayoutPanel notificationsTableLayoutPanel;
     }
 }
