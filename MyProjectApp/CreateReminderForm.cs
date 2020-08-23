@@ -56,14 +56,14 @@ namespace MyProjectApp
                 if (i == 0)
                 {
                     notificationNumeric.Value = Remind.Notifications[i].PeriodAmount;
-                    notificationComboBox.SelectedItem = Remind.Notifications[i].Period;
+                    notificationComboBox.SelectedValue = Remind.Notifications[i].Period;
                     continue;
                 }
                 if (notificationPanelsCount != Remind.Notifications.Count)
                 {
                     AddPanel();
                     numeric.Value = Remind.Notifications[i].PeriodAmount;
-                    comboBox.SelectedItem = Remind.Notifications[i].Period;
+                    comboBox.SelectedValue = Remind.Notifications[i].Period;
                     buttonShow.Visible = false;
                 }
             }
