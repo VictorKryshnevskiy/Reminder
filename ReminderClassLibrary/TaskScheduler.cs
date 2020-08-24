@@ -8,6 +8,7 @@ namespace ReminderClassLibrary
     {
         Timer timer;
         List<Remind> RemindList;
+        IRemindRepository repository;
         public event EventHandler<RemindEventArgs> EndedRemind;
         public event EventHandler<RemindEventArgs> RemindNotification;
         public TaskScheduler(List<Remind> remindsList)
@@ -19,6 +20,7 @@ namespace ReminderClassLibrary
             };
             timer.Start();
             timer.Tick += Timer_Tick;
+            repository =  new RemindFileRepository();
         }
 
         private void Timer_Tick(object sender, EventArgs e)
@@ -118,9 +120,9 @@ namespace ReminderClassLibrary
                 }
             }
         }
-        public void Refresh(List<Remind> reminds)
+        public void Refresh()
         {
-            RemindList = reminds;
+            RemindList = repository.GetReminds();
         }
     }
 }

@@ -100,7 +100,7 @@ namespace MyProjectApp
         {
             reminderDataGridView.Rows.Clear();
             WriteRemindsToGrid();
-            taskScheduler.Refresh(remindersList);
+            taskScheduler.Refresh();
         }
         private void reminderDataGridView_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
