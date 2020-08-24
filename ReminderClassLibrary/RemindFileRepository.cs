@@ -9,9 +9,18 @@ namespace ReminderClassLibrary
         public const string fileName = "Reminder.json";
         public List<Remind> GetReminds()
         {
-            var jsonString = FileSystem.ReadAllText(fileName);
-            var listReminds = JsonHelper.Deserialize<List<Remind>>(jsonString);
-            return listReminds;
+            if (FileSystem.IsExist(fileName))
+            {
+                var jsonString = FileSystem.ReadAllText(fileName);
+                var listReminds = JsonHelper.Deserialize<List<Remind>>(jsonString);
+                return listReminds;
+            }
+            else
+            {
+                FileSystem.Create(fileName);
+                FileSystem.WriteAllText(fileName, JsonHelper.Serialize(new List<Remind> { }));
+                return new List<Remind> { };
+            }
         }
         public void Save(Remind remind)
         {

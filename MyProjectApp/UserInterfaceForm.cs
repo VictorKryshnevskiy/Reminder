@@ -12,6 +12,7 @@ namespace MyProjectApp
         PopupNotifier popup;
         List<Remind> remindersList;
         IRemindRepository repository;
+        TaskScheduler taskScheduler;
         public UserInterfaceForm()
         {
             InitializeComponent();
@@ -29,7 +30,7 @@ namespace MyProjectApp
         }
         private void TaskSchedulerStart()
         {
-            TaskScheduler taskScheduler = new TaskScheduler(remindersList);
+            taskScheduler = new TaskScheduler(remindersList);
             taskScheduler.EndedRemind += TaskScheduler_EndedRemind;
             taskScheduler.RemindNotification += TaskScheduler_RemindNotification;
         }
@@ -41,6 +42,11 @@ namespace MyProjectApp
         }
         private void deleteReminderButton_Click(object sender, EventArgs e)
         {
+            if (remindersList == null)
+            {
+                MessageBox.Show("Список событий пуст");
+                return;
+            }
             var indexToDelete = reminderDataGridView.CurrentRow.Index;
             if (indexToDelete < remindersList.Count)
             {
@@ -53,6 +59,11 @@ namespace MyProjectApp
         }
         private void editReminderButton_Click(object sender, EventArgs e)
         {
+            if ( remindersList == null)
+            {
+                MessageBox.Show("Список событий пуст");
+                return;
+            }
             var indexToEdit = reminderDataGridView.CurrentRow.Index;
             if (indexToEdit < remindersList.Count)
             {
@@ -89,9 +100,15 @@ namespace MyProjectApp
         {
             reminderDataGridView.Rows.Clear();
             WriteRemindsToGrid();
+            taskScheduler.Refresh(remindersList);
         }
         private void reminderDataGridView_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
+            if (remindersList == null)
+            {
+                MessageBox.Show("Список событий пуст");
+                return;
+            }
             if (e.RowIndex >= 0 && e.RowIndex < remindersList.Count)
             {
                 var remindIndex = FindIndexInArray(e.RowIndex);
@@ -135,8 +152,10 @@ namespace MyProjectApp
 
         private void UserInterfaceForm_FormClosing(object sender, FormClosingEventArgs e)
         {
-            if(remindersList != null)
-            repository.Save(remindersList);
+            if (remindersList != null)
+            {
+                repository.Save(remindersList);
+            }
         }
         private void UserInterfaceForm_Resize_1(object sender, EventArgs e)
         {

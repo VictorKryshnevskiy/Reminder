@@ -118,5 +118,9 @@ namespace ReminderClassLibrary
                 }
             }
         }
+        public void Refresh(List<Remind> reminds)
+        {
+            RemindList = reminds;
+        }
     }
 }
