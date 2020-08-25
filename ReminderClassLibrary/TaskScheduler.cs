@@ -6,14 +6,14 @@ namespace ReminderClassLibrary
 {
     public class TaskScheduler
     {
-        Timer timer;
-        List<Remind> RemindList;
+        private Timer timer;
+        private List<Remind> remindList;
         IRemindRepository repository;
         public event EventHandler<RemindEventArgs> EndedRemind;
         public event EventHandler<RemindEventArgs> RemindNotification;
-        public TaskScheduler(List<Remind> remindsList)
+        public TaskScheduler(List<Remind> reminds)
         {
-            RemindList = remindsList;
+            remindList = reminds;
             timer = new Timer
             {
                 Interval = 1000,
@@ -25,12 +25,12 @@ namespace ReminderClassLibrary
 
         private void Timer_Tick(object sender, EventArgs e)
         {
-            if (RemindList != null)
+            if (remindList != null)
                 CheckNotification();
         }
         private void CheckNotification()
         {
-            foreach (var remind in RemindList)
+            foreach (var remind in remindList)
             {
                 if (remind.EndDate <= DateTime.Now && !remind.shownNotification)
                 {
@@ -122,7 +122,7 @@ namespace ReminderClassLibrary
         }
         public void Refresh()
         {
-            RemindList = repository.GetReminds();
+            remindList = repository.GetReminds();
         }
     }
 }

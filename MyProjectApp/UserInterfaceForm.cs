@@ -42,45 +42,47 @@ namespace MyProjectApp
         }
         private void deleteReminderButton_Click(object sender, EventArgs e)
         {
-            if (remindersList == null)
+            if (IsRemindsNotNull())
             {
-                MessageBox.Show("Список событий пуст");
-                return;
+                if (IsCurentRowNotNull(reminderDataGridView.CurrentRow))
+                {
+                    var indexToDelete = reminderDataGridView.CurrentRow.Index;
+                    if (indexToDelete < remindersList.Count)
+                    {
+                        var listElementToDelete = FindIndexInArray(indexToDelete);
+                        remindersList.RemoveAt(listElementToDelete);
+                        reminderDataGridView.Rows.RemoveAt(indexToDelete);
+                        repository.Save(remindersList);
+                    }
+                    else { MessageBox.Show("Пожалуйста, выберите строку корректно"); }
+                }
             }
-            var indexToDelete = reminderDataGridView.CurrentRow.Index;
-            if (indexToDelete < remindersList.Count)
-            {
-                var listElementToDelete = FindIndexInArray(indexToDelete);
-                remindersList.RemoveAt(listElementToDelete);
-                reminderDataGridView.Rows.RemoveAt(indexToDelete);
-                repository.Save(remindersList);
-            }
-            else { MessageBox.Show("Пожалуйста, выберите строку корректно"); }
         }
         private void editReminderButton_Click(object sender, EventArgs e)
         {
-            if ( remindersList == null)
+            if (IsRemindsNotNull())
             {
-                MessageBox.Show("Список событий пуст");
-                return;
-            }
-            var indexToEdit = reminderDataGridView.CurrentRow.Index;
-            if (indexToEdit < remindersList.Count)
-            {
-                var listElementToEdit = FindIndexInArray(indexToEdit);
-                var remindToEdit = remindersList.ElementAt(listElementToEdit);
-                Form form = new CreateReminderForm(remindToEdit);
-                form.ShowDialog();
-                if (CreateReminderForm.SaveButtonClicked)
+                if (IsCurentRowNotNull(reminderDataGridView.CurrentRow))
                 {
-                    remindersList.RemoveAt(listElementToEdit);
-                    reminderDataGridView.Rows.RemoveAt(indexToEdit);
-                    remindersList.Insert(listElementToEdit, CreateReminderForm.Remind);
-                    repository.Save(remindersList);
-                    UpdateGrid();
+                    var indexToEdit = reminderDataGridView.CurrentRow.Index;
+                    if (indexToEdit < remindersList.Count)
+                    {
+                        var listElementToEdit = FindIndexInArray(indexToEdit);
+                        var remindToEdit = remindersList.ElementAt(listElementToEdit);
+                        Form form = new CreateReminderForm(remindToEdit);
+                        form.ShowDialog();
+                        if (CreateReminderForm.SaveButtonClicked)
+                        {
+                            remindersList.RemoveAt(listElementToEdit);
+                            reminderDataGridView.Rows.RemoveAt(indexToEdit);
+                            remindersList.Insert(listElementToEdit, CreateReminderForm.Remind);
+                            repository.Save(remindersList);
+                            UpdateGrid();
+                        }
+                    }
+                    else { MessageBox.Show("Пожалуйста, выберите строку корректно"); }
                 }
             }
-            else { MessageBox.Show("Пожалуйста, выберите строку корректно"); }
         }
         private int FindIndexInArray(int indexInTable)
         {
@@ -104,19 +106,17 @@ namespace MyProjectApp
         }
         private void reminderDataGridView_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (remindersList == null)
+            if(IsRemindsNotNull())
             {
-                MessageBox.Show("Список событий пуст");
-                return;
-            }
-            if (e.RowIndex >= 0 && e.RowIndex < remindersList.Count)
-            {
-                var remindIndex = FindIndexInArray(e.RowIndex);
-                var form = new Kanban(remindersList[remindIndex]);
-                form.ShowDialog();
-                remindersList[remindIndex] = Kanban.Remind;
-                repository.Save(remindersList);
-                UpdateGrid();
+                if (e.RowIndex >= 0 && e.RowIndex < remindersList.Count)
+                {
+                    var remindIndex = FindIndexInArray(e.RowIndex);
+                    var form = new Kanban(remindersList[remindIndex]);
+                    form.ShowDialog();
+                    remindersList[remindIndex] = Kanban.Remind;
+                    repository.Save(remindersList);
+                    UpdateGrid();
+                }
             }
         }
         private void TaskScheduler_EndedRemind(object sender, RemindEventArgs e)
@@ -144,12 +144,10 @@ namespace MyProjectApp
             popup.Popup();
             popup.Click += Popup_Click;
         }
-
         private void Popup_Click(object sender, EventArgs e)
         {
             throw new NotImplementedException();
         }
-
         private void UserInterfaceForm_FormClosing(object sender, FormClosingEventArgs e)
         {
             if (remindersList != null)
@@ -174,17 +172,33 @@ namespace MyProjectApp
                 WindowState = FormWindowState.Normal;
             }
         }
-
         private void toolStripMenuItem1_Click(object sender, EventArgs e)
         {
             notifyIcon.Visible = false;
             ShowInTaskbar = true;
             WindowState = FormWindowState.Normal;
         }
-
         private void toolStripMenuItem2_Click(object sender, EventArgs e)
         {
             Application.Exit();
+        }
+        private bool IsRemindsNotNull()
+        {
+            if (remindersList != null)
+            {
+                return true;
+            }
+            MessageBox.Show("Список событий пуст");
+            return false;
+        }
+        private bool IsCurentRowNotNull(DataGridViewRow currentRow)
+        {
+            if (currentRow != null)
+            {
+                return true;
+            }
+            MessageBox.Show("Строка не выделена");
+            return false;
         }
     }
 }
