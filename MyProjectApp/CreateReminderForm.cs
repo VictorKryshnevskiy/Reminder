@@ -5,6 +5,7 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
+using System.ComponentModel;
 
 namespace MyProjectApp
 {
@@ -12,12 +13,14 @@ namespace MyProjectApp
     {
         public static bool SaveButtonClicked { get; private set; }
         public static Remind Remind { get; private set; }
-        List<NumericUpDown> numericUpDownList;
-        List<ComboBox> comboBoxList;
-        List<Panel> panelList;
+        List<NumericUpDown> numericsUpDownList;
+        List<ComboBox> comboBoxesList;
+        List<Panel> panelsList;
+        List<Button> buttonsToDeleteList;
         NumericUpDown numeric;
         ComboBox comboBox;
         Button buttonShow;
+        Button deleteButton;
         int countButtons = 1;
         IRemindRepository repository;
         int notificationPanelsCount = 1;
@@ -30,11 +33,12 @@ namespace MyProjectApp
         {
             repository = new RemindFileRepository();
             SaveButtonClicked = false;
-            notificationComboBox.Items
-                .AddRange(new object[] {NotificationPeriod.Minutes, NotificationPeriod.Hours, NotificationPeriod.Days, "" });
-            panelList = new List<Panel> {notificationPanel};
-            numericUpDownList = new List<NumericUpDown> { notificationNumeric };
-            comboBoxList = new List<ComboBox> { notificationComboBox };
+            FillComboBox(notificationComboBox);
+            FillComboBox(cyclicalNotificationComboBox);
+            panelsList = new List<Panel> { notificationPanel };
+            numericsUpDownList = new List<NumericUpDown> { notificationNumeric };
+            comboBoxesList = new List<ComboBox> { notificationComboBox };
+            buttonsToDeleteList = new List<Button> { deleteNotificationbutton };
             if (Remind.Name != default)
             {
                 RemindsPropertiesLoad();
@@ -52,18 +56,17 @@ namespace MyProjectApp
                 if (i == 0)
                 {
                     notificationNumeric.Value = Remind.Notifications[i].PeriodAmount;
-                    notificationComboBox.SelectedItem = Remind.Notifications[i].Period;
+                    notificationComboBox.SelectedValue = Remind.Notifications[i].Period;
                     continue;
                 }
                 if (notificationPanelsCount != Remind.Notifications.Count)
                 {
-                    AddPanel(); 
+                    AddPanel();
                     numeric.Value = Remind.Notifications[i].PeriodAmount;
-                    comboBox.SelectedItem = Remind.Notifications[i].Period;
+                    comboBox.SelectedValue = Remind.Notifications[i].Period;
                     buttonShow.Visible = false;
                 }
-                
-            }            
+            }
             foreach (var task in Remind.TasksList)
             {
                 if (task.Status == TaskStatus.ToDo)
@@ -79,22 +82,42 @@ namespace MyProjectApp
                     doneReminderTasksRichTextBox.Text += task.Text + '\n';
                 }
             }
+            if (Remind.CyclicalNotification != null)
+            {
+                startCyclicalNotification.Value = Remind.CyclicalNotification.Start;
+                cyclicalNotificationNumeric.Value = Remind.CyclicalNotification.PeriodAmount;
+                cyclicalNotificationComboBox.SelectedItem = Remind.CyclicalNotification.Period;
+            }
         }
         private void saveRemindButton_Click(object sender, EventArgs e)
         {
-            if (reminderNameTextBox.Text != "")
+            if (Validation.HasValidationErrors(Controls))
+            {
+                return;
+            }
+            try
             {
                 Remind.StartDate = startDateTimePicker.Value;
                 Remind.Name = reminderNameTextBox.Text;
                 Remind.EndDate = endDateTimePicker.Value;
                 Remind.Description = reminderDescriptionTextBox.Text;
                 Remind.Notifications = new List<Notification> { };
-                for (int i = 0; i < panelList.Count; i++)
+                for (int i = 0; i < panelsList.Count; i++)
                 {
-                    if (comboBoxList[i].Text != "")
+                    if (comboBoxesList[i].Text != "")
                     {
-                        Remind.Notifications.Add(new Notification((int)numericUpDownList[i].Value, (NotificationPeriod)comboBoxList[i].SelectedItem));
+                        Remind.Notifications.Add(new Notification((int)numericsUpDownList[i].Value, (NotificationPeriod)comboBoxesList[i].SelectedValue));
                     }
+                }
+                if (cyclicalNotificationComboBox.Text != "")
+                {
+                    Remind.CyclicalNotification = new CyclicalNotifications(startCyclicalNotification.Value,
+                    endDateTimePicker.Value, (int)cyclicalNotificationNumeric.Value,
+                    (NotificationPeriod)cyclicalNotificationComboBox.SelectedValue);
+                }
+                else
+                {
+                    Remind.CyclicalNotification = null;
                 }
                 Remind.TasksList = toDoReminderTasksRichTextBox.Text.Split(new string[] { "\n" }
                 , StringSplitOptions.RemoveEmptyEntries)
@@ -109,10 +132,11 @@ namespace MyProjectApp
                 SaveButtonClicked = true;
                 Close();
             }
-            else
+            catch (Exception ex)
             {
-                MessageBox.Show("Пожалуйста, укажите имя события");
+                MessageBox.Show(ex.Message);
             }
+
         }
         private void addNotificationbutton_Click(object sender, EventArgs e)
         {
@@ -123,7 +147,7 @@ namespace MyProjectApp
 
         private void AddPanel()
         {
-            
+
             var panel = new Panel
             {
                 Size = notificationPanel.Size
@@ -133,31 +157,99 @@ namespace MyProjectApp
             {
                 DropDownStyle = ComboBoxStyle.DropDownList
             };
-            comboBox.Items.AddRange(new object[] { NotificationPeriod.Minutes, NotificationPeriod.Hours, NotificationPeriod.Days, "" });
+            FillComboBox(comboBox);
             buttonShow = new Button
             {
                 Text = "Добавить напоминание",
-                Size = NotificationButton.Size
+                Size = NotificationButton.Size,
+                BackColor = Color.Green
+            };
+            deleteButton = new Button
+            {
+                Text = "Удалить напоминание",
+                Size = deleteNotificationbutton.Size,
+                BackColor = Color.Red
             };
             buttonShow.Location = new Point(NotificationButton.Location.X, NotificationButton.Location.Y);
-            panel.Location = new Point(notificationPanel.Location.X + panel.Width * notificationPanelsCount,
-                notificationPanel.Location.Y);
             numeric.Location = new Point(notificationNumeric.Location.X, notificationNumeric.Location.Y);
             comboBox.Location = new Point(notificationComboBox.Location.X, notificationComboBox.Location.Y);
+            deleteButton.Location = new Point(deleteNotificationbutton.Location.X, deleteNotificationbutton.Location.Y);
             buttonShow.Click += new EventHandler(addNotificationbutton_Click);
             Controls.Add(panel);
             panel.Controls.Add(numeric);
             panel.Controls.Add(comboBox);
             panel.Controls.Add(buttonShow);
-            panelList.Add(panel);
-            numericUpDownList.Add(numeric);
-            comboBoxList.Add(comboBox);
+            panel.Controls.Add(deleteButton);
+            panelsList.Add(panel);
+            deleteButton.Click += new EventHandler(deleteButton_Click);
+            numericsUpDownList.Add(numeric);
+            comboBoxesList.Add(comboBox);
+            buttonsToDeleteList.Add(deleteButton);
             countButtons++;
             if (countButtons >= 5)
             {
                 buttonShow.Visible = false;
             }
             notificationPanelsCount++;
+            notificationsTableLayoutPanel.Controls.Add(panel);
+        }
+
+        private void reminderNameTextBox_Validating(object sender, CancelEventArgs e)
+        {
+            if (reminderNameTextBox.Text.Trim() == string.Empty)
+            {
+                errorProvider.SetError(reminderNameTextBox, "Введите имя события");
+                e.Cancel = true;
+            }
+            else
+                errorProvider.SetError(reminderNameTextBox, "");
+        }
+
+        private void deleteCyclicalNotificationbutton_Click(object sender, EventArgs e)
+        {
+            cyclicalNotificationNumeric.Value = default;
+            cyclicalNotificationComboBox.SelectedValue = NotificationPeriod.None;
+        }
+
+        private void deleteNotificationbutton_Click(object sender, EventArgs e)
+        {
+            notificationNumeric.Value = default;
+            notificationComboBox.SelectedValue = NotificationPeriod.None;
+
+        }
+        private void deleteButton_Click(object sender, EventArgs e)
+        {
+            Button button = (Button)sender;
+            var selectedPanel = button.Parent;
+            for (int i = 0; i < selectedPanel.Controls.Count; i++)
+            {
+                if (selectedPanel.Controls[i] is ComboBox)
+                {
+                    selectedPanel.Controls[i].Text = "";
+                }
+                if (selectedPanel.Controls[i] is NumericUpDown)
+                {
+                    selectedPanel.Controls[i].Text = "0";
+                }
+            }
+            var panelIndex = panelsList.IndexOf((Panel)selectedPanel);
+            notificationsTableLayoutPanel.Controls.RemoveAt(panelIndex);
+            panelsList.RemoveAt(panelIndex);
+            countButtons--;
+            notificationPanelsCount--;
+            NotificationButton.Visible = true;
+        }
+        private void FillComboBox(ComboBox comboBox)
+        {
+            comboBox.DisplayMember = "Description";
+            comboBox.ValueMember = "Value";
+            comboBox.DataSource = Enum.GetValues(typeof(NotificationPeriod)).Cast<Enum>().Select(value => new
+            {
+                (Attribute.GetCustomAttribute(value.GetType().GetField(value.ToString()), typeof(DescriptionAttribute)) as DescriptionAttribute).Description,
+                value
+            })
+             .OrderBy(item => item.value)
+             .ToList();
         }
     }
 }

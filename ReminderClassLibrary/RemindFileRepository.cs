@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Windows.Forms;
 
 namespace ReminderClassLibrary
 {
@@ -7,12 +9,22 @@ namespace ReminderClassLibrary
         public const string fileName = "Reminder.json";
         public List<Remind> GetReminds()
         {
-            var jsonString = FileSystem.ReadAllText(fileName);
-            var listReminds = JsonHelper.Deserialize<List<Remind>>(jsonString);
-            return listReminds;
+            if (FileSystem.IsExist(fileName))
+            {
+                var jsonString = FileSystem.ReadAllText(fileName);
+                var listReminds = JsonHelper.Deserialize<List<Remind>>(jsonString);
+                return listReminds;
+            }
+            else
+            {
+                FileSystem.Create(fileName);
+                FileSystem.WriteAllText(fileName, JsonHelper.Serialize(new List<Remind> { }));
+                return new List<Remind> { };
+            }
         }
         public void Save(Remind remind)
         {
+            Validate(remind);
             if (FileSystem.IsExist(fileName))
             {
                 var jsonString = FileSystem.ReadAllText(fileName);
@@ -27,10 +39,38 @@ namespace ReminderClassLibrary
                 Save(remindsList);
             }
         }
-        public void Save(List<Remind> remind)
+        public void Save(List<Remind> reminds)
         {
-            var jsonString = JsonHelper.Serialize(remind);
+            TryUpdateId(reminds);
+            var jsonString = JsonHelper.Serialize(reminds);
             FileSystem.WriteAllText(fileName, jsonString);
+        }
+
+        private void TryUpdateId(List<Remind> reminds)
+        {
+            foreach (var remind in reminds)
+            {
+                if (remind.Id == Guid.Empty)
+                {
+                    remind.Id = Guid.NewGuid();
+                }
+            }
+        }
+
+        private void Validate(Remind remind)
+        {
+            if (remind.StartDate > remind.EndDate)
+            {
+                throw new Exception("Дата начала события не может быть позже даты конца события");
+            }
+            if (remind.Description.Length > 100)
+            {
+                throw new Exception("Описание событие не может быть длинее 100 символов");
+            }
+            if (remind.EndDate < DateTime.Now)
+            {
+                throw new Exception("Дата конца события не может быть в прошлом");
+            }
         }
     }
 }

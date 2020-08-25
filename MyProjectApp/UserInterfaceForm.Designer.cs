@@ -28,6 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(UserInterfaceForm));
             this.reminderDataGridView = new System.Windows.Forms.DataGridView();
             this.startDateColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.nameColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -37,13 +39,21 @@
             this.createReminderButton = new System.Windows.Forms.Button();
             this.editReminderButton = new System.Windows.Forms.Button();
             this.deleteReminderButton = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
+            this.notifyIcon = new System.Windows.Forms.NotifyIcon(this.components);
+            this.notifyIconContextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
+            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             ((System.ComponentModel.ISupportInitialize)(this.reminderDataGridView)).BeginInit();
+            this.notifyIconContextMenuStrip.SuspendLayout();
+            this.tableLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // reminderDataGridView
             // 
+            this.reminderDataGridView.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.reminderDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.reminderDataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.startDateColumn,
@@ -55,7 +65,7 @@
             this.reminderDataGridView.Name = "reminderDataGridView";
             this.reminderDataGridView.ReadOnly = true;
             this.reminderDataGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.reminderDataGridView.Size = new System.Drawing.Size(631, 426);
+            this.reminderDataGridView.Size = new System.Drawing.Size(677, 430);
             this.reminderDataGridView.TabIndex = 0;
             this.reminderDataGridView.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.reminderDataGridView_CellDoubleClick);
             // 
@@ -100,9 +110,9 @@
             // 
             // createReminderButton
             // 
-            this.createReminderButton.Location = new System.Drawing.Point(649, 12);
+            this.createReminderButton.Location = new System.Drawing.Point(3, 3);
             this.createReminderButton.Name = "createReminderButton";
-            this.createReminderButton.Size = new System.Drawing.Size(139, 23);
+            this.createReminderButton.Size = new System.Drawing.Size(94, 41);
             this.createReminderButton.TabIndex = 1;
             this.createReminderButton.Text = "Создать событие";
             this.createReminderButton.UseVisualStyleBackColor = true;
@@ -110,9 +120,9 @@
             // 
             // editReminderButton
             // 
-            this.editReminderButton.Location = new System.Drawing.Point(649, 54);
+            this.editReminderButton.Location = new System.Drawing.Point(3, 58);
             this.editReminderButton.Name = "editReminderButton";
-            this.editReminderButton.Size = new System.Drawing.Size(139, 23);
+            this.editReminderButton.Size = new System.Drawing.Size(94, 39);
             this.editReminderButton.TabIndex = 2;
             this.editReminderButton.Text = "Редактировать событие";
             this.editReminderButton.UseVisualStyleBackColor = true;
@@ -120,49 +130,76 @@
             // 
             // deleteReminderButton
             // 
-            this.deleteReminderButton.Location = new System.Drawing.Point(649, 94);
+            this.deleteReminderButton.Location = new System.Drawing.Point(3, 105);
             this.deleteReminderButton.Name = "deleteReminderButton";
-            this.deleteReminderButton.Size = new System.Drawing.Size(139, 23);
+            this.deleteReminderButton.Size = new System.Drawing.Size(92, 34);
             this.deleteReminderButton.TabIndex = 3;
             this.deleteReminderButton.Text = "Удалить событие";
             this.deleteReminderButton.UseVisualStyleBackColor = true;
             this.deleteReminderButton.Click += new System.EventHandler(this.deleteReminderButton_Click);
             // 
-            // button1
+            // notifyIcon
             // 
-            this.button1.Location = new System.Drawing.Point(694, 222);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 4;
-            this.button1.Text = "button1";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.notifyIcon.BalloonTipIcon = System.Windows.Forms.ToolTipIcon.Info;
+            this.notifyIcon.Icon = ((System.Drawing.Icon)(resources.GetObject("notifyIcon.Icon")));
+            this.notifyIcon.Text = "Reminder";
+            this.notifyIcon.Visible = true;
+            this.notifyIcon.MouseClick += new System.Windows.Forms.MouseEventHandler(this.notifyIcon_MouseClick);
             // 
-            // button2
+            // notifyIconContextMenuStrip
             // 
-            this.button2.Location = new System.Drawing.Point(694, 270);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(75, 23);
-            this.button2.TabIndex = 5;
-            this.button2.Text = "button2";
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
+            this.notifyIconContextMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripMenuItem1,
+            this.toolStripMenuItem2});
+            this.notifyIconContextMenuStrip.Name = "contextMenuStrip1";
+            this.notifyIconContextMenuStrip.Size = new System.Drawing.Size(114, 48);
+            // 
+            // toolStripMenuItem1
+            // 
+            this.toolStripMenuItem1.Name = "toolStripMenuItem1";
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
+            this.toolStripMenuItem1.Text = "Restore";
+            this.toolStripMenuItem1.Click += new System.EventHandler(this.toolStripMenuItem1_Click);
+            // 
+            // toolStripMenuItem2
+            // 
+            this.toolStripMenuItem2.Name = "toolStripMenuItem2";
+            this.toolStripMenuItem2.Size = new System.Drawing.Size(180, 22);
+            this.toolStripMenuItem2.Text = "Exit";
+            this.toolStripMenuItem2.Click += new System.EventHandler(this.toolStripMenuItem2_Click);
+            // 
+            // tableLayoutPanel1
+            // 
+            this.tableLayoutPanel1.ColumnCount = 1;
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50.5F));
+            this.tableLayoutPanel1.Controls.Add(this.editReminderButton, 0, 1);
+            this.tableLayoutPanel1.Controls.Add(this.deleteReminderButton, 0, 2);
+            this.tableLayoutPanel1.Controls.Add(this.createReminderButton, 0, 0);
+            this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Right;
+            this.tableLayoutPanel1.Location = new System.Drawing.Point(707, 0);
+            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
+            this.tableLayoutPanel1.RowCount = 3;
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 47F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 352F));
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(100, 454);
+            this.tableLayoutPanel1.TabIndex = 4;
             // 
             // UserInterfaceForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Controls.Add(this.button2);
-            this.Controls.Add(this.button1);
-            this.Controls.Add(this.deleteReminderButton);
-            this.Controls.Add(this.editReminderButton);
-            this.Controls.Add(this.createReminderButton);
+            this.ClientSize = new System.Drawing.Size(807, 454);
+            this.Controls.Add(this.tableLayoutPanel1);
             this.Controls.Add(this.reminderDataGridView);
             this.Name = "UserInterfaceForm";
             this.Text = "Form1";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.UserInterfaceForm_FormClosing);
             this.Load += new System.EventHandler(this.UserInterfaceForm_Load);
+            this.Resize += new System.EventHandler(this.UserInterfaceForm_Resize_1);
             ((System.ComponentModel.ISupportInitialize)(this.reminderDataGridView)).EndInit();
+            this.notifyIconContextMenuStrip.ResumeLayout(false);
+            this.tableLayoutPanel1.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -178,8 +215,11 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn endDateColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn descriptionColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn guidColumn;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.NotifyIcon notifyIcon;
+        private System.Windows.Forms.ContextMenuStrip notifyIconContextMenuStrip;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem2;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
     }
 }
 

@@ -6,14 +6,15 @@ namespace ReminderClassLibrary
 {
     public class Remind
     {
+        public bool shownNotification;
         public DateTime StartDate { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
         public DateTime EndDate { get; set; }
         public List<RemindTask> TasksList { get; set; }
-        private Guid guid = Guid.NewGuid(); 
-        public Guid GetGuid { get { return guid; }}
+        public Guid Id { get; set; }
         public List<Notification> Notifications { get; set; }
+        public CyclicalNotifications CyclicalNotification { get; set; }
 
         public Remind(DateTime startRemindDate, string remindName,
             DateTime endRemindDate, string remindDescription,
