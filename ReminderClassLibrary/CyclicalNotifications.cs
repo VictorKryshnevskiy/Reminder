@@ -8,6 +8,7 @@ namespace ReminderClassLibrary
 {
     public class CyclicalNotifications : Notification
     {
+        public Guid IdCycling { get; set; }
         public DateTime Start { get; set; }
         public DateTime End { get; set; }
         public DateTime CountDate { get; set; }
@@ -18,6 +19,10 @@ namespace ReminderClassLibrary
             PeriodAmount = timeBeforeRemind;
             Period = period;
             CountDate = Start;
+            if (IdCycling == Guid.Empty)
+            {
+                IdCycling = Guid.NewGuid();
+            }
         }
         //для десериализации
         public CyclicalNotifications()

@@ -38,30 +38,35 @@ namespace ReminderClassLibrary
                     remind.shownNotification = true;
                     continue;
                 }
-                foreach (var notification in remind.Notifications)
+                if (remind.Notifications != null)
                 {
-                    if (notification.Period == NotificationPeriod.Days && !notification.ShownNotification)
+
+
+                    foreach (var notification in remind.Notifications)
                     {
-                        if (remind.EndDate.AddDays(notification.PeriodAmount * -1) <= DateTime.Now)
+                        if (notification.Period == NotificationPeriod.Days && !notification.ShownNotification)
                         {
-                            RemindNotification.Invoke(this, new RemindEventArgs(remind));
-                            notification.ShownNotification = true;
+                            if (remind.EndDate.AddDays(notification.PeriodAmount * -1) <= DateTime.Now)
+                            {
+                                RemindNotification.Invoke(this, new RemindEventArgs(remind));
+                                notification.ShownNotification = true;
+                            }
                         }
-                    }
-                    if (notification.Period == NotificationPeriod.Hours && !notification.ShownNotification)
-                    {
-                        if (remind.EndDate.AddHours(notification.PeriodAmount * -1) <= DateTime.Now)
+                        if (notification.Period == NotificationPeriod.Hours && !notification.ShownNotification)
                         {
-                            RemindNotification.Invoke(this, new RemindEventArgs(remind));
-                            notification.ShownNotification = true;
+                            if (remind.EndDate.AddHours(notification.PeriodAmount * -1) <= DateTime.Now)
+                            {
+                                RemindNotification.Invoke(this, new RemindEventArgs(remind));
+                                notification.ShownNotification = true;
+                            }
                         }
-                    }
-                    if (notification.Period == NotificationPeriod.Minutes && !remind.shownNotification)
-                    {
-                        if (remind.EndDate.AddMinutes(notification.PeriodAmount * -1) <= DateTime.Now)
+                        if (notification.Period == NotificationPeriod.Minutes && !remind.shownNotification)
                         {
-                            RemindNotification.Invoke(this, new RemindEventArgs(remind));
-                            notification.ShownNotification = true;
+                            if (remind.EndDate.AddMinutes(notification.PeriodAmount * -1) <= DateTime.Now)
+                            {
+                                RemindNotification.Invoke(this, new RemindEventArgs(remind));
+                                notification.ShownNotification = true;
+                            }
                         }
                     }
                 }

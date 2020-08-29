@@ -19,7 +19,7 @@ namespace MyProjectApp
         }
         private void Kanban_Load(object sender, EventArgs e)
         {
-            repository = new RemindFileRepository();
+            repository = new RemindDataBaseRepository();
             foreach (var task in Remind.TasksList)
             {
                 if (task.Status == TaskStatus.ToDo)

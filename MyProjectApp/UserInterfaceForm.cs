@@ -21,7 +21,7 @@ namespace MyProjectApp
         }
         private void UserInterfaceForm_Load(object sender, EventArgs e)
         {
-            repository = new RemindFileRepository();
+            repository = new RemindDataBaseRepository();
             if (FileSystem.IsExist("Reminder.json"))
             {
                 WriteRemindsToGrid();

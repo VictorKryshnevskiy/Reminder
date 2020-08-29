@@ -31,7 +31,7 @@ namespace MyProjectApp
         }
         private void CreateReminderForm_Load(object sender, EventArgs e)
         {
-            repository = new RemindFileRepository();
+            repository = new RemindDataBaseRepository();
             SaveButtonClicked = false;
             FillComboBox(notificationComboBox);
             FillComboBox(cyclicalNotificationComboBox);
@@ -134,6 +134,7 @@ namespace MyProjectApp
             }
             catch (Exception ex)
             {
+               // throw ex;
                 MessageBox.Show(ex.Message);
             }
 
