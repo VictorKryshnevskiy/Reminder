@@ -50,9 +50,10 @@ namespace MyProjectApp
                     if (indexToDelete < remindersList.Count)
                     {
                         var listElementToDelete = FindIndexInArray(indexToDelete);
+                        repository.Delete(remindersList[listElementToDelete]);
                         remindersList.RemoveAt(listElementToDelete);
                         reminderDataGridView.Rows.RemoveAt(indexToDelete);
-                        repository.Save(remindersList);
+                        //repository.Save(remindersList);
                     }
                     else { MessageBox.Show("Пожалуйста, выберите строку корректно"); }
                 }

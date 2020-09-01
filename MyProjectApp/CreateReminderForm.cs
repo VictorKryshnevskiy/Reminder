@@ -50,36 +50,44 @@ namespace MyProjectApp
             reminderNameTextBox.Text = Remind.Name;
             endDateTimePicker.Value = Remind.EndDate;
             reminderDescriptionTextBox.Text = Remind.Description;
-            for (int i = 0; i < Remind.Notifications.Count; i++)
+            if (Remind.Notifications != null)
             {
-                // по умолчанию на форме есть 1 panel
-                if (i == 0)
+
+
+                for (int i = 0; i < Remind.Notifications.Count; i++)
                 {
-                    notificationNumeric.Value = Remind.Notifications[i].PeriodAmount;
-                    notificationComboBox.SelectedValue = Remind.Notifications[i].Period;
-                    continue;
-                }
-                if (notificationPanelsCount != Remind.Notifications.Count)
-                {
-                    AddPanel();
-                    numeric.Value = Remind.Notifications[i].PeriodAmount;
-                    comboBox.SelectedValue = Remind.Notifications[i].Period;
-                    buttonShow.Visible = false;
+                    // по умолчанию на форме есть 1 panel
+                    if (i == 0)
+                    {
+                        notificationNumeric.Value = Remind.Notifications[i].PeriodAmount;
+                        notificationComboBox.SelectedValue = Remind.Notifications[i].Period;
+                        continue;
+                    }
+                    if (notificationPanelsCount != Remind.Notifications.Count)
+                    {
+                        AddPanel();
+                        numeric.Value = Remind.Notifications[i].PeriodAmount;
+                        comboBox.SelectedValue = Remind.Notifications[i].Period;
+                        buttonShow.Visible = false;
+                    }
                 }
             }
-            foreach (var task in Remind.TasksList)
+            if (Remind.TasksList != null)
             {
-                if (task.Status == TaskStatus.ToDo)
+                foreach (var task in Remind.TasksList)
                 {
-                    toDoReminderTasksRichTextBox.Text += task.Text + '\n';
-                }
-                if (task.Status == TaskStatus.InProgress)
-                {
-                    inProgressReminderTasksRichTextBox.Text += task.Text + '\n';
-                }
-                if (task.Status == TaskStatus.Done)
-                {
-                    doneReminderTasksRichTextBox.Text += task.Text + '\n';
+                    if (task.Status == TaskStatus.ToDo)
+                    {
+                        toDoReminderTasksRichTextBox.Text += task.Text + '\n';
+                    }
+                    if (task.Status == TaskStatus.InProgress)
+                    {
+                        inProgressReminderTasksRichTextBox.Text += task.Text + '\n';
+                    }
+                    if (task.Status == TaskStatus.Done)
+                    {
+                        doneReminderTasksRichTextBox.Text += task.Text + '\n';
+                    }
                 }
             }
             if (Remind.CyclicalNotification != null)

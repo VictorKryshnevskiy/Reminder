@@ -4,9 +4,13 @@ namespace ReminderClassLibrary
 {
     public static class FileSystem
     {
-        public static bool IsExist(string path)
+        public static bool IsExist(string fileName)
         {
-            return File.Exists(path);
+            return File.Exists(fileName);
+        }
+        public static bool IsExist(string path, string fileName)
+        {
+            return File.Exists(Path.Combine(path, fileName));
         }
         public static void Create(string fileName)
         {

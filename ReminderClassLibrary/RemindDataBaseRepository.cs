@@ -9,24 +9,14 @@ namespace ReminderClassLibrary
 {
     public class RemindDataBaseRepository : IRemindRepository
     {
-        public const string fileName = "Reminder.mdf";
+        public const string fileName = "DbConnection.mdf";
         public List<Remind> GetReminds()
         {
-            if (FileSystem.IsExist(fileName))
+            
+            using (ReminderContext reminderContext = new ReminderContext())
             {
-                using (ReminderContext reminderContext = new ReminderContext())
-                {
-                    return reminderContext.Reminds.ToList();
-                }
-            }
-            else
-            {
-                //Database.SetInitializer<ReminderContext>(new DropCreateDatabaseIfModelChanges<ReminderContext>());
-                // FileSystem.Create(fileName);
-                using (ReminderContext reminderContext = new ReminderContext())
-                {
-                    return reminderContext.Reminds.ToList();
-                }
+                reminderContext.Database.CreateIfNotExists();
+                return reminderContext.Reminds.ToList();
             }
         }
         public void Save(Remind remind)
@@ -36,6 +26,23 @@ namespace ReminderClassLibrary
             using (ReminderContext reminderContext = new ReminderContext())
             {
                 reminderContext.Reminds.Add(remind);
+                reminderContext.SaveChanges();
+            }
+        }
+        public void Update(Remind remind)
+        {
+            using (ReminderContext reminderContext = new ReminderContext())
+            {
+                reminderContext.Reminds.Add(remind);
+                reminderContext.SaveChanges();
+            }
+        }
+        public void Delete(Remind remind)
+        {
+            using (ReminderContext reminderContext = new ReminderContext())
+            {
+                reminderContext.Reminds.Attach(remind);
+                reminderContext.Reminds.Remove(remind);
                 reminderContext.SaveChanges();
             }
         }
