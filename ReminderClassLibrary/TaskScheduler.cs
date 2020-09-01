@@ -94,8 +94,8 @@ namespace ReminderClassLibrary
                         {
                             if (remind.CyclicalNotification.CountDate.AddHours(remind.CyclicalNotification.PeriodAmount) < DateTime.Now)
                             {
-                                if (remind.CyclicalNotification.CountDate.AddHours(remind.CyclicalNotification.PeriodAmount * 2) > DateTime.Now
-                                    && !remind.CyclicalNotification.ShownNotification)
+                                if (remind.CyclicalNotification.CountDate.AddHours(remind.CyclicalNotification.PeriodAmount * 2) > DateTime.Now)
+                                    
                                 {
                                     RemindNotification.Invoke(this, new RemindEventArgs(remind));
                                     remind.CyclicalNotification.CountDate = remind.CyclicalNotification.CountDate.AddHours(remind.CyclicalNotification.PeriodAmount);

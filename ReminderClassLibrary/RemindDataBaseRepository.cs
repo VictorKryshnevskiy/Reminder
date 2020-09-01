@@ -16,7 +16,8 @@ namespace ReminderClassLibrary
             using (ReminderContext reminderContext = new ReminderContext())
             {
                 reminderContext.Database.CreateIfNotExists();
-                return reminderContext.Reminds.ToList();
+                return reminderContext.Reminds.Include(x => x.CyclicalNotification).Include(x=>x.Notifications).
+                    Include(x=>x.TasksList).ToList();
             }
         }
         public void Save(Remind remind)
