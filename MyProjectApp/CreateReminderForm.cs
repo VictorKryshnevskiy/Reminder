@@ -24,10 +24,12 @@ namespace MyProjectApp
         int countButtons = 1;
         IRemindRepository repository;
         int notificationPanelsCount = 1;
-        public CreateReminderForm(Remind rem)
+        string button;
+        public CreateReminderForm(Remind rem, string buttonName)
         {
             InitializeComponent();
             Remind = rem;
+            button = buttonName;
         }
         private void CreateReminderForm_Load(object sender, EventArgs e)
         {
@@ -94,7 +96,7 @@ namespace MyProjectApp
             {
                 startCyclicalNotification.Value = Remind.CyclicalNotification.Start;
                 cyclicalNotificationNumeric.Value = Remind.CyclicalNotification.PeriodAmount;
-                cyclicalNotificationComboBox.SelectedItem = Remind.CyclicalNotification.Period;
+                cyclicalNotificationComboBox.SelectedValue = Remind.CyclicalNotification.Period;
             }
         }
         private void saveRemindButton_Click(object sender, EventArgs e)
@@ -114,7 +116,8 @@ namespace MyProjectApp
                 {
                     if (comboBoxesList[i].Text != "")
                     {
-                        Remind.Notifications.Add(new Notification((int)numericsUpDownList[i].Value, (NotificationPeriod)comboBoxesList[i].SelectedValue));
+                        Remind.Notifications.Add(new Notification((int)numericsUpDownList[i].Value,
+                            (NotificationPeriod)comboBoxesList[i].SelectedValue));
                     }
                 }
                 if (cyclicalNotificationComboBox.Text != "")
@@ -136,7 +139,14 @@ namespace MyProjectApp
                 Remind.TasksList.AddRange(doneReminderTasksRichTextBox.Text.Split(new string[] { "\n" }
                 , StringSplitOptions.RemoveEmptyEntries)
                    .Select(x => new RemindTask(x, TaskStatus.Done)).ToList());
-                repository.Save(Remind);
+                if (button == "save")
+                {
+                    repository.Save(Remind);
+                }
+                if (button == "update")
+                {
+                    repository.Update(Remind);
+                }
                 SaveButtonClicked = true;
                 Close();
             }

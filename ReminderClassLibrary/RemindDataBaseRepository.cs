@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.Data.Entity.Migrations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -26,16 +27,31 @@ namespace ReminderClassLibrary
             TryUpdateId(remind);
             using (ReminderContext reminderContext = new ReminderContext())
             {
+                
                 reminderContext.Reminds.Add(remind);
                 reminderContext.SaveChanges();
+            }
+        }
+        public void Save(List<Remind> reminds)
+        {
+            foreach (var remind in reminds)
+            {
+                Save(remind);
             }
         }
         public void Update(Remind remind)
         {
             using (ReminderContext reminderContext = new ReminderContext())
             {
-                reminderContext.Reminds.Add(remind);
+                reminderContext.Entry(remind).State = EntityState.Modified;
                 reminderContext.SaveChanges();
+            }
+        }
+        public void Update(List<Remind> reminds)
+        {
+            foreach (var remind in reminds)
+            {
+                Update(remind);
             }
         }
         public void Delete(Remind remind)
@@ -47,13 +63,7 @@ namespace ReminderClassLibrary
                 reminderContext.SaveChanges();
             }
         }
-        public void Save(List<Remind> reminds)
-        {
-            foreach (var remind in reminds)
-            {
-                Save(remind);
-            }
-        }
+        
         private void TryUpdateId(Remind remind)
         {
             if (remind.Id == Guid.Empty)

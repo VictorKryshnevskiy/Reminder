@@ -36,7 +36,7 @@ namespace MyProjectApp
         }
         private void createReminderButton_Click(object sender, EventArgs e)
         {
-            Form form = new CreateReminderForm(new Remind());
+            Form form = new CreateReminderForm(new Remind(), "save");
             form.ShowDialog();
             UpdateGrid();
         }
@@ -53,7 +53,6 @@ namespace MyProjectApp
                         repository.Delete(remindersList[listElementToDelete]);
                         remindersList.RemoveAt(listElementToDelete);
                         reminderDataGridView.Rows.RemoveAt(indexToDelete);
-                        //repository.Save(remindersList);
                     }
                     else { MessageBox.Show("Пожалуйста, выберите строку корректно"); }
                 }
@@ -70,14 +69,13 @@ namespace MyProjectApp
                     {
                         var listElementToEdit = FindIndexInArray(indexToEdit);
                         var remindToEdit = remindersList.ElementAt(listElementToEdit);
-                        Form form = new CreateReminderForm(remindToEdit);
+                        Form form = new CreateReminderForm(remindToEdit, "update");
                         form.ShowDialog();
                         if (CreateReminderForm.SaveButtonClicked)
                         {
                             remindersList.RemoveAt(listElementToEdit);
                             reminderDataGridView.Rows.RemoveAt(indexToEdit);
                             remindersList.Insert(listElementToEdit, CreateReminderForm.Remind);
-                            repository.Save(remindersList);
                             UpdateGrid();
                         }
                     }
@@ -115,7 +113,7 @@ namespace MyProjectApp
                     var form = new Kanban(remindersList[remindIndex]);
                     form.ShowDialog();
                     remindersList[remindIndex] = Kanban.Remind;
-                    repository.Save(remindersList);
+                    repository.Update(remindersList);
                     UpdateGrid();
                 }
             }
@@ -153,7 +151,7 @@ namespace MyProjectApp
         {
             if (remindersList != null)
             {
-                repository.Save(remindersList);
+                repository.Update(remindersList);
             }
         }
         private void UserInterfaceForm_Resize_1(object sender, EventArgs e)

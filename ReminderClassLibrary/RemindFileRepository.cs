@@ -57,6 +57,11 @@ namespace ReminderClassLibrary
             throw new NotImplementedException();
         }
 
+        public void Update(List<Remind> items)
+        {
+            throw new NotImplementedException();
+        }
+
         private void TryUpdateId(List<Remind> reminds)
         {
             foreach (var remind in reminds)

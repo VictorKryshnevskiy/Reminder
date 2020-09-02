@@ -12,10 +12,10 @@ namespace MyProjectApp
         int selectedItemIndex;
         ListBox selectedListBox;
         IRemindRepository repository;
-        public Kanban(Remind rem)
+        public Kanban(Remind remind)
         {
             InitializeComponent();
-            Remind = rem;
+            Remind = remind;
         }
         private void Kanban_Load(object sender, EventArgs e)
         {
@@ -93,7 +93,7 @@ namespace MyProjectApp
         }
         private void Kanban_FormClosing(object sender, FormClosingEventArgs e)
         {
-            repository.Save(Remind);
+           // repository.Update(Remind);
         }
     }
 }
