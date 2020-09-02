@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data.Entity;
 using System.Data.Entity.Migrations;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -13,7 +14,6 @@ namespace ReminderClassLibrary
         public const string fileName = "DbConnection.mdf";
         public List<Remind> GetReminds()
         {
-            
             using (ReminderContext reminderContext = new ReminderContext())
             {
                 reminderContext.Database.CreateIfNotExists();
@@ -59,6 +59,8 @@ namespace ReminderClassLibrary
             using (ReminderContext reminderContext = new ReminderContext())
             {
                 reminderContext.Reminds.Attach(remind);
+                reminderContext.RemindTasks.RemoveRange(remind.TasksList);
+                reminderContext.Notifications.RemoveRange(remind.Notifications);
                 reminderContext.Reminds.Remove(remind);
                 reminderContext.SaveChanges();
             }

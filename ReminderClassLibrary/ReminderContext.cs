@@ -12,7 +12,7 @@ namespace ReminderClassLibrary
         public ReminderContext() : base("DbConnection")
         { }
         public DbSet<Remind> Reminds { get; set; }
-        public DbSet<CyclicalNotifications> CyclicalNotifications{ get; set; }
+        public DbSet<CyclicalNotifications> CyclicalNotifications { get; set; }
         public DbSet<Notification> Notifications { get; set; }
         public DbSet<RemindTask> RemindTasks { get; set; }
     }
