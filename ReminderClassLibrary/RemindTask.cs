@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -9,6 +10,7 @@ namespace ReminderClassLibrary
 {
     public class RemindTask
     {
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public string Text { get; set; }
         public TaskStatus Status { get; set; }
         public Guid Id { get; set; }
@@ -17,10 +19,6 @@ namespace ReminderClassLibrary
         {
             Text = text;
             Status = status;
-            if (Id == Guid.Empty)
-            {
-                Id = Guid.NewGuid();
-            }
         }
         //для десериализации
         public RemindTask() { }

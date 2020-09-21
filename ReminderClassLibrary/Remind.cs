@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Windows.Forms;
 
 namespace ReminderClassLibrary
 {
     public class Remind
     {
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public Guid Id { get; set; }
         public bool shownNotification;
         public DateTime StartDate { get; set; }

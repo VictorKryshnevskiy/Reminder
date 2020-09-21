@@ -13,7 +13,6 @@ namespace ReminderClassLibrary
         [Key]
         [ForeignKey("Remind")]
         public Guid Id { get; set; }
-        //public Guid RemindId { get; set; }
         public Remind Remind { get; set; }
         public DateTime Start { get; set; }
         public DateTime End { get; set; }
@@ -27,10 +26,6 @@ namespace ReminderClassLibrary
             PeriodAmount = timeBeforeRemind;
             Period = period;
             CountDate = Start;
-            //if (Id == Guid.Empty)
-            //{
-            //    Id = Guid.NewGuid();
-            //}
         }
         //для десериализации
         public CyclicalNotifications()
