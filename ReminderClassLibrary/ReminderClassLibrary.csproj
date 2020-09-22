@@ -92,6 +92,10 @@
     <Compile Include="Migrations\202009211348032_InitialCreate.designer.cs">
       <DependentUpon>202009211348032_InitialCreate.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202009221019147_AddCompanyMigration.cs" />
+    <Compile Include="Migrations\202009221019147_AddCompanyMigration.designer.cs">
+      <DependentUpon>202009221019147_AddCompanyMigration.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="ReminderContext.cs" />
     <Compile Include="Notification.cs" />
@@ -117,6 +121,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\202009211348032_InitialCreate.resx">
       <DependentUpon>202009211348032_InitialCreate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202009221019147_AddCompanyMigration.resx">
+      <DependentUpon>202009221019147_AddCompanyMigration.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
