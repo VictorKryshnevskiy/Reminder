@@ -11,9 +11,11 @@ namespace ReminderClassLibrary
     public class RemindTask
     {
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public Guid Id { get; set; }
         public string Text { get; set; }
         public TaskStatus Status { get; set; }
-        public Guid Id { get; set; }
+        public Remind Remind { get; set; }
+        public Guid RemindId { get; set; }
 
         public RemindTask(string text, TaskStatus status = TaskStatus.ToDo)
         {
