@@ -81,17 +81,26 @@ namespace ReminderClassLibrary
                 foreach (var notification in remind.Notifications)
                 {
                     var not = context.Notifications.FirstOrDefault(p => p.Id == notification.Id);
-                    if (not != null)
+                    if (notification.Period == NotificationPeriod.None)
                     {
-                        not.Period = notification.Period;
-                        not.PeriodAmount = notification.PeriodAmount;
-                        //context.Entry(notification).State = EntityState.Modified;
+                        context.Notifications.Remove(not);
                         context.SaveChanges();
                     }
                     else
                     {
-                        //context.Notifications.Add(remind.Notifications);
-                        //context.SaveChanges();
+                        
+                        if (not != null)
+                        {
+                            not.Period = notification.Period;
+                            not.PeriodAmount = notification.PeriodAmount;
+                            context.SaveChanges();
+                        }
+                        else
+                        {
+                            notification.RemindId = remind.Id;
+                            context.Notifications.Add(notification);
+                            context.SaveChanges();
+                        }
                     }
                 }
                 foreach (var task in remind.TasksList)

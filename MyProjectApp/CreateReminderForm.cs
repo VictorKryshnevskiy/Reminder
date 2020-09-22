@@ -104,84 +104,96 @@ namespace MyProjectApp
                 return;
             }
             //try
-           // {
-                Remind.StartDate = startDateTimePicker.Value;
-                Remind.Name = reminderNameTextBox.Text;
-                Remind.EndDate = endDateTimePicker.Value;
-                Remind.Description = reminderDescriptionTextBox.Text;
-                if (button == "save")
+            // {
+            Remind.StartDate = startDateTimePicker.Value;
+            Remind.Name = reminderNameTextBox.Text;
+            Remind.EndDate = endDateTimePicker.Value;
+            Remind.Description = reminderDescriptionTextBox.Text;
+            if (button == "save")
+            {
+                Remind.Notifications = new List<Notification> { };
+                for (int i = 0; i < panelsList.Count; i++)
                 {
-                    Remind.Notifications = new List<Notification> { };
-                    for (int i = 0; i < panelsList.Count; i++)
+                    if (comboBoxesList[i].Text != "")
                     {
-                        if (comboBoxesList[i].Text != "")
-                        {
-                            Remind.Notifications.Add(new Notification((int)numericsUpDownList[i].Value,
-                                (NotificationPeriod)comboBoxesList[i].SelectedValue));
-                        }
+                        Remind.Notifications.Add(new Notification((int)numericsUpDownList[i].Value,
+                            (NotificationPeriod)comboBoxesList[i].SelectedValue));
                     }
                 }
-                if (button == "update")
+            }
+            if (button == "update")
+            {
+                for (int i = 0; i < comboBoxesList.Count; i++)
                 {
-                    for (int i = 0; i < panelsList.Count; i++)
+                    if (comboBoxesList[i].Text != "")
                     {
-                        if (comboBoxesList[i].Text != "")
+                        if (Remind.Notifications.Count > i)
                         {
                             Remind.Notifications[i].Period = (NotificationPeriod)comboBoxesList[i].SelectedValue;
                             Remind.Notifications[i].PeriodAmount = (int)numericsUpDownList[i].Value;
                         }
+                        else
+                        {
+                            if (Remind.Notifications.Count <= i)
+                            {
+                                Remind.Notifications.Add(new Notification((int)numericsUpDownList[i].Value,
+                                    (NotificationPeriod)comboBoxesList[i].SelectedValue));
+                            }
+                        }
                     }
+                    else { Remind.Notifications[i].Period = NotificationPeriod.None; }
                 }
-                if (cyclicalNotificationComboBox.Text != "")
-                {
-                    if (Remind.CyclicalNotification == null)
-                    { Remind.CyclicalNotification = new CyclicalNotifications(); }
-                    Remind.CyclicalNotification.Start = startCyclicalNotification.Value;
-                    Remind.CyclicalNotification.End = endDateTimePicker.Value;
-                    Remind.CyclicalNotification.PeriodAmount = (int)cyclicalNotificationNumeric.Value;
-                    Remind.CyclicalNotification.Period = (NotificationPeriod)cyclicalNotificationComboBox.SelectedValue;
-                    Remind.CyclicalNotification.Start = startCyclicalNotification.Value;
-                    Remind.CyclicalNotification.CountDate = startCyclicalNotification.Value;
-                }
-                else
-                {
-                    Remind.CyclicalNotification = null;
-                }
-                if (button == "save")
-                {
-                    Remind.TasksList = toDoReminderTasksRichTextBox.Text.Split(new string[] { "\n" }
+            }
+            if (cyclicalNotificationComboBox.Text != "")
+            {
+                if (Remind.CyclicalNotification == null)
+                { Remind.CyclicalNotification = new CyclicalNotifications(); }
+                Remind.CyclicalNotification.Start = startCyclicalNotification.Value;
+                Remind.CyclicalNotification.End = endDateTimePicker.Value;
+                Remind.CyclicalNotification.PeriodAmount = (int)cyclicalNotificationNumeric.Value;
+                Remind.CyclicalNotification.Period = (NotificationPeriod)cyclicalNotificationComboBox.SelectedValue;
+                Remind.CyclicalNotification.Start = startCyclicalNotification.Value;
+                Remind.CyclicalNotification.CountDate = startCyclicalNotification.Value;
+            }
+            else
+            {
+                Remind.CyclicalNotification = null;
+            }
+            if (button == "save")
+            {
+                Remind.TasksList = toDoReminderTasksRichTextBox.Text.Split(new string[] { "\n" }
+            , StringSplitOptions.RemoveEmptyEntries)
+                .Select(x => new RemindTask(x)).ToList();
+                Remind.TasksList.AddRange(inProgressReminderTasksRichTextBox.Text.Split(new string[] { "\n" }
                 , StringSplitOptions.RemoveEmptyEntries)
-                    .Select(x => new RemindTask(x)).ToList();
-                    Remind.TasksList.AddRange(inProgressReminderTasksRichTextBox.Text.Split(new string[] { "\n" }
-                    , StringSplitOptions.RemoveEmptyEntries)
-                        .Select(x => new RemindTask(x, TaskStatus.InProgress)).ToList());
-                    Remind.TasksList.AddRange(doneReminderTasksRichTextBox.Text.Split(new string[] { "\n" }
-                    , StringSplitOptions.RemoveEmptyEntries)
-                       .Select(x => new RemindTask(x, TaskStatus.Done)).ToList());
-                }
-                if (button == "update")
-                {
-                    Remind.TasksList = toDoReminderTasksRichTextBox.Text.Split(new string[] { "\n" }
+                    .Select(x => new RemindTask(x, TaskStatus.InProgress)).ToList());
+                Remind.TasksList.AddRange(doneReminderTasksRichTextBox.Text.Split(new string[] { "\n" }
                 , StringSplitOptions.RemoveEmptyEntries)
-                    .Select(x => new RemindTask(x)).ToList();
-                    Remind.TasksList.AddRange(inProgressReminderTasksRichTextBox.Text.Split(new string[] { "\n" }
-                    , StringSplitOptions.RemoveEmptyEntries)
-                        .Select(x => new RemindTask(x, TaskStatus.InProgress)).ToList());
-                    Remind.TasksList.AddRange(doneReminderTasksRichTextBox.Text.Split(new string[] { "\n" }
-                    , StringSplitOptions.RemoveEmptyEntries)
-                       .Select(x => new RemindTask(x, TaskStatus.Done)).ToList());
-                }
-                if (button == "save")
-                {
-                    repository.Save(Remind);
-                }
-                if (button == "update")
-                {
-                    repository.Update(Remind);
-                }
-                SaveButtonClicked = true;
-                Close();
-           // }
+                   .Select(x => new RemindTask(x, TaskStatus.Done)).ToList());
+            }
+            if (button == "update")
+            {
+                Remind.TasksList = toDoReminderTasksRichTextBox.Text.Split(new string[] { "\n" }
+            , StringSplitOptions.RemoveEmptyEntries)
+                .Select(x => new RemindTask(x)).ToList();
+                Remind.TasksList.AddRange(inProgressReminderTasksRichTextBox.Text.Split(new string[] { "\n" }
+                , StringSplitOptions.RemoveEmptyEntries)
+                    .Select(x => new RemindTask(x, TaskStatus.InProgress)).ToList());
+                Remind.TasksList.AddRange(doneReminderTasksRichTextBox.Text.Split(new string[] { "\n" }
+                , StringSplitOptions.RemoveEmptyEntries)
+                   .Select(x => new RemindTask(x, TaskStatus.Done)).ToList());
+            }
+            if (button == "save")
+            {
+                repository.Save(Remind);
+            }
+            if (button == "update")
+            {
+                repository.Update(Remind);
+            }
+            SaveButtonClicked = true;
+            Close();
+            // }
             //catch (Exception ex)
             //{
             //    // throw ex;

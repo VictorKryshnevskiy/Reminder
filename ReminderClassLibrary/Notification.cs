@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
@@ -11,6 +12,8 @@ namespace ReminderClassLibrary
     {
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public Guid Id { get; set; }
+        public Remind Remind { get; set; }
+        public Guid RemindId { get; set; }
         public int PeriodAmount { get; set; }
         public NotificationPeriod Period { get; set; }
         public bool ShownNotification;
