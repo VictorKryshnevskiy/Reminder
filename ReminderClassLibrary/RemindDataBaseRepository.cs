@@ -105,7 +105,27 @@ namespace ReminderClassLibrary
                 }
                 foreach (var task in remind.TasksList)
                 {
-                    context.Entry(task).State = EntityState.Modified;
+                    var taskDB = context.RemindTasks.FirstOrDefault(p => p.Id == task.Id);
+                    if (task.Text == "")
+                    {
+                        context.RemindTasks.Remove(taskDB);
+                        context.SaveChanges();
+                    }
+                    else
+                    {
+                        if (taskDB != null)
+                        {
+                            taskDB.Status = task.Status;
+                            taskDB.Text = task.Text;
+                            context.SaveChanges();
+                        }
+                        else
+                        {
+                            task.RemindId = remind.Id;
+                            context.RemindTasks.Add(task);
+                            context.SaveChanges();
+                        }
+                    }
                 }
                 bool saveFailed;
                 do

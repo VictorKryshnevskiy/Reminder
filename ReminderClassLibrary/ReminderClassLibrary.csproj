@@ -96,6 +96,14 @@
     <Compile Include="Migrations\202009221019147_AddCompanyMigration.designer.cs">
       <DependentUpon>202009221019147_AddCompanyMigration.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202009231016512_AddCompanyMigration1.cs" />
+    <Compile Include="Migrations\202009231016512_AddCompanyMigration1.designer.cs">
+      <DependentUpon>202009231016512_AddCompanyMigration1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202009231028066_AddCompanyMigration2.cs" />
+    <Compile Include="Migrations\202009231028066_AddCompanyMigration2.designer.cs">
+      <DependentUpon>202009231028066_AddCompanyMigration2.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="ReminderContext.cs" />
     <Compile Include="Notification.cs" />
@@ -124,6 +132,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202009221019147_AddCompanyMigration.resx">
       <DependentUpon>202009221019147_AddCompanyMigration.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202009231016512_AddCompanyMigration1.resx">
+      <DependentUpon>202009231016512_AddCompanyMigration1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202009231028066_AddCompanyMigration2.resx">
+      <DependentUpon>202009231028066_AddCompanyMigration2.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
