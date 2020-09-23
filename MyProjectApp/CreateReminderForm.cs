@@ -103,9 +103,9 @@ namespace MyProjectApp
             {
                 return;
             }
-            //try
-            // {
-            Remind.StartDate = startDateTimePicker.Value;
+            try
+            {
+                Remind.StartDate = startDateTimePicker.Value;
             Remind.Name = reminderNameTextBox.Text;
             Remind.EndDate = endDateTimePicker.Value;
             Remind.Description = reminderDescriptionTextBox.Text;
@@ -179,14 +179,13 @@ namespace MyProjectApp
             }
             SaveButtonClicked = true;
             Close();
-            // }
-            //catch (Exception ex)
-            //{
-            //    // throw ex;
-            //    MessageBox.Show(ex.Message);
-            //}
-
         }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+
+}
 
         private void SaveCyclicalNotification()
         {
@@ -205,7 +204,6 @@ namespace MyProjectApp
                 Remind.CyclicalNotification = null;
             }
         }
-
         private void addNotificationbutton_Click(object sender, EventArgs e)
         {
             Button button = (Button)sender;
@@ -215,7 +213,6 @@ namespace MyProjectApp
 
         private void AddPanel()
         {
-
             var panel = new Panel
             {
                 Size = notificationPanel.Size
@@ -261,7 +258,6 @@ namespace MyProjectApp
             notificationPanelsCount++;
             notificationsTableLayoutPanel.Controls.Add(panel);
         }
-
         private void reminderNameTextBox_Validating(object sender, CancelEventArgs e)
         {
             if (reminderNameTextBox.Text.Trim() == string.Empty)
@@ -272,7 +268,6 @@ namespace MyProjectApp
             else
                 errorProvider.SetError(reminderNameTextBox, "");
         }
-
         private void deleteCyclicalNotificationbutton_Click(object sender, EventArgs e)
         {
             cyclicalNotificationNumeric.Value = default;
