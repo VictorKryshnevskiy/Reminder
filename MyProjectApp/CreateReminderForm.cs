@@ -166,42 +166,20 @@ namespace MyProjectApp
                         }
                     }
                     SaveCyclicalNotification();
-
-                    Remind.TasksList = toDoReminderTasksRichTextBox.Text.Split(new string[] { "\n" }
+                    var remindTasks = toDoReminderTasksRichTextBox.Text.Split(new string[] { "\n" }
                         , StringSplitOptions.RemoveEmptyEntries)
                         .Select(x => new RemindTask(x, TaskStatus.ToDo)).ToList();
-                    Remind.TasksList.AddRange(inProgressReminderTasksRichTextBox.Text.Split(new string[] { "\n" }
+                    remindTasks.AddRange(inProgressReminderTasksRichTextBox.Text.Split(new string[] { "\n" }
                         , StringSplitOptions.RemoveEmptyEntries)
                         .Select(x => new RemindTask(x, TaskStatus.InProgress)).ToList());
-                    Remind.TasksList.AddRange(doneReminderTasksRichTextBox.Text.Split(new string[] { "\n" }
+                    remindTasks.AddRange(doneReminderTasksRichTextBox.Text.Split(new string[] { "\n" }
                         , StringSplitOptions.RemoveEmptyEntries)
-                       .Select(x => new RemindTask(x, TaskStatus.Done)).ToList());
-                    //if (remindTasks.Count == 0)
-                    //{
-                    //    Remind.TasksList.Clear();
-                    //}
-                    //else
-                    //{
-                    //    for (int i = 0; i < remindTasks.Count; i++)
-                    //    {
-                    //        if (Remind.TasksList.Count > i)
-                    //        {
-                    //            Remind.TasksList[i].Text = remindTasks[i].Text;
-                    //            Remind.TasksList[i].Status = remindTasks[i].Status;
-                    //        }
-                    //        else
-                    //        {
-                    //            Remind.TasksList.Add(remindTasks[i]);
-                    //        }
-                    //    }
-                    //    if (Remind.TasksList.Count > remindTasks.Count)
-                    //    {
-                    //        for (int i = Remind.TasksList.Count; i > remindTasks.Count; i--)
-                    //        {
-                    //            Remind.TasksList.RemoveAt(i - 1);
-                    //        }
-                    //    }
-                    //}
+                        .Select(x => new RemindTask(x, TaskStatus.Done)).ToList());
+                    Remind.TasksList = new List<RemindTask>();
+                    foreach (var task in remindTasks)
+                    {
+                        Remind.TasksList.Add(new RemindTask(task.Text, task.Status));
+                    }
                     repository.Update(Remind);
                 }
                 SaveButtonClicked = true;

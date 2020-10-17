@@ -113,7 +113,6 @@ namespace MyProjectApp
                     var form = new Kanban(remindersList[remindIndex]);
                     form.ShowDialog();
                     remindersList[remindIndex] = Kanban.Remind;
-                    repository.Update(remindersList);
                     UpdateGrid();
                 }
             }
@@ -146,13 +145,6 @@ namespace MyProjectApp
         private void Popup_Click(object sender, EventArgs e)
         {
             throw new NotImplementedException();
-        }
-        private void UserInterfaceForm_FormClosing(object sender, FormClosingEventArgs e)
-        {
-            if (remindersList != null)
-            {
-                repository.Update(remindersList);
-            }
         }
         private void UserInterfaceForm_Resize_1(object sender, EventArgs e)
         {

@@ -64,13 +64,11 @@ namespace ReminderClassLibrary
                     if (remind.CyclicalNotification == null && cyclicalNot != null)
                     {
                         context.CyclicalNotifications.Remove(cyclicalNot);
-                        context.SaveChanges();
                     }
                     if (cyclicalNot == null && remind.CyclicalNotification != null)
                     {
                         remind.CyclicalNotification.Id = remind.Id;
                         context.CyclicalNotifications.Add(remind.CyclicalNotification);
-                        context.SaveChanges();
                     }
                 }
 
@@ -80,7 +78,6 @@ namespace ReminderClassLibrary
                     if (notification.Period == NotificationPeriod.None)
                     {
                         context.Notifications.Remove(not);
-                        context.SaveChanges();
                     }
                     else
                     {
@@ -89,40 +86,21 @@ namespace ReminderClassLibrary
                         {
                             not.Period = notification.Period;
                             not.PeriodAmount = notification.PeriodAmount;
-                            context.SaveChanges();
                         }
                         else
                         {
                             notification.RemindId = remind.Id;
                             context.Notifications.Add(notification);
-                            context.SaveChanges();
                         }
                     }
                 }
                 context.RemindTasks.RemoveRange(context.RemindTasks);
-                context.SaveChanges();
                 foreach (var task in remind.TasksList)
                 {
-                    var taskDB = context.RemindTasks.FirstOrDefault(p => p.Id == task.Id);
-                    if (task.Text == "")
+                    context.RemindTasks.Add(task);
+                    if (task.Id == Guid.Empty)
                     {
-                        context.RemindTasks.Remove(taskDB);
-                        context.SaveChanges();
-                    }
-                    else
-                    {
-                        if (taskDB != null)
-                        {
-                            taskDB.Status = task.Status;
-                            taskDB.Text = task.Text;
-                            context.SaveChanges();
-                        }
-                        else
-                        {
-                            context.RemindTasks.Add(task);
-                            task.RemindId = remind.Id;
-                            context.SaveChanges();
-                        }
+                        task.RemindId = remind.Id;
                     }
                 }
                 bool saveFailed;

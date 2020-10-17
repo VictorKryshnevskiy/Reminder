@@ -90,12 +90,7 @@ namespace MyProjectApp
             {
                 Remind.TasksList.Add(new RemindTask(task.ToString(), TaskStatus.Done));
             }
+            repository.Update(Remind);
         }
-        private void Kanban_FormClosing(object sender, FormClosingEventArgs e)
-        {
-            //repository.Update(Remind);
-            
-        }
-        
     }
 }
