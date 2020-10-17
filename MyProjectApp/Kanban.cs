@@ -94,9 +94,7 @@ namespace MyProjectApp
         private void Kanban_FormClosing(object sender, FormClosingEventArgs e)
         {
             //repository.Update(Remind);
-            int a;
-            int b = 5;
-            int c = a + b;
+            
         }
         
     }
