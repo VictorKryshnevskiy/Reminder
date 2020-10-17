@@ -61,7 +61,7 @@ namespace ReminderClassLibrary
                 }
                 else
                 {
-                    if (remind.CyclicalNotification == null && cyclicalNot !=null)
+                    if (remind.CyclicalNotification == null && cyclicalNot != null)
                     {
                         context.CyclicalNotifications.Remove(cyclicalNot);
                         context.SaveChanges();
@@ -84,7 +84,7 @@ namespace ReminderClassLibrary
                     }
                     else
                     {
-                        
+
                         if (not != null)
                         {
                             not.Period = notification.Period;
@@ -99,6 +99,8 @@ namespace ReminderClassLibrary
                         }
                     }
                 }
+                context.RemindTasks.RemoveRange(context.RemindTasks);
+                context.SaveChanges();
                 foreach (var task in remind.TasksList)
                 {
                     var taskDB = context.RemindTasks.FirstOrDefault(p => p.Id == task.Id);
@@ -117,8 +119,8 @@ namespace ReminderClassLibrary
                         }
                         else
                         {
-                            task.RemindId = remind.Id;
                             context.RemindTasks.Add(task);
+                            task.RemindId = remind.Id;
                             context.SaveChanges();
                         }
                     }

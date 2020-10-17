@@ -106,86 +106,113 @@ namespace MyProjectApp
             try
             {
                 Remind.StartDate = startDateTimePicker.Value;
-            Remind.Name = reminderNameTextBox.Text;
-            Remind.EndDate = endDateTimePicker.Value;
-            Remind.Description = reminderDescriptionTextBox.Text;
-            if (button == "save")
-            {
-                Remind.Notifications = new List<Notification> { };
-                for (int i = 0; i < panelsList.Count; i++)
+                Remind.Name = reminderNameTextBox.Text;
+                Remind.EndDate = endDateTimePicker.Value;
+                Remind.Description = reminderDescriptionTextBox.Text;
+                if (button == "save")
                 {
-                    if (comboBoxesList[i].Text != "")
+                    Remind.Notifications = new List<Notification> { };
+                    for (int i = 0; i < panelsList.Count; i++)
                     {
-                        Remind.Notifications.Add(new Notification((int)numericsUpDownList[i].Value,
-                            (NotificationPeriod)comboBoxesList[i].SelectedValue));
-                    }
-                }
-                SaveCyclicalNotification();
-                var remindTasks = toDoReminderTasksRichTextBox.Text.Split(new string[] { "\n" }
-                    , StringSplitOptions.RemoveEmptyEntries)
-                    .Select(x => new RemindTask(x, TaskStatus.ToDo)).ToList();
-                remindTasks.AddRange(inProgressReminderTasksRichTextBox.Text.Split(new string[] { "\n" }
-                    , StringSplitOptions.RemoveEmptyEntries)
-                    .Select(x => new RemindTask(x, TaskStatus.InProgress)).ToList());
-                remindTasks.AddRange(doneReminderTasksRichTextBox.Text.Split(new string[] { "\n" }
-                    , StringSplitOptions.RemoveEmptyEntries)
-                    .Select(x => new RemindTask(x, TaskStatus.Done)).ToList());
-                Remind.TasksList = new List<RemindTask>();
-                foreach (var task in remindTasks)
-                {
-                    Remind.TasksList.Add(new RemindTask(task.Text, task.Status));
-                }
-                repository.Save(Remind);
-            }
-            if (button == "update")
-            {
-                for (int i = 0; i < comboBoxesList.Count; i++)
-                {
-                    if (comboBoxesList[i].Text != "")
-                    {
-                        if (Remind.Notifications.Count > i)
+                        if (comboBoxesList[i].Text != "")
                         {
-                            Remind.Notifications[i].Period = (NotificationPeriod)comboBoxesList[i].SelectedValue;
-                            Remind.Notifications[i].PeriodAmount = (int)numericsUpDownList[i].Value;
+                            Remind.Notifications.Add(new Notification((int)numericsUpDownList[i].Value,
+                                (NotificationPeriod)comboBoxesList[i].SelectedValue));
+                        }
+                    }
+                    SaveCyclicalNotification();
+                    var remindTasks = toDoReminderTasksRichTextBox.Text.Split(new string[] { "\n" }
+                        , StringSplitOptions.RemoveEmptyEntries)
+                        .Select(x => new RemindTask(x, TaskStatus.ToDo)).ToList();
+                    remindTasks.AddRange(inProgressReminderTasksRichTextBox.Text.Split(new string[] { "\n" }
+                        , StringSplitOptions.RemoveEmptyEntries)
+                        .Select(x => new RemindTask(x, TaskStatus.InProgress)).ToList());
+                    remindTasks.AddRange(doneReminderTasksRichTextBox.Text.Split(new string[] { "\n" }
+                        , StringSplitOptions.RemoveEmptyEntries)
+                        .Select(x => new RemindTask(x, TaskStatus.Done)).ToList());
+                    Remind.TasksList = new List<RemindTask>();
+                    foreach (var task in remindTasks)
+                    {
+                        Remind.TasksList.Add(new RemindTask(task.Text, task.Status));
+                    }
+                    repository.Save(Remind);
+                }
+                if (button == "update")
+                {
+                    for (int i = 0; i < comboBoxesList.Count; i++)
+                    {
+                        if (comboBoxesList[i].Text != "")
+                        {
+                            if (Remind.Notifications.Count > i)
+                            {
+                                Remind.Notifications[i].Period = (NotificationPeriod)comboBoxesList[i].SelectedValue;
+                                Remind.Notifications[i].PeriodAmount = (int)numericsUpDownList[i].Value;
+                            }
+                            else
+                            {
+                                if (Remind.Notifications.Count <= i)
+                                {
+                                    Remind.Notifications.Add(new Notification((int)numericsUpDownList[i].Value,
+                                        (NotificationPeriod)comboBoxesList[i].SelectedValue));
+                                }
+                            }
                         }
                         else
                         {
-                            if (Remind.Notifications.Count <= i)
+                            if (Remind.Notifications.Count > 0)
                             {
-                                Remind.Notifications.Add(new Notification((int)numericsUpDownList[i].Value,
-                                    (NotificationPeriod)comboBoxesList[i].SelectedValue));
+                                Remind.Notifications[i].Period = NotificationPeriod.None;
                             }
                         }
                     }
-                    else
-                    {
-                        if (Remind.Notifications.Count > 0)
-                        {
-                            Remind.Notifications[i].Period = NotificationPeriod.None;
-                        }
-                    }
+                    SaveCyclicalNotification();
+
+                    Remind.TasksList = toDoReminderTasksRichTextBox.Text.Split(new string[] { "\n" }
+                        , StringSplitOptions.RemoveEmptyEntries)
+                        .Select(x => new RemindTask(x, TaskStatus.ToDo)).ToList();
+                    Remind.TasksList.AddRange(inProgressReminderTasksRichTextBox.Text.Split(new string[] { "\n" }
+                        , StringSplitOptions.RemoveEmptyEntries)
+                        .Select(x => new RemindTask(x, TaskStatus.InProgress)).ToList());
+                    Remind.TasksList.AddRange(doneReminderTasksRichTextBox.Text.Split(new string[] { "\n" }
+                        , StringSplitOptions.RemoveEmptyEntries)
+                       .Select(x => new RemindTask(x, TaskStatus.Done)).ToList());
+                    //if (remindTasks.Count == 0)
+                    //{
+                    //    Remind.TasksList.Clear();
+                    //}
+                    //else
+                    //{
+                    //    for (int i = 0; i < remindTasks.Count; i++)
+                    //    {
+                    //        if (Remind.TasksList.Count > i)
+                    //        {
+                    //            Remind.TasksList[i].Text = remindTasks[i].Text;
+                    //            Remind.TasksList[i].Status = remindTasks[i].Status;
+                    //        }
+                    //        else
+                    //        {
+                    //            Remind.TasksList.Add(remindTasks[i]);
+                    //        }
+                    //    }
+                    //    if (Remind.TasksList.Count > remindTasks.Count)
+                    //    {
+                    //        for (int i = Remind.TasksList.Count; i > remindTasks.Count; i--)
+                    //        {
+                    //            Remind.TasksList.RemoveAt(i - 1);
+                    //        }
+                    //    }
+                    //}
+                    repository.Update(Remind);
                 }
-                SaveCyclicalNotification();
-                Remind.TasksList = toDoReminderTasksRichTextBox.Text.Split(new string[] { "\n" }
-                    , StringSplitOptions.RemoveEmptyEntries)
-                    .Select(x => new RemindTask(x)).ToList();
-                Remind.TasksList.AddRange(inProgressReminderTasksRichTextBox.Text.Split(new string[] { "\n" }
-                    , StringSplitOptions.RemoveEmptyEntries)
-                    .Select(x => new RemindTask(x, TaskStatus.InProgress)).ToList());
-                Remind.TasksList.AddRange(doneReminderTasksRichTextBox.Text.Split(new string[] { "\n" }
-                    , StringSplitOptions.RemoveEmptyEntries)
-                   .Select(x => new RemindTask(x, TaskStatus.Done)).ToList());
-                repository.Update(Remind);
+                SaveButtonClicked = true;
+                Close();
             }
-            SaveButtonClicked = true;
-            Close();
-        }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
             }
 
-}
+        }
 
         private void SaveCyclicalNotification()
         {
