@@ -104,9 +104,6 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
-  </ItemGroup>
-  <ItemGroup>
     <ProjectReference Include="..\ReminderClassLibrary\ReminderClassLibrary.csproj">
       <Project>{83929d42-ec39-4414-a776-73398d37b5c1}</Project>
       <Name>ReminderClassLibrary</Name>
@@ -119,6 +116,9 @@
     <None Include="Resources\Antu_appointment-reminder.svg.png" />
   </ItemGroup>
   <ItemGroup>
+    <PackageReference Include="EntityFramework">
+      <Version>6.4.4</Version>
+    </PackageReference>
     <PackageReference Include="Microsoft.Bcl.AsyncInterfaces">
       <Version>1.1.1</Version>
     </PackageReference>

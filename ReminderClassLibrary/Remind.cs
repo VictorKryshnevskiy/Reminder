@@ -1,18 +1,20 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Windows.Forms;
 
 namespace ReminderClassLibrary
 {
     public class Remind
     {
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public Guid Id { get; set; }
         public bool shownNotification;
         public DateTime StartDate { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
         public DateTime EndDate { get; set; }
         public List<RemindTask> TasksList { get; set; }
-        public Guid Id { get; set; }
         public List<Notification> Notifications { get; set; }
         public CyclicalNotifications CyclicalNotification { get; set; }
 

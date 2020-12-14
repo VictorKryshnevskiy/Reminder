@@ -1,12 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Windows.Forms;
 
 namespace ReminderClassLibrary
 {
     public class RemindFileRepository : IRemindRepository
     {
         public const string fileName = "Reminder.json";
+
+        public void Delete(Remind remind)
+        {
+            throw new NotImplementedException();
+        }
+
         public List<Remind> GetReminds()
         {
             if (FileSystem.IsExist(fileName))
@@ -44,6 +49,16 @@ namespace ReminderClassLibrary
             TryUpdateId(reminds);
             var jsonString = JsonHelper.Serialize(reminds);
             FileSystem.WriteAllText(fileName, jsonString);
+        }
+
+        public void Update(Remind remind)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Update(List<Remind> items)
+        {
+            throw new NotImplementedException();
         }
 
         private void TryUpdateId(List<Remind> reminds)
